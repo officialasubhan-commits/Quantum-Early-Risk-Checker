@@ -1,0 +1,26 @@
+{
+    "model_name": "Variational Quantum Classifier (VQC)",
+    "framework": "Custom Statevector QML Simulator (NumPy)",
+    "num_qubits": 6,
+    "num_layers": 2,
+    "num_trainable_params": 26,
+    "feature_reduction_method": "PCA (21 -> 6 quantum features)",
+    "training_subset_size": 5000,
+    "test_set_size": 38052,
+    "accuracy": 0.2050352149689898,
+    "precision": 0.14122181316152785,
+    "recall_sensitivity": 0.9260656356092041,
+    "specificity": 0.08830534351145038,
+    "f1_score": 0.24507112553032193,
+    "f1_macro": 0.2027930973158631,
+    "roc_auc": 0.5027342353886334,
+    "confusion_matrix": {
+        "TN": 2892,
+        "FP": 29858,
+        "FN": 392,
+        "TP": 4910
+    },
+    "training_time_sec": 62.15119647979736,
+    "inference_time_sec": 32.65183711051941,
+    "inference_ms_per_sample": 0.8580846502291446
+}

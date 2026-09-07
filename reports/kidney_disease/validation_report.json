@@ -1,0 +1,78 @@
+{
+    "disease_id": "kidney_disease",
+    "disease_name": "Chronic Kidney Disease Risk Assessment",
+    "category": "Nephrology",
+    "dataset_name": "UCI Chronic Kidney Disease Dataset",
+    "total_test_samples": 60,
+    "total_features": 24,
+    "data_leakage_free": true,
+    "best_classical_model_name": "RandomForestClassifier",
+    "selected_primary_model": "Classical ML (RandomForestClassifier)",
+    "qml_genuine_contribution": false,
+    "qml_justification": "Classical RandomForestClassifier achieves superior performance (ROC-AUC: 1.0000) compared to standalone QML or Hybrid fusion.",
+    "explainability_status": "OPERATIONAL",
+    "top_5_important_features": {
+        "pcv": 0.1708,
+        "hemo": 0.1574,
+        "sc": 0.1566,
+        "sg": 0.112,
+        "rbcc": 0.0941
+    },
+    "classical_ml": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall_sensitivity": 1.0,
+        "specificity": 1.0,
+        "f1_score": 1.0,
+        "roc_auc": 1.0,
+        "pr_auc": 1.0,
+        "brier_score": 0.0127,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0,
+        "confusion_matrix": {
+            "TN": 23,
+            "FP": 0,
+            "FN": 0,
+            "TP": 37
+        },
+        "inference_ms_per_sample": 0.1009
+    },
+    "quantum_qml": {
+        "accuracy": 0.4667,
+        "precision": 0.5758,
+        "recall_sensitivity": 0.5135,
+        "specificity": 0.3913,
+        "f1_score": 0.5429,
+        "roc_auc": 0.4489,
+        "pr_auc": 0.6733,
+        "brier_score": 0.2511,
+        "false_positive_rate": 0.6087,
+        "false_negative_rate": 0.4865,
+        "confusion_matrix": {
+            "TN": 9,
+            "FP": 14,
+            "FN": 18,
+            "TP": 19
+        },
+        "inference_ms_per_sample": 0.7811
+    },
+    "hybrid_ensemble": {
+        "accuracy": 0.9833,
+        "precision": 0.9737,
+        "recall_sensitivity": 1.0,
+        "specificity": 0.9565,
+        "f1_score": 0.9867,
+        "roc_auc": 1.0,
+        "pr_auc": 1.0,
+        "brier_score": 0.0508,
+        "false_positive_rate": 0.0435,
+        "false_negative_rate": 0.0,
+        "confusion_matrix": {
+            "TN": 22,
+            "FP": 1,
+            "FN": 0,
+            "TP": 37
+        },
+        "inference_ms_per_sample": 0.8531
+    }
+}

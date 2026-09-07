@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIH26139 - Project Monitoring Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="top-header">
+            <div class="header-left">
+                <div class="sih-badge">SIH26139</div>
+                <div class="header-titles">
+                    <h1>Hybrid Quantum Machine Learning Platform</h1>
+                    <p class="subtitle">Internal Project Monitoring & Development Dashboard</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="status-indicator">
+                    <span class="status-dot pulse"></span>
+                    <span class="status-text">Status: <strong id="header-status">Development</strong></span>
+                </div>
+                <div class="env-tag" id="header-env">Local Dev Environment</div>
+            </div>
+        </header>
+
+        <!-- Current Task Summary Banner -->
+        <section class="section-card current-task-card">
+            <div class="section-header">
+                <h2>⚡ Current Development Status</h2>
+                <span class="progress-badge" id="progress-pct-badge">0% Complete</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="main-progress-fill" style="width: 0%"></div>
+            </div>
+            <div class="task-grid">
+                <div class="task-item">
+                    <span class="label">Current Phase</span>
+                    <strong class="value highlight-blue" id="val-current-phase">Loading...</strong>
+                </div>
+                <div class="task-item">
+                    <span class="label">Current Task</span>
+                    <strong class="value" id="val-current-task">Loading...</strong>
+                </div>
+                <div class="task-item">
+                    <span class="label">Last Completed Task</span>
+                    <strong class="value text-success" id="val-last-completed">Loading...</strong>
+                </div>
+                <div class="task-item">
+                    <span class="label">Next Milestone</span>
+                    <strong class="value text-cyan" id="val-next-task">Loading...</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Dashboard Split Grid -->
+        <div class="dashboard-grid">
+            <!-- Left Column: ML Metrics & Architecture -->
+            <div class="grid-column">
+                <!-- ML Status Card -->
+                <section class="section-card">
+                    <div class="section-header">
+                        <h2>📊 ML Status & Experiment Metrics</h2>
+                        <span class="info-tag">Real-Time Ingestion & Model Baseline</span>
+                    </div>
+                    <div class="metrics-grid">
+                        <div class="metric-box">
+                            <span class="metric-label">Dataset Records</span>
+                            <strong class="metric-val" id="ml-records">Loading...</strong>
+                        </div>
+                        <div class="metric-box">
+                            <span class="metric-label">Predictive Features</span>
+                            <strong class="metric-val" id="ml-features">Loading...</strong>
+                        </div>
+                        <div class="metric-box full-width">
+                            <span class="metric-label">Best Classical Baseline Model</span>
+                            <strong class="metric-val highlight-cyan" id="ml-best-model">Loading...</strong>
+                        </div>
+                        <div class="metric-box">
+                            <span class="metric-label">Accuracy</span>
+                            <strong class="metric-val" id="ml-accuracy">Loading...</strong>
+                        </div>
+                        <div class="metric-box">
+                            <span class="metric-label">Precision</span>
+                            <strong class="metric-val" id="ml-precision">Loading...</strong>
+                        </div>
+                        <div class="metric-box">
+                            <span class="metric-label">Recall / Sensitivity</span>
+                            <strong class="metric-val" id="ml-recall">Loading...</strong>
+                        </div>
+                        <div class="metric-box">
+                            <span class="metric-label">F1-Score</span>
+                            <strong class="metric-val text-accent" id="ml-f1">Loading...</strong>
+                        </div>
+                        <div class="metric-box full-width">
+                            <span class="metric-label">ROC-AUC Score</span>
+                            <strong class="metric-val text-accent" id="ml-roc-auc">Loading...</strong>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Project Architecture Visual Flow -->
+                <section class="section-card">
+                    <div class="section-header">
+                        <h2>📐 Project Architecture Flow</h2>
+                        <span class="info-tag">End-to-End Hybrid Pipeline</span>
+                    </div>
+                    <div class="architecture-flow" id="architecture-flow-container">
+                        <!-- Flow steps dynamically populated by JS -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column: Project Progress & Task Checklist -->
+            <div class="grid-column">
+                <!-- Project Progress Phases -->
+                <section class="section-card">
+                    <div class="section-header">
+                        <h2>🚀 Project Phase Progress</h2>
+                        <span class="info-tag">14 Core Development Modules</span>
+                    </div>
+                    <div class="phases-grid" id="phases-grid-container">
+                        <!-- Phase cards populated dynamically -->
+                    </div>
+                </section>
+
+                <!-- Task Checklist Card -->
+                <section class="section-card">
+                    <div class="section-header">
+                        <h2>✅ Task Checklist & Tracker</h2>
+                        <span class="info-tag">Interactive Task Status Management</span>
+                    </div>
+                    <div class="checklist-container" id="checklist-container">
+                        <!-- Checklist items populated dynamically -->
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bottom-footer">
+            <p>SIH26139 — Hybrid Quantum Machine Learning Platform for Early Disease Detection | Internal Monitoring Console</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

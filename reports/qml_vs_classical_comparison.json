@@ -1,0 +1,50 @@
+{
+    "qml_vqc": {
+        "model_name": "Variational Quantum Classifier (VQC)",
+        "framework": "Custom Statevector QML Simulator (NumPy)",
+        "num_qubits": 6,
+        "num_layers": 2,
+        "num_trainable_params": 26,
+        "feature_reduction_method": "PCA (21 -> 6 quantum features)",
+        "training_subset_size": 5000,
+        "test_set_size": 38052,
+        "accuracy": 0.8606643540418375,
+        "precision": 0.0,
+        "recall_sensitivity": 0.0,
+        "specificity": 1.0,
+        "f1_score": 0.0,
+        "f1_macro": 0.4625575548713313,
+        "roc_auc": 0.4944273657355283,
+        "confusion_matrix": {
+            "TN": 32750,
+            "FP": 0,
+            "FN": 5302,
+            "TP": 0
+        },
+        "training_time_sec": 122.48598504066467,
+        "inference_time_sec": 35.73493242263794,
+        "inference_ms_per_sample": 0.9391078635193404
+    },
+    "classical_rf_baseline": {
+        "model_name": "Random Forest",
+        "accuracy": 0.7348365394723011,
+        "precision": 0.3138413685847589,
+        "recall_sensitivity": 0.7612221803093172,
+        "specificity": 0.7305648854961833,
+        "f1_score": 0.4444444444444444,
+        "f1_macro": 0.6351523937730834,
+        "roc_auc": 0.8240092374762801,
+        "confusion_matrix": {
+            "TN": 23926,
+            "FP": 8824,
+            "FN": 1266,
+            "TP": 4036
+        },
+        "training_time_sec": 10.166834354400635,
+        "inference_time_sec": 0.46450233459472656,
+        "inference_ms_per_sample": 0.01220704127495865,
+        "cv_mean_f1_macro": 0.6368178817500089,
+        "cv_std_f1_macro": 0.0018460723075744742
+    },
+    "comparison_notes": "Both QML and Classical Random Forest were evaluated on the EXACT SAME 38,052 sample held-out test set."
+}

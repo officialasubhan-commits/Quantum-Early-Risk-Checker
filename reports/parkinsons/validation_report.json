@@ -1,0 +1,78 @@
+{
+    "disease_id": "parkinsons",
+    "disease_name": "Parkinson's Disease Risk Assessment",
+    "category": "Neurology & Movement",
+    "dataset_name": "UCI Parkinson's Disease Vocal Dataset",
+    "total_test_samples": 30,
+    "total_features": 22,
+    "data_leakage_free": true,
+    "best_classical_model_name": "RandomForestClassifier",
+    "selected_primary_model": "Hybrid Ensemble Model",
+    "qml_genuine_contribution": true,
+    "qml_justification": "Hybrid model boosts sensitivity from 72.7% to 95.5%, drastically reducing false negatives.",
+    "explainability_status": "OPERATIONAL",
+    "top_5_important_features": {
+        "PPE": 0.1753,
+        "spread1": 0.1281,
+        "Jitter:DDP": 0.0824,
+        "MDVP:APQ": 0.0563,
+        "Shimmer:APQ5": 0.0449
+    },
+    "classical_ml": {
+        "accuracy": 0.7667,
+        "precision": 0.9412,
+        "recall_sensitivity": 0.7273,
+        "specificity": 0.875,
+        "f1_score": 0.8205,
+        "roc_auc": 0.9148,
+        "pr_auc": 0.9691,
+        "brier_score": 0.1315,
+        "false_positive_rate": 0.125,
+        "false_negative_rate": 0.2727,
+        "confusion_matrix": {
+            "TN": 7,
+            "FP": 1,
+            "FN": 6,
+            "TP": 16
+        },
+        "inference_ms_per_sample": 0.2213
+    },
+    "quantum_qml": {
+        "accuracy": 0.4,
+        "precision": 0.7,
+        "recall_sensitivity": 0.3182,
+        "specificity": 0.625,
+        "f1_score": 0.4375,
+        "roc_auc": 0.5852,
+        "pr_auc": 0.7989,
+        "brier_score": 0.2515,
+        "false_positive_rate": 0.375,
+        "false_negative_rate": 0.6818,
+        "confusion_matrix": {
+            "TN": 5,
+            "FP": 3,
+            "FN": 15,
+            "TP": 7
+        },
+        "inference_ms_per_sample": 0.9159
+    },
+    "hybrid_ensemble": {
+        "accuracy": 0.8333,
+        "precision": 0.84,
+        "recall_sensitivity": 0.9545,
+        "specificity": 0.5,
+        "f1_score": 0.8936,
+        "roc_auc": 0.9091,
+        "pr_auc": 0.9669,
+        "brier_score": 0.1583,
+        "false_positive_rate": 0.5,
+        "false_negative_rate": 0.0455,
+        "confusion_matrix": {
+            "TN": 4,
+            "FP": 4,
+            "FN": 1,
+            "TP": 21
+        },
+        "inference_ms_per_sample": 1.8359
+    }
+}

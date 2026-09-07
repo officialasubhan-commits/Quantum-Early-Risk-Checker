@@ -1,0 +1,110 @@
+{
+    "metadata": {
+        "name": "CDC Diabetes Health Indicators (BRFSS 2015)",
+        "source": "Centers for Disease Control and Prevention (CDC) - Behavioral Risk Factor Surveillance System (BRFSS 2015)",
+        "official_url": "https://www.cdc.gov/brfss/annual_data/annual_2015.html",
+        "license": "Public Domain / Open Government Data (CC0 1.0 Universal)",
+        "target_variable": "Diabetes_binary",
+        "target_mapping": {
+            "0.0": "No Diabetes",
+            "1.0": "Prediabetes or Diabetes Risk"
+        },
+        "clinical_validation_note": "Dataset originates from official CDC national health surveillance surveys. Contains self-reported survey responses and health indicators, not direct laboratory biomarker measurements.",
+        "urls": [
+            "https://raw.githubusercontent.com/nabilshajahan3110/CDC-Diabetic-Health-Indicators/main/diabetes_binary_health_indicators_BRFSS2015.csv"
+        ]
+    },
+    "validation_metrics": {
+        "num_rows": 253680,
+        "num_cols": 22,
+        "num_features": 21,
+        "column_names": [
+            "Diabetes_binary",
+            "HighBP",
+            "HighChol",
+            "CholCheck",
+            "BMI",
+            "Smoker",
+            "Stroke",
+            "HeartDiseaseorAttack",
+            "PhysActivity",
+            "Fruits",
+            "Veggies",
+            "HvyAlcoholConsump",
+            "AnyHealthcare",
+            "NoDocbcCost",
+            "GenHlth",
+            "MentHlth",
+            "PhysHlth",
+            "DiffWalk",
+            "Sex",
+            "Age",
+            "Education",
+            "Income"
+        ],
+        "data_types": {
+            "Diabetes_binary": "float64",
+            "HighBP": "float64",
+            "HighChol": "float64",
+            "CholCheck": "float64",
+            "BMI": "float64",
+            "Smoker": "float64",
+            "Stroke": "float64",
+            "HeartDiseaseorAttack": "float64",
+            "PhysActivity": "float64",
+            "Fruits": "float64",
+            "Veggies": "float64",
+            "HvyAlcoholConsump": "float64",
+            "AnyHealthcare": "float64",
+            "NoDocbcCost": "float64",
+            "GenHlth": "float64",
+            "MentHlth": "float64",
+            "PhysHlth": "float64",
+            "DiffWalk": "float64",
+            "Sex": "float64",
+            "Age": "float64",
+            "Education": "float64",
+            "Income": "float64"
+        },
+        "total_missing_values": 0,
+        "missing_values_per_column": {
+            "Diabetes_binary": 0,
+            "HighBP": 0,
+            "HighChol": 0,
+            "CholCheck": 0,
+            "BMI": 0,
+            "Smoker": 0,
+            "Stroke": 0,
+            "HeartDiseaseorAttack": 0,
+            "PhysActivity": 0,
+            "Fruits": 0,
+            "Veggies": 0,
+            "HvyAlcoholConsump": 0,
+            "AnyHealthcare": 0,
+            "NoDocbcCost": 0,
+            "GenHlth": 0,
+            "MentHlth": 0,
+            "PhysHlth": 0,
+            "DiffWalk": 0,
+            "Sex": 0,
+            "Age": 0,
+            "Education": 0,
+            "Income": 0
+        },
+        "duplicate_records": 24206,
+        "duplicate_percentage": 9.54,
+        "target_variable": "Diabetes_binary",
+        "target_class_counts": {
+            "0.0": 218334,
+            "1.0": 35346
+        },
+        "target_class_proportions": {
+            "0.0": 86.07,
+            "1.0": 13.93
+        },
+        "class_imbalance_ratio": 6.18,
+        "out_of_range_violations": {},
+        "total_out_of_range_records": 0,
+        "validation_status": "PASSED"
+    }
+}

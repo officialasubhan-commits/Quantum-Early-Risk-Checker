@@ -1,0 +1,50 @@
+{
+    "disease_id": "breast_cancer",
+    "disease_name": "Breast Cancer Risk Assessment",
+    "total_records": 569,
+    "feature_count": 30,
+    "test_sample_count": 86,
+    "best_classical_model": "LogisticRegression",
+    "classical_rf": {
+        "accuracy": 0.9883720930232558,
+        "precision": 0.9696969696969697,
+        "recall_sensitivity": 1.0,
+        "specificity": 0.9814814814814815,
+        "f1_score": 0.9846153846153847,
+        "roc_auc": 0.9988425925925927,
+        "confusion_matrix": {
+            "TN": 53,
+            "FP": 1,
+            "FN": 0,
+            "TP": 32
+        }
+    },
+    "quantum_vqc": {
+        "accuracy": 0.5930232558139535,
+        "precision": 0.4666666666666667,
+        "recall_sensitivity": 0.65625,
+        "specificity": 0.5555555555555556,
+        "f1_score": 0.5454545454545454,
+        "roc_auc": 0.6458333333333334,
+        "confusion_matrix": {
+            "TN": 30,
+            "FP": 24,
+            "FN": 11,
+            "TP": 21
+        }
+    },
+    "hybrid_ensemble": {
+        "accuracy": 0.9883720930232558,
+        "precision": 0.9696969696969697,
+        "recall_sensitivity": 1.0,
+        "specificity": 0.9814814814814815,
+        "f1_score": 0.9846153846153847,
+        "roc_auc": 0.9988425925925927,
+        "confusion_matrix": {
+            "TN": 53,
+            "FP": 1,
+            "FN": 0,
+            "TP": 32
+        }
+    }
+}

@@ -1,0 +1,451 @@
+{
+    "global_feature_attributions": {
+        "feature_attributions": [
+            {
+                "feature": "PhysHlth",
+                "classical_importance": 0.3389574989572818,
+                "quantum_importance": 0.0888474908792184,
+                "hybrid_importance": 0.296438797584011
+            },
+            {
+                "feature": "HighBP",
+                "classical_importance": 0.2487431038668288,
+                "quantum_importance": 0.058355495134171986,
+                "hybrid_importance": 0.21637721038227714
+            },
+            {
+                "feature": "Age",
+                "classical_importance": 0.05102268973681348,
+                "quantum_importance": 0.2840495988483013,
+                "hybrid_importance": 0.0906372642857664
+            },
+            {
+                "feature": "BMI",
+                "classical_importance": 0.09410865301172303,
+                "quantum_importance": 0.02611354302293501,
+                "hybrid_importance": 0.08254948431362906
+            },
+            {
+                "feature": "DiffWalk",
+                "classical_importance": 0.05156509629557806,
+                "quantum_importance": 0.022281633040884413,
+                "hybrid_importance": 0.046586907542280134
+            },
+            {
+                "feature": "Income",
+                "classical_importance": 0.01794449071874371,
+                "quantum_importance": 0.1858354714196013,
+                "hybrid_importance": 0.046485957437889504
+            },
+            {
+                "feature": "Smoker",
+                "classical_importance": 0.047692968089790275,
+                "quantum_importance": 0.017882926111609312,
+                "hybrid_importance": 0.042625260953499514
+            },
+            {
+                "feature": "Veggies",
+                "classical_importance": 0.035874704438437204,
+                "quantum_importance": 0.015748473561360332,
+                "hybrid_importance": 0.03245324518933414
+            },
+            {
+                "feature": "CholCheck",
+                "classical_importance": 0.017500510558257423,
+                "quantum_importance": 0.07480154594159497,
+                "hybrid_importance": 0.027241686573424805
+            },
+            {
+                "feature": "Education",
+                "classical_importance": 0.008357797092778793,
+                "quantum_importance": 0.07668788170788533,
+                "hybrid_importance": 0.019973911477346906
+            },
+            {
+                "feature": "HighChol",
+                "classical_importance": 0.008569828705416893,
+                "quantum_importance": 0.07432399933428697,
+                "hybrid_importance": 0.019748037712324806
+            },
+            {
+                "feature": "HvyAlcoholConsump",
+                "classical_importance": 0.020232872277976727,
+                "quantum_importance": 0.009701278775401891,
+                "hybrid_importance": 0.018442501382539004
+            },
+            {
+                "feature": "MentHlth",
+                "classical_importance": 0.01669033112997058,
+                "quantum_importance": 0.00821978242609395,
+                "hybrid_importance": 0.015250337850311551
+            },
+            {
+                "feature": "Fruits",
+                "classical_importance": 0.014135666082583816,
+                "quantum_importance": 0.010854379895752638,
+                "hybrid_importance": 0.013577847430822515
+            },
+            {
+                "feature": "PhysActivity",
+                "classical_importance": 0.006119146678838943,
+                "quantum_importance": 0.005067323276439495,
+                "hybrid_importance": 0.005940336700431037
+            },
+            {
+                "feature": "Sex",
+                "classical_importance": 0.005141464149952455,
+                "quantum_importance": 0.009201868108637719,
+                "hybrid_importance": 0.00583173282292895
+            },
+            {
+                "feature": "HeartDiseaseorAttack",
+                "classical_importance": 0.0031560832522376917,
+                "quantum_importance": 0.014417775583498387,
+                "hybrid_importance": 0.00507057094855201
+            },
+            {
+                "feature": "NoDocbcCost",
+                "classical_importance": 0.005011424123287383,
+                "quantum_importance": 0.0020238579548012585,
+                "hybrid_importance": 0.004503537874644742
+            },
+            {
+                "feature": "Stroke",
+                "classical_importance": 0.0045385028839451825,
+                "quantum_importance": 0.002419392190913743,
+                "hybrid_importance": 0.004178254066129838
+            },
+            {
+                "feature": "AnyHealthcare",
+                "classical_importance": 0.002748115029468674,
+                "quantum_importance": 0.0077075863992467466,
+                "hybrid_importance": 0.003591225162330946
+            },
+            {
+                "feature": "GenHlth",
+                "classical_importance": 0.0018890529200892,
+                "quantum_importance": 0.005458696387364874,
+                "hybrid_importance": 0.0024958923095260645
+            }
+        ],
+        "top_features": [
+            "PhysHlth",
+            "HighBP",
+            "Age",
+            "BMI",
+            "DiffWalk"
+        ]
+    },
+    "sample_patient_explanations": [
+        {
+            "patient_id": "PATIENT_HIGH_RISK_101",
+            "risk_probability": 0.6679,
+            "predicted_label": "Elevated Diabetes/Prediabetes Risk",
+            "is_high_risk": true,
+            "top_contributing_features": [
+                {
+                    "feature": "Age",
+                    "display_name": "Age Category (1=18-24, 13=80+)",
+                    "feature_value": 13.0,
+                    "contribution_score": 0.4629430024918165
+                },
+                {
+                    "feature": "PhysHlth",
+                    "display_name": "Physical Illness Days in Past Month",
+                    "feature_value": 5.0,
+                    "contribution_score": 0.4006883679004799
+                },
+                {
+                    "feature": "Income",
+                    "display_name": "Income Bracket",
+                    "feature_value": 3.0,
+                    "contribution_score": 0.037572770019826396
+                }
+            ],
+            "full_feature_contributions": [
+                {
+                    "feature": "Age",
+                    "display_name": "Age Category (1=18-24, 13=80+)",
+                    "feature_value": 13.0,
+                    "contribution_score": 0.4629430024918165
+                },
+                {
+                    "feature": "PhysHlth",
+                    "display_name": "Physical Illness Days in Past Month",
+                    "feature_value": 5.0,
+                    "contribution_score": 0.4006883679004799
+                },
+                {
+                    "feature": "Income",
+                    "display_name": "Income Bracket",
+                    "feature_value": 3.0,
+                    "contribution_score": 0.037572770019826396
+                },
+                {
+                    "feature": "Smoker",
+                    "display_name": "Tobacco Smoking History",
+                    "feature_value": 1.0,
+                    "contribution_score": 0.033287039639578464
+                },
+                {
+                    "feature": "Education",
+                    "display_name": "Education Level",
+                    "feature_value": 4.0,
+                    "contribution_score": 0.023333110457970214
+                },
+                {
+                    "feature": "DiffWalk",
+                    "display_name": "Difficulty Walking or Climbing Stairs",
+                    "feature_value": 1.0,
+                    "contribution_score": 0.013928109125593854
+                },
+                {
+                    "feature": "Fruits",
+                    "display_name": "Daily Fruit Consumption",
+                    "feature_value": 1.0,
+                    "contribution_score": 0.009865908876481531
+                },
+                {
+                    "feature": "HighBP",
+                    "display_name": "High Blood Pressure Diagnosis",
+                    "feature_value": 0.09,
+                    "contribution_score": 0.004599297389016924
+                },
+                {
+                    "feature": "Sex",
+                    "display_name": "Biological Sex",
+                    "feature_value": 1.0,
+                    "contribution_score": 0.0035884560726589815
+                },
+                {
+                    "feature": "Stroke",
+                    "display_name": "History of Stroke",
+                    "feature_value": 1.0,
+                    "contribution_score": 0.003167622638159209
+                },
+                {
+                    "feature": "HighChol",
+                    "display_name": "High Blood Cholesterol Diagnosis",
+                    "feature_value": -0.43,
+                    "contribution_score": 0.0025784302406350206
+                },
+                {
+                    "feature": "HvyAlcoholConsump",
+                    "display_name": "Heavy Alcohol Consumption",
+                    "feature_value": 1.0,
+                    "contribution_score": 0.002087895741938222
+                },
+                {
+                    "feature": "GenHlth",
+                    "display_name": "General Health Assessment (1=Excellent, 5=Poor)",
+                    "feature_value": 1.0,
+                    "contribution_score": 0.0013184538926972694
+                },
+                {
+                    "feature": "CholCheck",
+                    "display_name": "Cholesterol Check within 5 Years",
+                    "feature_value": 0.09,
+                    "contribution_score": 0.0010415355131476447
+                },
+                {
+                    "feature": "BMI",
+                    "display_name": "Body Mass Index (BMI)",
+                    "feature_value": 0.0,
+                    "contribution_score": 0.0
+                },
+                {
+                    "feature": "HeartDiseaseorAttack",
+                    "display_name": "History of Coronary Heart Disease/Myocardial Infarction",
+                    "feature_value": 0.0,
+                    "contribution_score": 0.0
+                },
+                {
+                    "feature": "PhysActivity",
+                    "display_name": "Physical Activity Level",
+                    "feature_value": 0.0,
+                    "contribution_score": 0.0
+                },
+                {
+                    "feature": "Veggies",
+                    "display_name": "Daily Vegetable Consumption",
+                    "feature_value": 0.0,
+                    "contribution_score": 0.0
+                },
+                {
+                    "feature": "AnyHealthcare",
+                    "display_name": "Healthcare Coverage Status",
+                    "feature_value": 0.0,
+                    "contribution_score": 0.0
+                },
+                {
+                    "feature": "NoDocbcCost",
+                    "display_name": "Inability to See Doctor Due to Cost",
+                    "feature_value": 0.0,
+                    "contribution_score": 0.0
+                },
+                {
+                    "feature": "MentHlth",
+                    "display_name": "Mental Unwellness Days in Past Month",
+                    "feature_value": 0.0,
+                    "contribution_score": 0.0
+                }
+            ],
+            "clinical_narrative": "Diagnostic Assessment for PATIENT_HIGH_RISK_101:\n\u2022 Risk Prediction: Elevated Diabetes/Prediabetes Risk (66.8% estimated probability).\n\u2022 Key Clinical Risk Factor Contributions:\n  - Age Category (1=18-24, 13=80+) (Value: 13.0) contributed 46.3% to this prediction.\n  - Physical Illness Days in Past Month (Value: 5.0) contributed 40.1% to this prediction.\n  - Income Bracket (Value: 3.0) contributed 3.8% to this prediction.\n\u2022 Recommendation: Patient exhibits strong clinical indicators associated with prediabetes/diabetes risk. Consult healthcare provider for HbA1c screening."
+        },
+        {
+            "patient_id": "PATIENT_LOW_RISK_202",
+            "risk_probability": 0.6278,
+            "predicted_label": "Elevated Diabetes/Prediabetes Risk",
+            "is_high_risk": true,
+            "top_contributing_features": [
+                {
+                    "feature": "PhysHlth",
+                    "display_name": "Physical Illness Days in Past Month",
+                    "feature_value": 4.0,
+                    "contribution_score": 0.4137456117604403
+                },
+                {
+                    "feature": "Age",
+                    "display_name": "Age Category (1=18-24, 13=80+)",
+                    "feature_value": 8.0,
+                    "contribution_score": 0.3677145692276884
+                },
+                {
+                    "feature": "Income",
+                    "display_name": "Income Bracket",
+                    "feature_value": 6.0,
+                    "contribution_score": 0.09699288750783312
+                }
+            ],
+            "full_feature_contributions": [
+                {
+                    "feature": "PhysHlth",
+                    "display_name": "Physical Illness Days in Past Month",
+                    "feature_value": 4.0,
+                    "contribution_score": 0.4137456117604403
+                },
+                {
+                    "feature": "Age",
+                    "display_name": "Age Category (1=18-24, 13=80+)",
+                    "feature_value": 8.0,
+                    "contribution_score": 0.3677145692276884
+                },
+                {
+                    "feature": "Income",
+                    "display_name": "Income Bracket",
+                    "feature_value": 6.0,
+                    "contribution_score": 0.09699288750783312
+                },
+                {
+                    "feature": "Smoker",
+                    "display_name": "Tobacco Smoking History",
+                    "feature_value": 1.0,
+                    "contribution_score": 0.04296470674808838
+                },
+                {
+                    "feature": "Education",
+                    "display_name": "Education Level",
+                    "feature_value": 4.0,
+                    "contribution_score": 0.030116834035174057
+                },
+                {
+                    "feature": "HighBP",
+                    "display_name": "High Blood Pressure Diagnosis",
+                    "feature_value": 0.4,
+                    "contribution_score": 0.025239801882257242
+                },
+                {
+                    "feature": "Sex",
+                    "display_name": "Biological Sex",
+                    "feature_value": 1.0,
+                    "contribution_score": 0.004631741497879339
+                },
+                {
+                    "feature": "Stroke",
+                    "display_name": "History of Stroke",
+                    "feature_value": 1.0,
+                    "contribution_score": 0.004088557565067988
+                },
+                {
+                    "feature": "Veggies",
+                    "display_name": "Daily Vegetable Consumption",
+                    "feature_value": 1.0,
+                    "contribution_score": 0.00384262821563022
+                },
+                {
+                    "feature": "HighChol",
+                    "display_name": "High Blood Cholesterol Diagnosis",
+                    "feature_value": -0.43,
+                    "contribution_score": 0.003328067030255429
+                },
+                {
+                    "feature": "HvyAlcoholConsump",
+                    "display_name": "Heavy Alcohol Consumption",
+                    "feature_value": 1.0,
+                    "contribution_score": 0.002694917578861457
+                },
+                {
+                    "feature": "AnyHealthcare",
+                    "display_name": "Healthcare Coverage Status",
+                    "feature_value": 1.0,
+                    "contribution_score": 0.0024756680299042183
+                },
+                {
+                    "feature": "GenHlth",
+                    "display_name": "General Health Assessment (1=Excellent, 5=Poor)",
+                    "feature_value": 1.0,
+                    "contribution_score": 0.0017017729865427928
+                },
+                {
+                    "feature": "CholCheck",
+                    "display_name": "Cholesterol Check within 5 Years",
+                    "feature_value": -0.03,
+                    "contribution_score": 0.00046223593437714295
+                },
+                {
+                    "feature": "BMI",
+                    "display_name": "Body Mass Index (BMI)",
+                    "feature_value": 0.0,
+                    "contribution_score": 0.0
+                },
+                {
+                    "feature": "HeartDiseaseorAttack",
+                    "display_name": "History of Coronary Heart Disease/Myocardial Infarction",
+                    "feature_value": 0.0,
+                    "contribution_score": 0.0
+                },
+                {
+                    "feature": "PhysActivity",
+                    "display_name": "Physical Activity Level",
+                    "feature_value": 0.0,
+                    "contribution_score": 0.0
+                },
+                {
+                    "feature": "Fruits",
+                    "display_name": "Daily Fruit Consumption",
+                    "feature_value": 0.0,
+                    "contribution_score": 0.0
+                },
+                {
+                    "feature": "NoDocbcCost",
+                    "display_name": "Inability to See Doctor Due to Cost",
+                    "feature_value": 0.0,
+                    "contribution_score": 0.0
+                },
+                {
+                    "feature": "MentHlth",
+                    "display_name": "Mental Unwellness Days in Past Month",
+                    "feature_value": 0.0,
+                    "contribution_score": 0.0
+                },
+                {
+                    "feature": "DiffWalk",
+                    "display_name": "Difficulty Walking or Climbing Stairs",
+                    "feature_value": 0.0,
+                    "contribution_score": 0.0
+                }
+            ],
+            "clinical_narrative": "Diagnostic Assessment for PATIENT_LOW_RISK_202:\n\u2022 Risk Prediction: Elevated Diabetes/Prediabetes Risk (62.8% estimated probability).\n\u2022 Key Clinical Risk Factor Contributions:\n  - Physical Illness Days in Past Month (Value: 4.0) contributed 41.4% to this prediction.\n  - Age Category (1=18-24, 13=80+) (Value: 8.0) contributed 36.8% to this prediction.\n  - Income Bracket (Value: 6.0) contributed 9.7% to this prediction.\n\u2022 Recommendation: Patient exhibits strong clinical indicators associated with prediabetes/diabetes risk. Consult healthcare provider for HbA1c screening."
+        }
+    ]
+}

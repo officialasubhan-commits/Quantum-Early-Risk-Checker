@@ -1,0 +1,22 @@
+{
+    "disease_id": "heart_disease",
+    "model_name": "6-Qubit Variational Quantum Classifier (QML)",
+    "n_qubits": 6,
+    "n_layers": 2,
+    "pca_variance_retained": 0.7032907879608064,
+    "training_time_sec": 58.00320219993591,
+    "validation_metrics": {
+        "accuracy": 0.4888888888888889,
+        "precision": 0.4444444444444444,
+        "recall_sensitivity": 0.38095238095238093,
+        "specificity": 0.5833333333333334,
+        "f1_score": 0.41025641025641024,
+        "roc_auc": 0.3551587301587302,
+        "confusion_matrix": {
+            "TN": 14,
+            "FP": 10,
+            "FN": 13,
+            "TP": 8
+        }
+    }
+}

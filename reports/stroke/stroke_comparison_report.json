@@ -1,0 +1,50 @@
+{
+    "disease_id": "stroke",
+    "disease_name": "Stroke Risk Assessment",
+    "total_records": 5110,
+    "feature_count": 10,
+    "test_sample_count": 767,
+    "best_classical_model": "GradientBoostingClassifier",
+    "classical_rf": {
+        "accuracy": 0.9504563233376793,
+        "precision": 0.0,
+        "recall_sensitivity": 0.0,
+        "specificity": 1.0,
+        "f1_score": 0.0,
+        "roc_auc": 0.8249765359901812,
+        "confusion_matrix": {
+            "TN": 729,
+            "FP": 0,
+            "FN": 38,
+            "TP": 0
+        }
+    },
+    "quantum_vqc": {
+        "accuracy": 0.9504563233376793,
+        "precision": 0.0,
+        "recall_sensitivity": 0.0,
+        "specificity": 1.0,
+        "f1_score": 0.0,
+        "roc_auc": 0.5349433253916684,
+        "confusion_matrix": {
+            "TN": 729,
+            "FP": 0,
+            "FN": 38,
+            "TP": 0
+        }
+    },
+    "hybrid_ensemble": {
+        "accuracy": 0.6597131681877445,
+        "precision": 0.11149825783972125,
+        "recall_sensitivity": 0.8421052631578947,
+        "specificity": 0.6502057613168725,
+        "f1_score": 0.19692307692307692,
+        "roc_auc": 0.8166197386470291,
+        "confusion_matrix": {
+            "TN": 474,
+            "FP": 255,
+            "FN": 6,
+            "TP": 32
+        }
+    }
+}

@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "task": "Inspect existing codebase and data ingestion",
+        "phase": "Data Ingestion",
+        "status": "COMPLETED"
+    },
+    {
+        "id": 2,
+        "task": "10-point data validation & ingestion report generation",
+        "phase": "Data Ingestion",
+        "status": "COMPLETED"
+    },
+    {
+        "id": 3,
+        "task": "Stratified 70/15/15 train/val/test data pipeline split",
+        "phase": "Preprocessing",
+        "status": "COMPLETED"
+    },
+    {
+        "id": 4,
+        "task": "Train and cross-validate classical ML baseline models",
+        "phase": "Classical ML",
+        "status": "COMPLETED"
+    },
+    {
+        "id": 5,
+        "task": "Save best classical model & preprocessor artifacts",
+        "phase": "Classical ML",
+        "status": "COMPLETED"
+    },
+    {
+        "id": 6,
+        "task": "Develop internal project monitoring dashboard UI",
+        "phase": "Web Application",
+        "status": "COMPLETED"
+    },
+    {
+        "id": 7,
+        "task": "Implement PCA dimensionality reduction (21 -> 6 quantum features)",
+        "phase": "QML",
+        "status": "COMPLETED"
+    },
+    {
+        "id": 8,
+        "task": "Construct 6-qubit Variational Quantum Circuit (VQC)",
+        "phase": "QML",
+        "status": "COMPLETED"
+    },
+    {
+        "id": 9,
+        "task": "Train VQC on simulator & evaluate on 38,052 test set",
+        "phase": "QML",
+        "status": "COMPLETED"
+    },
+    {
+        "id": 10,
+        "task": "Train Hybrid Classical-Quantum Classifier & Meta-Ensemble",
+        "phase": "Hybrid Model",
+        "status": "COMPLETED"
+    },
+    {
+        "id": 11,
+        "task": "Compute SHAP feature attributions for model explainability",
+        "phase": "Explainability",
+        "status": "NOT STARTED"
+    },
+    {
+        "id": 12,
+        "task": "Build FastAPI prediction & monitoring endpoints",
+        "phase": "FastAPI",
+        "status": "NOT STARTED"
+    }
+]

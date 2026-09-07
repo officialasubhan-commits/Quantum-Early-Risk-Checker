@@ -1,0 +1,22 @@
+{
+    "disease_id": "heart_disease",
+    "model_name": "Hybrid Classical-Quantum Ensemble Classifier",
+    "optimal_classical_weight": 0.5,
+    "optimal_quantum_weight": 0.5,
+    "optimal_threshold": 0.47,
+    "training_time_sec": 5.100303411483765,
+    "validation_metrics": {
+        "accuracy": 0.8,
+        "precision": 0.7727272727272727,
+        "recall_sensitivity": 0.8095238095238095,
+        "specificity": 0.7916666666666666,
+        "f1_score": 0.7906976744186046,
+        "roc_auc": 0.9027777777777778,
+        "confusion_matrix": {
+            "TN": 19,
+            "FP": 5,
+            "FN": 4,
+            "TP": 17
+        }
+    }
+}

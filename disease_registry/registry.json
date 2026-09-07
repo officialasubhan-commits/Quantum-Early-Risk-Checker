@@ -1,0 +1,466 @@
+{
+  "diseases": {
+    "diabetes": {
+      "id": "diabetes",
+      "name": "Diabetes / Prediabetes Risk Assessment",
+      "category": "Endocrine & Metabolic",
+      "description": "AI-assisted early-risk assessment for prediabetes and type-2 diabetes based on 21 clinical health indicators.",
+      "dataset_name": "CDC BRFSS 2015 Diabetes Health Indicators",
+      "target_variable": "Diabetes_binary",
+      "status": "ACTIVE",
+      "model_version": "1.0.0",
+      "features": [
+        "HighBP",
+        "HighChol",
+        "CholCheck",
+        "BMI",
+        "Smoker",
+        "Stroke",
+        "HeartDiseaseorAttack",
+        "PhysActivity",
+        "Fruits",
+        "Veggies",
+        "HvyAlcoholConsump",
+        "AnyHealthcare",
+        "NoDocbcCost",
+        "GenHlth",
+        "MentHlth",
+        "PhysHlth",
+        "DiffWalk",
+        "Sex",
+        "Age",
+        "Education",
+        "Income"
+      ],
+      "model_paths": {
+        "preprocessor": "models/preprocessor.joblib",
+        "classical_model": "models/best_classical_model.joblib",
+        "pca_reducer": "models/qml_pca_reducer.joblib",
+        "qml_params": "models/qml_vqc_params.npz",
+        "hybrid_model": "models/hybrid_fusion_model.joblib"
+      },
+      "qml_config": {
+        "n_qubits": 6,
+        "n_layers": 2,
+        "pca_dim": 6
+      }
+    },
+    "heart_disease": {
+      "id": "heart_disease",
+      "name": "Cardiovascular / Heart Disease Risk Assessment",
+      "category": "Cardiology",
+      "description": "Early risk assessment for coronary artery disease and heart failure based on cardiovascular biomarkers.",
+      "dataset_name": "UCI Heart Disease Benchmark Dataset",
+      "target_variable": "target",
+      "status": "ACTIVE",
+      "model_version": "1.0.0",
+      "features": [
+        "age",
+        "sex",
+        "cp",
+        "trestbps",
+        "chol",
+        "fbs",
+        "restecg",
+        "thalach",
+        "exang",
+        "oldpeak",
+        "slope",
+        "ca",
+        "thal"
+      ],
+      "model_paths": {
+        "preprocessor": "models/heart_disease/preprocessor.joblib",
+        "classical_model": "models/heart_disease/best_classical_model.joblib",
+        "pca_reducer": "models/heart_disease/qml_pca_reducer.joblib",
+        "qml_params": "models/heart_disease/qml_vqc_params.npz",
+        "hybrid_model": "models/heart_disease/hybrid_fusion_model.joblib"
+      },
+      "qml_config": {
+        "n_qubits": 6,
+        "n_layers": 2,
+        "pca_dim": 6
+      }
+    },
+    "kidney_disease": {
+      "id": "kidney_disease",
+      "name": "Chronic Kidney Disease Risk Assessment",
+      "category": "Nephrology",
+      "description": "Early risk screening for chronic kidney disease (CKD) using renal biomarkers and clinical indicators.",
+      "dataset_name": "UCI Chronic Kidney Disease Dataset",
+      "target_variable": "target",
+      "status": "ACTIVE",
+      "model_version": "1.0.0",
+      "features": [
+        "age",
+        "bp",
+        "sg",
+        "al",
+        "su",
+        "rbc",
+        "pc",
+        "pcc",
+        "ba",
+        "bgr",
+        "bu",
+        "sc",
+        "sod",
+        "pot",
+        "hemo",
+        "pcv",
+        "wbcc",
+        "rbcc",
+        "htn",
+        "dm",
+        "cad",
+        "appet",
+        "pe",
+        "ane"
+      ],
+      "model_paths": {
+        "preprocessor": "models/kidney_disease/preprocessor.joblib",
+        "classical_model": "models/kidney_disease/best_classical_model.joblib",
+        "pca_reducer": "models/kidney_disease/qml_pca_reducer.joblib",
+        "qml_params": "models/kidney_disease/qml_vqc_params.npz",
+        "hybrid_model": "models/kidney_disease/hybrid_fusion_model.joblib"
+      },
+      "qml_config": {
+        "n_qubits": 6,
+        "n_layers": 2,
+        "pca_dim": 6
+      }
+    },
+    "liver_disease": {
+      "id": "liver_disease",
+      "name": "Liver Disease Risk Assessment",
+      "category": "Hepatology",
+      "description": "Early screening for hepatic dysfunction and liver disease using serum bilirubin and enzyme markers.",
+      "dataset_name": "UCI Indian Liver Patient Dataset",
+      "target_variable": "target",
+      "status": "ACTIVE",
+      "model_version": "1.0.0",
+      "features": [
+        "Age",
+        "Gender",
+        "Total_Bilirubin",
+        "Direct_Bilirubin",
+        "Alkaline_Phosphotase",
+        "Alamine_Aminotransferase",
+        "Aspartate_Aminotransferase",
+        "Total_Protiens",
+        "Albumin",
+        "Albumin_and_Globulin_Ratio"
+      ],
+      "model_paths": {
+        "preprocessor": "models/liver_disease/preprocessor.joblib",
+        "classical_model": "models/liver_disease/best_classical_model.joblib",
+        "pca_reducer": "models/liver_disease/qml_pca_reducer.joblib",
+        "qml_params": "models/liver_disease/qml_vqc_params.npz",
+        "hybrid_model": "models/liver_disease/hybrid_fusion_model.joblib"
+      },
+      "qml_config": {
+        "n_qubits": 6,
+        "n_layers": 2,
+        "pca_dim": 6
+      }
+    },
+    "stroke": {
+      "id": "stroke",
+      "name": "Stroke Risk Assessment",
+      "category": "Neurology",
+      "description": "Cerebrovascular accident and stroke prediction using clinical risk factors and lifestyle indicators.",
+      "dataset_name": "Kaggle Healthcare Stroke Dataset",
+      "target_variable": "target",
+      "status": "ACTIVE",
+      "model_version": "1.0.0",
+      "features": [
+        "gender",
+        "age",
+        "hypertension",
+        "heart_disease",
+        "ever_married",
+        "work_type",
+        "Residence_type",
+        "avg_glucose_level",
+        "bmi",
+        "smoking_status"
+      ],
+      "model_paths": {
+        "preprocessor": "models/stroke/preprocessor.joblib",
+        "classical_model": "models/stroke/best_classical_model.joblib",
+        "pca_reducer": "models/stroke/qml_pca_reducer.joblib",
+        "qml_params": "models/stroke/qml_vqc_params.npz",
+        "hybrid_model": "models/stroke/hybrid_fusion_model.joblib"
+      },
+      "qml_config": {
+        "n_qubits": 6,
+        "n_layers": 2,
+        "pca_dim": 6
+      }
+    },
+    "breast_cancer": {
+      "id": "breast_cancer",
+      "name": "Breast Cancer Risk Assessment",
+      "category": "Oncology",
+      "description": "Biomarker and cell nucleus morphometric analysis for early breast cancer risk stratification.",
+      "dataset_name": "UCI Breast Cancer Wisconsin (Diagnostic) Dataset",
+      "target_variable": "target",
+      "status": "ACTIVE",
+      "model_version": "1.0.0",
+      "features": [
+        "mean radius",
+        "mean texture",
+        "mean perimeter",
+        "mean area",
+        "mean smoothness",
+        "mean compactness",
+        "mean concavity",
+        "mean concave points",
+        "mean symmetry",
+        "mean fractal dimension",
+        "radius error",
+        "texture error",
+        "perimeter error",
+        "area error",
+        "smoothness error",
+        "compactness error",
+        "concavity error",
+        "concave points error",
+        "symmetry error",
+        "fractal dimension error",
+        "worst radius",
+        "worst texture",
+        "worst perimeter",
+        "worst area",
+        "worst smoothness",
+        "worst compactness",
+        "worst concavity",
+        "worst concave points",
+        "worst symmetry",
+        "worst fractal dimension"
+      ],
+      "model_paths": {
+        "preprocessor": "models/breast_cancer/preprocessor.joblib",
+        "classical_model": "models/breast_cancer/best_classical_model.joblib",
+        "pca_reducer": "models/breast_cancer/qml_pca_reducer.joblib",
+        "qml_params": "models/breast_cancer/qml_vqc_params.npz",
+        "hybrid_model": "models/breast_cancer/hybrid_fusion_model.joblib"
+      },
+      "qml_config": {
+        "n_qubits": 6,
+        "n_layers": 2,
+        "pca_dim": 6
+      }
+    },
+    "parkinsons": {
+      "id": "parkinsons",
+      "name": "Parkinson's Disease Risk Assessment",
+      "category": "Neurology & Movement",
+      "description": "Acoustic and voice frequency analysis for early detection of Parkinsonian neurological tremor.",
+      "dataset_name": "UCI Parkinson's Disease Vocal Dataset",
+      "target_variable": "target",
+      "status": "ACTIVE",
+      "model_version": "1.0.0",
+      "features": [
+        "MDVP:Fo(Hz)",
+        "MDVP:Fhi(Hz)",
+        "MDVP:Flo(Hz)",
+        "MDVP:Jitter(%)",
+        "MDVP:Jitter(Abs)",
+        "MDVP:RAP",
+        "MDVP:PPQ",
+        "Jitter:DDP",
+        "MDVP:Shimmer",
+        "MDVP:Shimmer(dB)",
+        "Shimmer:APQ3",
+        "Shimmer:APQ5",
+        "MDVP:APQ",
+        "Shimmer:DDA",
+        "NHR",
+        "HNR",
+        "RPDE",
+        "DFA",
+        "spread1",
+        "spread2",
+        "D2",
+        "PPE"
+      ],
+      "model_paths": {
+        "preprocessor": "models/parkinsons/preprocessor.joblib",
+        "classical_model": "models/parkinsons/best_classical_model.joblib",
+        "pca_reducer": "models/parkinsons/qml_pca_reducer.joblib",
+        "qml_params": "models/parkinsons/qml_vqc_params.npz",
+        "hybrid_model": "models/parkinsons/hybrid_fusion_model.joblib"
+      },
+      "qml_config": {
+        "n_qubits": 6,
+        "n_layers": 2,
+        "pca_dim": 6
+      }
+    },
+    "thyroid": {
+      "id": "thyroid",
+      "name": "Thyroid Disease Risk Assessment",
+      "category": "Endocrine & Thyroid",
+      "description": "AI-assisted screening for hypothyroidism and thyroid dysfunction using TSH, T3, T4, and clinical indicators.",
+      "symptoms": "Fatigue, weight gain/loss, temperature intolerance, dry skin, goitre, mood changes",
+      "risk_factors": "Female sex, age > 50, personal/family history of autoimmune disease, iodine levels",
+      "dataset_name": "UCI Thyroid Disease Benchmark Dataset (Garavan Institute)",
+      "target_variable": "target",
+      "data_modality": "Tabular Clinical Biomarkers",
+      "status": "ACTIVE",
+      "model_version": "1.0.0",
+      "features": [
+        "age",
+        "sex",
+        "on_thyroxine",
+        "query_on_thyroxine",
+        "on_antithyroid_med",
+        "sick",
+        "pregnant",
+        "thyroid_surgery",
+        "I131_treatment",
+        "query_hypothyroid",
+        "query_hyperthyroid",
+        "lithium",
+        "goitre",
+        "tumor",
+        "hypopituitary",
+        "psych",
+        "TSH",
+        "T3",
+        "TT4",
+        "T4U",
+        "FTI"
+      ],
+      "model_paths": {
+        "preprocessor": "models/thyroid/preprocessor.joblib",
+        "classical_model": "models/thyroid/best_classical_model.joblib",
+        "pca_reducer": "models/thyroid/qml_pca_reducer.joblib",
+        "qml_params": "models/thyroid/qml_vqc_params.npz",
+        "hybrid_model": "models/thyroid/hybrid_fusion_model.joblib"
+      },
+      "qml_config": {
+        "n_qubits": 6,
+        "n_layers": 2,
+        "pca_dim": 6
+      }
+    },
+    "lung_cancer": {
+      "id": "lung_cancer",
+      "name": "Thoracic & Lung Cancer Risk Assessment",
+      "category": "Pulmonology & Oncology",
+      "description": "Risk stratification for thoracic surgery complications and early lung cancer screening using pulmonary spirometry (FVC, FEV1).",
+      "symptoms": "Persistent cough, dyspnoea, haemoptysis, thoracic chest pain, unexplained weight loss",
+      "risk_factors": "Smoking history, occupational toxin exposure, low FEV1/FVC ratio, advanced age, large tumor size",
+      "dataset_name": "UCI Thoracic Surgery & Lung Cancer Dataset",
+      "target_variable": "target",
+      "data_modality": "Tabular Clinical Biomarkers",
+      "status": "ACTIVE",
+      "model_version": "1.0.0",
+      "features": [
+        "age",
+        "forced_vital_capacity",
+        "fev1",
+        "performance_status",
+        "pain",
+        "haemoptysis",
+        "dyspnoea",
+        "cough",
+        "weakness",
+        "tumor_size",
+        "diabetes_history",
+        "myocardial_infarction",
+        "peripheral_arterial_disease",
+        "smoking_history"
+      ],
+      "model_paths": {
+        "preprocessor": "models/lung_cancer/preprocessor.joblib",
+        "classical_model": "models/lung_cancer/best_classical_model.joblib",
+        "pca_reducer": "models/lung_cancer/qml_pca_reducer.joblib",
+        "qml_params": "models/lung_cancer/qml_vqc_params.npz",
+        "hybrid_model": "models/lung_cancer/hybrid_fusion_model.joblib"
+      },
+      "qml_config": {
+        "n_qubits": 6,
+        "n_layers": 2,
+        "pca_dim": 6
+      }
+    },
+    "alzheimers": {
+      "id": "alzheimers",
+      "name": "Alzheimer's & Dementia Risk Assessment",
+      "category": "Neurology & Geriatrics",
+      "description": "Early cognitive impairment and Alzheimer's dementia risk evaluation based on MMSE scores, CDR ratings, and brain MRI volume markers.",
+      "symptoms": "Memory loss, cognitive disorientation, executive dysfunction, language impairment, behavioral changes",
+      "risk_factors": "Advanced age, low Mini-Mental State Exam (MMSE) score, reduced whole brain volume (nWBV), APOE-e4 allele",
+      "dataset_name": "OASIS Longitudinal MRI Dementia Dataset",
+      "target_variable": "target",
+      "data_modality": "Tabular Clinical Biomarkers",
+      "status": "ACTIVE",
+      "model_version": "1.0.0",
+      "features": [
+        "gender",
+        "age",
+        "education_years",
+        "socioeconomic_status",
+        "mini_mental_state_exam",
+        "clinical_dementia_rating",
+        "estimated_total_intracranial_vol",
+        "normalize_whole_brain_vol",
+        "atlas_scaling_factor"
+      ],
+      "model_paths": {
+        "preprocessor": "models/alzheimers/preprocessor.joblib",
+        "classical_model": "models/alzheimers/best_classical_model.joblib",
+        "pca_reducer": "models/alzheimers/qml_pca_reducer.joblib",
+        "qml_params": "models/alzheimers/qml_vqc_params.npz",
+        "hybrid_model": "models/alzheimers/hybrid_fusion_model.joblib"
+      },
+      "qml_config": {
+        "n_qubits": 6,
+        "n_layers": 2,
+        "pca_dim": 6
+      }
+    },
+    "hypertension": {
+      "id": "hypertension",
+      "name": "Clinical Hypertension Risk Assessment",
+      "category": "Cardiology & Vascular",
+      "description": "Early risk detection for primary and secondary hypertension using blood pressure dynamics, electrolyte balances, and lifestyle markers.",
+      "symptoms": "Occipital headache, dizziness, visual disturbances, palpitations, epistaxis",
+      "risk_factors": "High SBP/DBP, elevated BMI, high dietary sodium, physical inactivity, smoking, family history",
+      "dataset_name": "Clinical Hypertension & Vascular Health Dataset",
+      "target_variable": "target",
+      "data_modality": "Tabular Clinical Biomarkers",
+      "status": "ACTIVE",
+      "model_version": "1.0.0",
+      "features": [
+        "age",
+        "sex",
+        "systolic_bp",
+        "diastolic_bp",
+        "heart_rate",
+        "bmi",
+        "fasting_glucose",
+        "serum_sodium",
+        "serum_potassium",
+        "family_history",
+        "smoking_status",
+        "physical_activity_hours"
+      ],
+      "model_paths": {
+        "preprocessor": "models/hypertension/preprocessor.joblib",
+        "classical_model": "models/hypertension/best_classical_model.joblib",
+        "pca_reducer": "models/hypertension/qml_pca_reducer.joblib",
+        "qml_params": "models/hypertension/qml_vqc_params.npz",
+        "hybrid_model": "models/hypertension/hybrid_fusion_model.joblib"
+      },
+      "qml_config": {
+        "n_qubits": 6,
+        "n_layers": 2,
+        "pca_dim": 6
+      }
+    }
+  }
+}

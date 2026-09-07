@@ -1,0 +1,22 @@
+# Voice AI Module Dependencies (SIH26139 Platform)
+fastapi>=0.100.0
+uvicorn>=0.22.0
+pydantic>=2.0.0
+requests>=2.31.0
+httpx>=0.24.0
+websockets>=11.0
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Speech Recognition (Local STT)
+faster-whisper>=0.10.0
+
+# Speech Synthesis (Local TTS)
+# kokoro-onnx or pyttsx3/soundfile fallback
+soundfile>=0.12.1
+
+# Optional Audio capture / processing
+wave
+psutil>=5.9.0
+python-multipart>=0.0.9
+sqlalchemy>=2.0.0

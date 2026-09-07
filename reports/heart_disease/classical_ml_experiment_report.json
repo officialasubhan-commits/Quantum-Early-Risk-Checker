@@ -1,0 +1,63 @@
+{
+    "disease_id": "heart_disease",
+    "selected_best_model": "RandomForestClassifier",
+    "best_model_path": "D:\\Test\\models\\heart_disease\\best_classical_model.joblib",
+    "validation_benchmark_comparison": {
+        "LogisticRegression": {
+            "accuracy": 0.8,
+            "precision": 0.8333333333333334,
+            "recall_sensitivity": 0.7142857142857143,
+            "specificity": 0.875,
+            "f1_score": 0.7692307692307693,
+            "roc_auc": 0.8888888888888888,
+            "confusion_matrix": {
+                "TN": 21,
+                "FP": 3,
+                "FN": 6,
+                "TP": 15
+            }
+        },
+        "SupportVectorMachine": {
+            "accuracy": 0.8,
+            "precision": 0.8,
+            "recall_sensitivity": 0.7619047619047619,
+            "specificity": 0.8333333333333334,
+            "f1_score": 0.7804878048780488,
+            "roc_auc": 0.8928571428571428,
+            "confusion_matrix": {
+                "TN": 20,
+                "FP": 4,
+                "FN": 5,
+                "TP": 16
+            }
+        },
+        "RandomForestClassifier": {
+            "accuracy": 0.8,
+            "precision": 0.8333333333333334,
+            "recall_sensitivity": 0.7142857142857143,
+            "specificity": 0.875,
+            "f1_score": 0.7692307692307693,
+            "roc_auc": 0.9107142857142858,
+            "confusion_matrix": {
+                "TN": 21,
+                "FP": 3,
+                "FN": 6,
+                "TP": 15
+            }
+        },
+        "GradientBoostingClassifier": {
+            "accuracy": 0.7555555555555555,
+            "precision": 0.75,
+            "recall_sensitivity": 0.7142857142857143,
+            "specificity": 0.7916666666666666,
+            "f1_score": 0.7317073170731707,
+            "roc_auc": 0.875,
+            "confusion_matrix": {
+                "TN": 19,
+                "FP": 5,
+                "FN": 6,
+                "TP": 15
+            }
+        }
+    }
+}

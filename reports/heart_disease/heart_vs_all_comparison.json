@@ -1,0 +1,47 @@
+{
+    "disease_id": "heart_disease",
+    "disease_name": "Cardiovascular / Heart Disease",
+    "test_sample_count": 46,
+    "classical_rf": {
+        "accuracy": 0.8913043478260869,
+        "precision": 0.9,
+        "recall_sensitivity": 0.8571428571428571,
+        "specificity": 0.92,
+        "f1_score": 0.8780487804878049,
+        "roc_auc": 0.9390476190476191,
+        "confusion_matrix": {
+            "TN": 23,
+            "FP": 2,
+            "FN": 3,
+            "TP": 18
+        }
+    },
+    "quantum_vqc": {
+        "accuracy": 0.5869565217391305,
+        "precision": 0.5625,
+        "recall_sensitivity": 0.42857142857142855,
+        "specificity": 0.72,
+        "f1_score": 0.4864864864864865,
+        "roc_auc": 0.5657142857142856,
+        "confusion_matrix": {
+            "TN": 18,
+            "FP": 7,
+            "FN": 12,
+            "TP": 9
+        }
+    },
+    "hybrid_ensemble": {
+        "accuracy": 0.8478260869565217,
+        "precision": 0.7692307692307693,
+        "recall_sensitivity": 0.9523809523809523,
+        "specificity": 0.76,
+        "f1_score": 0.851063829787234,
+        "roc_auc": 0.9390476190476191,
+        "confusion_matrix": {
+            "TN": 19,
+            "FP": 6,
+            "FN": 1,
+            "TP": 20
+        }
+    }
+}

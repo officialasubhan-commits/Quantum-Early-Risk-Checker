@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIH26139 - AI Disease Risk Decision Support</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-wrapper">
+        <!-- Application Header -->
+        <header class="main-header">
+            <div class="brand-section">
+                <span class="brand-badge">SIH26139</span>
+                <div class="brand-titles">
+                    <h1>Hybrid Quantum Machine Learning Platform</h1>
+                    <p>AI-Assisted Early Disease Risk Decision Support System</p>
+                </div>
+            </div>
+            <div class="header-status">
+                <span class="status-dot"></span>
+                <span>FastAPI Backend: <strong id="api-status-text">Connected (v1.0.0)</strong></span>
+            </div>
+        </header>
+
+        <!-- Safety Disclaimer Banner -->
+        <div class="disclaimer-banner">
+            <span class="icon">⚠️</span>
+            <div>
+                <strong>IMPORTANT MEDICAL DISCLAIMER:</strong> This tool provides AI-assisted early disease risk assessment decision support based on statistical and quantum machine learning models. It is <strong>NOT a medical diagnosis</strong> and does NOT replace professional evaluation by a qualified healthcare practitioner.
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs">
+            <button class="tab-btn active" data-tab="tab-home">🏠 Overview & Safety</button>
+            <button class="tab-btn" data-tab="tab-voice" id="tab-btn-voice">🎙️ Voice AI Assistant</button>
+            <button class="tab-btn" data-tab="tab-profile">👤 Patient Profile</button>
+            <button class="tab-btn" data-tab="tab-symptoms">🩺 Symptoms & History</button>
+            <button class="tab-btn" data-tab="tab-upload">📄 Upload Report</button>
+            <button class="tab-btn" data-tab="tab-results">📊 Risk Assessment & Explainability</button>
+        </nav>
+
+        <!-- TAB 1: OVERVIEW & SAFETY -->
+        <div class="tab-content active" id="tab-home">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Welcome to the Hybrid Quantum Disease Risk Assessment Platform</h2>
+                    <p>Advanced decision-support powered by Classical Machine Learning & 6-Qubit Variational Quantum Computing</p>
+                </div>
+                <div style="margin-bottom: 24px; color: var(--text-secondary);">
+                    <p style="margin-bottom: 12px;">This platform provides early probabilistic risk assessment for metabolic health indicators (such as diabetes and prediabetes) using the CDC BRFSS epidemiological dataset.</p>
+                    <p style="margin-bottom: 12px;">Our dual-branch architecture combines standard Random Forest ensembles with 6-Qubit Variational Quantum Circuits (VQC) to evaluate complex non-linear clinical risk factors.</p>
+                </div>
+
+                <div class="card-header" style="margin-top: 24px;">
+                    <h2>Assessment Workflow</h2>
+                </div>
+                <div class="form-grid" style="margin-bottom: 28px;">
+                    <div style="background: var(--bg-input); padding: 18px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                        <strong style="color: var(--accent-teal); font-size: 1.1rem; display: block; margin-bottom: 6px;">1. Health Profile</strong>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary);">Enter basic demographics, age group, biological sex, and healthcare access details.</p>
+                    </div>
+                    <div style="background: var(--bg-input); padding: 18px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                        <strong style="color: var(--accent-blue); font-size: 1.1rem; display: block; margin-bottom: 6px;">2. Symptoms & History</strong>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary);">Log physical illness days, cardiovascular history, BMI, and lifestyle habits.</p>
+                    </div>
+                    <div style="background: var(--bg-input); padding: 18px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                        <strong style="color: var(--accent-purple); font-size: 1.1rem; display: block; margin-bottom: 6px;">3. Quantum Prediction</strong>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary);">Generate probabilistic risk scores and patient-specific explainability attributions.</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 10px;">
+                    <button class="btn-primary" onclick="switchTab('tab-profile')">Begin Risk Assessment →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: MULTILINGUAL VOICE AI ASSISTANT -->
+        <div class="tab-content" id="tab-voice">
+            <div class="card">
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                    <div>
+                        <h2>🎙️ Conversational Voice AI Health Assessment</h2>
+                        <p>Interactive spoken health interview asking one relevant question at a time in English, Hindi (हिंदी), or Bengali (বাংলা). Values synchronize live with your health forms.</p>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span id="voice-engine-badge" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; border: 1px solid var(--accent-emerald);">
+                            Voice AI Backend: Active
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Setup & Configuration Bar -->
+                <div style="background: var(--bg-input); padding: 16px 20px; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                            <label for="select-voice-disease" style="font-size: 0.88rem; font-weight: 600; color: var(--text-secondary);">Target Disease:</label>
+                            <select id="select-voice-disease" class="form-control" style="width: auto; padding: 6px 14px;" onchange="onVoiceDiseaseChange()">
+                                <option value="diabetes" selected>🩺 Diabetes / Prediabetes (BRFSS)</option>
+                                <option value="heart_disease">❤️ Cardiovascular / Heart Disease</option>
+                                <option value="hypertension">🩸 Hypertension Risk</option>
+                                <option value="kidney_disease">🫘 Chronic Kidney Disease (CKD)</option>
+                                <option value="all">⚡ Comprehensive Health Screening (All Questions)</option>
+                            </select>
+
+                            <label for="select-voice-language" style="font-size: 0.88rem; font-weight: 600; color: var(--text-secondary);">Conversation Language:</label>
+                            <select id="select-voice-language" class="form-control" style="width: auto; padding: 6px 14px;" onchange="onVoiceLanguageChange()">
+                                <option value="en" selected>🇬🇧 English (en-US)</option>
+                                <option value="hi">🇮🇳 Hindi / हिंदी (hi-IN)</option>
+                                <option value="bn">🇧🇩 Bengali / বাংলা (bn-IN)</option>
+                            </select>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <button type="button" id="btn-start-conversation" class="btn-primary" style="background: linear-gradient(135deg, #10b981, #06b6d4); font-weight: 700; display: flex; align-items: center; gap: 8px;" onclick="startConversationalAssessment()">
+                                <span>▶️</span>
+                                <span id="start-btn-text">Start Spoken Assessment</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Conversational Stage -->
+                <div id="conversational-stage" style="margin-bottom: 24px; padding: 22px; background: rgba(15, 23, 42, 0.85); border-radius: var(--radius-md); border: 1px solid var(--accent-teal);">
+                    <!-- Progress & Status Header -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span id="voice-state-indicator" style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #94a3b8;"></span>
+                            <strong id="voice-state-text" style="font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Ready to Begin</strong>
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--accent-teal); font-weight: 700;" id="question-progress-text">
+                            Question 0 of 0
+                        </div>
+                    </div>
+
+                    <!-- AI Assistant Speech Bubble -->
+                    <div style="display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start;">
+                        <div style="font-size: 1.8rem; background: rgba(6, 182, 212, 0.15); padding: 8px 12px; border-radius: 50%; border: 1px solid var(--accent-teal); flex-shrink: 0;">
+                            🤖
+                        </div>
+                        <div style="flex-grow: 1; background: rgba(30, 41, 59, 0.7); border-radius: var(--radius-md); padding: 16px; border: 1px solid rgba(6, 182, 212, 0.3);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <strong style="color: var(--accent-teal); font-size: 0.88rem;">Voice AI Assistant (Speaking ONE question at a time)</strong>
+                                <button type="button" class="btn-secondary" style="padding: 2px 10px; font-size: 0.78rem;" onclick="playLastSynthesizedAudio()">🔊 Replay Question</button>
+                            </div>
+                            <p id="assistant-spoken-bubble" style="font-size: 1.15rem; font-weight: 500; color: #f8fafc; margin: 0; line-height: 1.5;">
+                                Click "Start Spoken Assessment" above to begin your interactive health assessment.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- User Voice Response / Input Bubble -->
+                    <div style="display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start;">
+                        <div style="font-size: 1.8rem; background: rgba(59, 130, 246, 0.15); padding: 8px 12px; border-radius: 50%; border: 1px solid var(--accent-blue); flex-shrink: 0;">
+                            👤
+                        </div>
+                        <div style="flex-grow: 1;">
+                            <div style="position: relative;">
+                                <input type="text" id="inp-voice-transcript" class="form-control" style="font-size: 1.05rem; padding: 14px 16px; border: 1px solid var(--accent-blue);" placeholder="Speak your answer or type here (e.g. 'I am 45', '175 cm', 'Yes I have high BP')..." onkeydown="if(event.key==='Enter') submitConversationalTurn();">
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; flex-wrap: wrap; gap: 8px;">
+                                <div style="display: flex; gap: 8px; align-items: center;">
+                                    <button type="button" id="btn-mic-toggle" class="btn-primary" style="background: linear-gradient(135deg, #06b6d4, #3b82f6); display: flex; align-items: center; gap: 6px; padding: 7px 16px; font-size: 0.9rem;" onclick="toggleMicrophoneCapture()">
+                                        <span id="mic-icon">🎙️</span>
+                                        <span id="mic-btn-text">Speak Answer</span>
+                                    </button>
+                                    <button type="button" class="btn-primary" style="background: var(--accent-teal); color: #0f172a; font-weight: 700; padding: 7px 16px; font-size: 0.9rem;" onclick="submitConversationalTurn()">
+                                        Send Answer ↵
+                                    </button>
+                                </div>
+                                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                                    <button type="button" class="btn-secondary" style="padding: 4px 10px; font-size: 0.8rem;" onclick="handleQuickCommand('skip')">⏭️ Skip</button>
+                                    <button type="button" class="btn-secondary" style="padding: 4px 10px; font-size: 0.8rem;" onclick="handleQuickCommand('dont_know')">❓ Don't Know</button>
+                                    <button type="button" class="btn-secondary" style="padding: 4px 10px; font-size: 0.8rem;" onclick="handleQuickCommand('back')">⏮️ Go Back</button>
+                                    <button type="button" class="btn-secondary" style="padding: 4px 10px; font-size: 0.8rem;" onclick="handleQuickCommand('repeat')">🔁 Repeat</button>
+                                    <button type="button" class="btn-secondary" style="padding: 4px 10px; font-size: 0.8rem;" onclick="handleQuickCommand('stop')">🛑 Stop</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fast Simulation Scenarios for Evaluation -->
+                    <div style="background: rgba(30, 41, 59, 0.4); padding: 10px 14px; border-radius: var(--radius-sm); border: 1px dashed var(--border-color); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                        <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary);">Quick Dialogue Test Scenarios:</span>
+                        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                            <button type="button" class="btn-secondary" style="padding: 3px 8px; font-size: 0.78rem;" onclick="injectScenarioAnswer('I am 45 years old')">Age 45</button>
+                            <button type="button" class="btn-secondary" style="padding: 3px 8px; font-size: 0.78rem;" onclick="injectScenarioAnswer('My height is 175 cm and weight is 82 kg')">Multi: Ht 175 + Wt 82</button>
+                            <button type="button" class="btn-secondary" style="padding: 3px 8px; font-size: 0.78rem;" onclick="injectScenarioAnswer('Actually I am 52')">Correction: Age 52</button>
+                            <button type="button" class="btn-secondary" style="padding: 3px 8px; font-size: 0.78rem;" onclick="injectScenarioAnswer('I don\'t know')">Say 'I don\'t know'</button>
+                            <button type="button" class="btn-secondary" style="padding: 3px 8px; font-size: 0.78rem;" onclick="injectScenarioAnswer('मेरी उम्र 48 साल है')">Hindi Age 48</button>
+                            <button type="button" class="btn-secondary" style="padding: 3px 8px; font-size: 0.78rem;" onclick="injectScenarioAnswer('আমার উচ্চতা ১৭০ সেমি এবং ওজন ৭৫ কেজি')">Bengali Multi</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Parameter Confirmation & Form Synchronization Grid -->
+                <div style="margin-top: 10px; margin-bottom: 24px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                        <div>
+                            <h3 style="color: var(--accent-teal); font-size: 1.05rem; margin: 0;">Live Synchronized Clinical Parameters</h3>
+                            <span style="font-size: 0.8rem; color: var(--text-muted);">Parameters update live in both the UI cards and the manual health forms</span>
+                        </div>
+                        <span id="sync-status-badge" style="font-size: 0.8rem; background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); padding: 4px 12px; border-radius: 12px; font-weight: 600; border: 1px solid var(--accent-emerald);">
+                            ✅ Real-Time Sync Active
+                        </span>
+                    </div>
+
+                    <div id="extracted-params-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px;">
+                        <div class="param-card" id="card-param-age" style="background: var(--bg-input); padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                            <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Age / BRFSS Cat</span>
+                            <strong id="badge-param-age" style="font-size: 1rem; color: var(--text-primary);">-</strong>
+                        </div>
+                        <div class="param-card" id="card-param-sex" style="background: var(--bg-input); padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                            <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Biological Sex</span>
+                            <strong id="badge-param-sex" style="font-size: 1rem; color: var(--text-primary);">-</strong>
+                        </div>
+                        <div class="param-card" id="card-param-bmi" style="background: var(--bg-input); padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                            <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Height / Weight / BMI</span>
+                            <strong id="badge-param-bmi" style="font-size: 1rem; color: var(--text-primary);">-</strong>
+                        </div>
+                        <div class="param-card" id="card-param-highbp" style="background: var(--bg-input); padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                            <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">High Blood Pressure</span>
+                            <strong id="badge-param-highbp" style="font-size: 1rem; color: var(--text-primary);">-</strong>
+                        </div>
+                        <div class="param-card" id="card-param-bp" style="background: var(--bg-input); padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                            <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Blood Pressure Reading</span>
+                            <strong id="badge-param-bpreading" style="font-size: 1rem; color: var(--text-primary);">-</strong>
+                        </div>
+                        <div class="param-card" id="card-param-glucose" style="background: var(--bg-input); padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                            <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Blood Glucose / Sugar</span>
+                            <strong id="badge-param-glucose" style="font-size: 1rem; color: var(--text-primary);">-</strong>
+                        </div>
+                        <div class="param-card" id="card-param-heartrate" style="background: var(--bg-input); padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                            <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Heart Rate (Pulse)</span>
+                            <strong id="badge-param-heartrate" style="font-size: 1rem; color: var(--text-primary);">-</strong>
+                        </div>
+                        <div class="param-card" id="card-param-smoker" style="background: var(--bg-input); padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                            <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Tobacco Smoking</span>
+                            <strong id="badge-param-smoker" style="font-size: 1rem; color: var(--text-primary);">-</strong>
+                        </div>
+                        <div class="param-card" id="card-param-alcohol" style="background: var(--bg-input); padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                            <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Alcohol Intake</span>
+                            <strong id="badge-param-alcohol" style="font-size: 1rem; color: var(--text-primary);">-</strong>
+                        </div>
+                        <div class="param-card" id="card-param-activity" style="background: var(--bg-input); padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                            <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Physical Activity</span>
+                            <strong id="badge-param-activity" style="font-size: 1rem; color: var(--text-primary);">-</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Completion Review Card (Appears after all questions are collected) -->
+                <div id="voice-completion-card" style="display: none; background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent-emerald); padding: 20px; border-radius: var(--radius-md); margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <h3 style="color: var(--accent-emerald); margin: 0; font-size: 1.15rem;">Information Collection Complete</h3>
+                            <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem;">All required indicators for this assessment have been gathered and synchronized with your clinical profile.</p>
+                        </div>
+                    </div>
+                    <p id="completion-summary-text" style="font-size: 0.95rem; color: var(--text-primary); margin-bottom: 16px;">
+                        I've collected the information needed for your assessment. I'll show you what I understood so you can review and correct anything before we continue.
+                    </p>
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                        <button type="button" class="btn-primary" style="background: var(--accent-teal); color: #0f172a; font-weight: 700; padding: 10px 20px;" onclick="switchTab('tab-profile')">
+                            📋 Review Synchronized Form Values →
+                        </button>
+                        <button type="button" class="btn-primary" style="background: linear-gradient(135deg, #10b981, #06b6d4); font-weight: 700; padding: 10px 20px;" onclick="switchTab('tab-results'); runBackendAssessment();">
+                            ⚡ Proceed to Risk Prediction →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Safety Note on Assessment Role -->
+                <div style="font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 12px;">
+                    🛡️ <strong>Safety Assurance:</strong> The Voice AI assistant functions purely as an assessment data collection interface for decision-support, not as a diagnostic doctor. It does not claim diagnoses or provide unsupported medical conclusions.
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: PATIENT PROFILE -->
+        <div class="tab-content" id="tab-profile">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Patient Health & Demographic Profile</h2>
+                    <p>Collect baseline demographic and healthcare access indicators</p>
+                </div>
+                <form id="profile-form" onsubmit="event.preventDefault(); switchTab('tab-symptoms');">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="inp-patient-id">Patient Identifier / Tag</label>
+                            <input type="text" id="inp-patient-id" class="form-control" value="PATIENT_DEMO_101" required>
+                            <span class="hint-text">Unique reference identifier for session</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="inp-age">Age Category</label>
+                            <select id="inp-age" class="form-control">
+                                <option value="1">18 to 24 years</option>
+                                <option value="2">25 to 29 years</option>
+                                <option value="3">30 to 34 years</option>
+                                <option value="4">35 to 39 years</option>
+                                <option value="5">40 to 44 years</option>
+                                <option value="6">45 to 49 years</option>
+                                <option value="7" selected>50 to 54 years</option>
+                                <option value="8">55 to 59 years</option>
+                                <option value="9">60 to 64 years</option>
+                                <option value="10">65 to 69 years</option>
+                                <option value="11">70 to 74 years</option>
+                                <option value="12">75 to 79 years</option>
+                                <option value="13">80 years or older</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inp-sex">Biological Sex</label>
+                            <select id="inp-sex" class="form-control">
+                                <option value="0">Female</option>
+                                <option value="1" selected>Male</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inp-education">Education Level</label>
+                            <select id="inp-education" class="form-control">
+                                <option value="1">Never attended school / Kindergarten only</option>
+                                <option value="2">Grades 1 to 8 (Elementary)</option>
+                                <option value="3">Grades 9 to 11 (Some High School)</option>
+                                <option value="4">Grade 12 or GED (High School Graduate)</option>
+                                <option value="5" selected>College 1 to 3 years (Some College / Tech School)</option>
+                                <option value="6">College 4 years or more (College Graduate)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inp-income">Income Scale</label>
+                            <select id="inp-income" class="form-control">
+                                <option value="1">Less than $10,000</option>
+                                <option value="2">$10,000 to $15,000</option>
+                                <option value="3">$15,000 to $20,000</option>
+                                <option value="4">$20,000 to $25,000</option>
+                                <option value="5">25,000 to $35,000</option>
+                                <option value="6" selected>$35,000 to $50,000</option>
+                                <option value="7">$50,000 to $75,000</option>
+                                <option value="8">$75,000 or more</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inp-healthcare">Healthcare Coverage</label>
+                            <select id="inp-healthcare" class="form-control">
+                                <option value="1" selected>Yes (Insured)</option>
+                                <option value="0">No (Uninsured)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inp-cost-barrier">Could Not See Doctor Due to Cost</label>
+                            <select id="inp-cost-barrier" class="form-control">
+                                <option value="0" selected>No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="margin-top: 24px; text-align: right;">
+                        <button type="submit" class="btn-primary">Proceed to Symptoms & History →</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- TAB 3: SYMPTOMS & HISTORY -->
+        <div class="tab-content" id="tab-symptoms">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Clinical Symptoms & Medical History Assessment</h2>
+                    <p>Enter physical health indicators, chronic conditions, and lifestyle risk factors</p>
+                </div>
+                <form id="symptoms-form" onsubmit="event.preventDefault(); switchTab('tab-results');">
+                    <!-- Section 1: Physical Health & Body Metrics -->
+                    <h3 style="color: var(--accent-teal); font-size: 1rem; margin-bottom: 16px;">1. Body Metrics & Physical Unwellness</h3>
+                    <div class="form-grid" style="margin-bottom: 24px;">
+                        <div class="form-group">
+                            <label for="inp-height">Height (cm)</label>
+                            <input type="number" id="inp-height" class="form-control" value="175" min="100" max="250" onchange="calculateBMI()">
+                        </div>
+                        <div class="form-group">
+                            <label for="inp-weight">Weight (kg)</label>
+                            <input type="number" id="inp-weight" class="form-control" value="88" min="30" max="300" onchange="calculateBMI()">
+                        </div>
+                        <div class="form-group">
+                            <label for="inp-bmi">Calculated BMI (kg/m²)</label>
+                            <input type="number" id="inp-bmi" class="form-control" value="28.7" step="0.1" min="10" max="100" required readonly style="background: rgba(6, 182, 212, 0.1); border-color: var(--accent-teal); font-weight: 700;">
+                        </div>
+                        <div class="form-group">
+                            <label for="inp-genhlth">General Health Rating</label>
+                            <select id="inp-genhlth" class="form-control">
+                                <option value="1">1 - Excellent</option>
+                                <option value="2">2 - Very Good</option>
+                                <option value="3" selected>3 - Good</option>
+                                <option value="4">4 - Fair</option>
+                                <option value="5">5 - Poor</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inp-physhlth">Physical Illness Days (Past 30 Days)</label>
+                            <input type="number" id="inp-physhlth" class="form-control" value="4" min="0" max="30" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inp-menthlth">Mental Unwellness Days (Past 30 Days)</label>
+                            <input type="number" id="inp-menthlth" class="form-control" value="2" min="0" max="30" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inp-diffwalk">Difficulty Walking or Climbing Stairs</label>
+                            <select id="inp-diffwalk" class="form-control">
+                                <option value="0" selected>No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Cardiovascular & Metabolic History -->
+                    <h3 style="color: var(--accent-blue); font-size: 1rem; margin-bottom: 16px; border-top: 1px solid var(--border-color); padding-top: 20px;">2. Cardiovascular & Metabolic History</h3>
+                    <div class="form-grid" style="margin-bottom: 24px;">
+                        <div class="form-group">
+                            <label for="inp-highbp">High Blood Pressure Diagnosis</label>
+                            <select id="inp-highbp" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1" selected>Yes</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inp-highchol">High Cholesterol Diagnosis</label>
+                            <select id="inp-highchol" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1" selected>Yes</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inp-cholcheck">Cholesterol Check in Past 5 Years</label>
+                            <select id="inp-cholcheck" class="form-control">
+                                <option value="1" selected>Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inp-heartdisease">History of Heart Disease / Heart Attack</label>
+                            <select id="inp-heartdisease" class="form-control">
+                                <option value="0" selected>No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inp-stroke">History of Stroke</label>
+                            <select id="inp-stroke" class="form-control">
+                                <option value="0" selected>No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Section 3: Lifestyle & Behavior -->
+                    <h3 style="color: var(--accent-purple); font-size: 1rem; margin-bottom: 16px; border-top: 1px solid var(--border-color); padding-top: 20px;">3. Lifestyle & Behavioral Factors</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="inp-smoker">Tobacco Smoking History (>= 100 cigarettes)</label>
+                            <select id="inp-smoker" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1" selected>Yes</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inp-physact">Physical Activity in Past Month</label>
+                            <select id="inp-physact" class="form-control">
+                                <option value="1" selected>Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inp-fruits">Daily Fruit Intake (>= 1 time/day)</label>
+                            <select id="inp-fruits" class="form-control">
+                                <option value="1" selected>Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inp-veggies">Daily Vegetable Intake (>= 1 time/day)</label>
+                            <select id="inp-veggies" class="form-control">
+                                <option value="1" selected>Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inp-alcohol">Heavy Alcohol Consumption</label>
+                            <select id="inp-alcohol" class="form-control">
+                                <option value="0" selected>No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 28px; display: flex; justify-content: space-between;">
+                        <button type="button" class="btn-secondary" onclick="switchTab('tab-profile')">← Back to Profile</button>
+                        <button type="submit" class="btn-primary">Proceed to Risk Assessment →</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- TAB 4: MEDICAL REPORT UPLOAD -->
+        <div class="tab-content" id="tab-upload">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Medical Lab Report Upload</h2>
+                    <p>Upload EHR / Lab report files (PDF, PNG, JPG, JPEG) to the backend service</p>
+                </div>
+                
+                <div class="dropzone" id="report-dropzone" onclick="document.getElementById('report-file-input').click()">
+                    <div class="dropzone-icon">📄</div>
+                    <strong style="font-size: 1.1rem; color: var(--text-primary); display: block; margin-bottom: 6px;">Click or Drag & Drop Medical Report File Here</strong>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);">Supported Formats: PDF, PNG, JPG, JPEG (Max file size: 10 MB)</p>
+                    <input type="file" id="report-file-input" style="display: none;" accept=".pdf,.png,.jpg,.jpeg" onchange="handleFileSelected(this)">
+                </div>
+
+                <div id="file-info-preview" style="display: none; margin-top: 16px; padding: 14px; background: var(--bg-input); border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                    <strong id="preview-filename" style="color: var(--accent-teal);">filename.pdf</strong>
+                    <span id="preview-filesize" style="font-size: 0.85rem; color: var(--text-muted); margin-left: 10px;">(0 KB)</span>
+                    <button class="btn-primary" style="margin-left: 20px; padding: 6px 16px; font-size: 0.85rem;" onclick="uploadReportFile()">Upload File to FastAPI →</button>
+                </div>
+
+                <div id="upload-status-display" class="upload-status-box" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <strong style="color: var(--accent-emerald);" id="upload-status-title">Status: Uploaded Successfully</strong>
+                        <span class="pending-tag">PENDING_CLINICAL_NLP_INTEGRATION</span>
+                    </div>
+                    <p id="upload-status-msg" style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 8px;"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: RISK ASSESSMENT & EXPLAINABILITY -->
+        <div class="tab-content" id="tab-results">
+            <div class="card">
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                    <div>
+                        <h2>Multi-Disease Risk Assessment & Explainability</h2>
+                        <p>Generate disease-specific risk predictions and feature attributions</p>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                        <label for="select-target-disease" style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary);">Target Disease:</label>
+                        <select id="select-target-disease" class="form-control" style="width: auto; padding: 6px 12px;" onchange="onDiseaseSelected()">
+                            <option value="diabetes" selected>🩺 Diabetes / Prediabetes</option>
+                            <option value="heart_disease">❤️ Cardiovascular / Heart Disease</option>
+                            <option value="kidney_disease">🫘 Chronic Kidney Disease (CKD)</option>
+                            <option value="liver_disease">🧪 Liver Disease</option>
+                            <option value="stroke">🧠 Stroke Risk Assessment</option>
+                            <option value="breast_cancer">🎗️ Breast Cancer Biomarkers</option>
+                            <option value="parkinsons">🎙️ Parkinson's Vocal Tremor</option>
+                            <option value="all">⚡ Comprehensive Multi-Disease Screening (All 7)</option>
+                        </select>
+                        <label for="select-model-type" style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary);">Engine:</label>
+                        <select id="select-model-type" class="form-control" style="width: auto; padding: 6px 12px;">
+                            <option value="hybrid" selected>Hybrid Quantum Ensemble (Recommended)</option>
+                            <option value="classical">Best Classical Model</option>
+                            <option value="qml">6-Qubit VQC (Quantum Simulator)</option>
+                        </select>
+                        <button class="btn-primary" onclick="runBackendAssessment()">⚡ Execute Assessment</button>
+                    </div>
+                </div>
+
+                <!-- Presets & Parameter Customizer Drawer -->
+                <div class="preset-bar" style="margin-bottom: 20px; background: rgba(30, 41, 59, 0.6); padding: 14px 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-weight: 600; font-size: 0.85rem; color: var(--text-secondary);">Fast Testing Presets:</span>
+                        <button type="button" class="preset-chip btn-low" onclick="loadClinicalPreset('low')">🟢 Low Risk Profile</button>
+                        <button type="button" class="preset-chip btn-high" onclick="loadClinicalPreset('high')">🔴 High Risk Profile</button>
+                    </div>
+                    <button type="button" class="btn-secondary" style="padding: 6px 12px; font-size: 0.82rem;" onclick="toggleParameterTuner()">⚙️ Tweak Selected Disease Parameters</button>
+                </div>
+
+                <!-- Parameter Tuner (Dynamic Form Fields for active disease) -->
+                <div id="disease-parameter-tuner" style="display: none; margin-bottom: 24px; padding: 18px; background: var(--bg-input); border-radius: var(--radius-md); border: 1px solid var(--accent-teal);">
+                    <h3 id="tuner-title" style="color: var(--accent-teal); font-size: 0.98rem; margin-bottom: 12px;">Disease Parameter Customizer</h3>
+                    <div id="tuner-fields-grid" class="form-grid">
+                        <!-- Populated dynamically based on target disease -->
+                    </div>
+                </div>
+
+                <!-- Loading Box -->
+                <div id="assessment-loading" style="display: none; text-align: center; padding: 40px;">
+                    <div style="font-size: 2.5rem; margin-bottom: 12px;" class="spinner-pulse">⚛️</div>
+                    <p style="color: var(--accent-teal); font-weight: 600;">Executing FastAPI Backend Model Inference & Feature Attribution...</p>
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">Running 6-Qubit VQC Simulator & SHAP/LIME Attribution Engine</span>
+                </div>
+
+                <!-- Single Disease Results Container -->
+                <div id="assessment-results-container" style="display: none;">
+                    <!-- Result Header Box -->
+                    <div class="result-header-box">
+                        <div>
+                            <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">Diagnostic Risk Assessment</span>
+                            <h3 id="res-risk-label" style="font-size: 1.35rem; font-weight: 800; margin-top: 4px;">Loading...</h3>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px;" id="res-model-used">Model: Hybrid Classical-Quantum Ensemble</p>
+                        </div>
+                        <div id="res-risk-badge" class="risk-badge high">HIGH RISK</div>
+                    </div>
+
+                    <!-- Risk Probability Meter -->
+                    <div class="meter-container">
+                        <div class="meter-labels">
+                            <span>Estimated Probabilistic Risk Score</span>
+                            <strong id="res-risk-pct" style="color: var(--accent-teal); font-size: 1.05rem;">0.0%</strong>
+                        </div>
+                        <div class="meter-track">
+                            <div id="res-meter-fill" class="meter-fill high"></div>
+                        </div>
+                    </div>
+
+                    <!-- Top Contributing Factors -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 28px; margin-bottom: 12px;">
+                        <h3 style="color: var(--accent-teal); font-size: 1.05rem; margin: 0;">Key Clinical Risk Factor Contributions</h3>
+                        <button class="btn-secondary" style="padding: 4px 10px; font-size: 0.8rem;" onclick="window.print()">🖨️ Export / Print Report</button>
+                    </div>
+                    <div class="feature-list" id="res-features-list">
+                        <!-- Populated dynamically -->
+                    </div>
+
+                    <!-- Human Readable Clinical Narrative -->
+                    <h3 style="color: var(--accent-purple); font-size: 1.05rem; margin-top: 28px; margin-bottom: 12px;">Human-Readable Clinical Explanation Narrative</h3>
+                    <div class="narrative-box" id="res-clinical-narrative">
+                        Generating explanation narrative...
+                    </div>
+                </div>
+
+                <!-- Multi-Disease Screening Results Container (All 7 Diseases Grid) -->
+                <div id="multi-screening-container" style="display: none;">
+                    <div class="result-header-box" style="margin-bottom: 20px;">
+                        <div>
+                            <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">Multi-Disease Dynamic Routing Engine</span>
+                            <h3 style="font-size: 1.35rem; font-weight: 800; margin-top: 4px; color: var(--accent-teal);">Comprehensive 7-Disease Screening Overview</h3>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px;">Simultaneous evaluation across all disease-specific model registries</p>
+                        </div>
+                        <div class="risk-badge low">7 DISEASES EVALUATED</div>
+                    </div>
+
+                    <div id="multi-disease-cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-top: 16px;">
+                        <!-- Populated dynamically with rich disease cards -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="app-footer">
+            <p>SIH26139 — Hybrid Quantum Machine Learning Platform | Patient Decision Support Interface</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+{
+    "disease_id": "breast_cancer",
+    "disease_name": "Breast Cancer Risk Assessment",
+    "category": "Oncology",
+    "dataset_name": "UCI Breast Cancer Wisconsin (Diagnostic) Dataset",
+    "total_test_samples": 86,
+    "total_features": 30,
+    "data_leakage_free": true,
+    "best_classical_model_name": "LogisticRegression",
+    "selected_primary_model": "Classical ML (LogisticRegression)",
+    "qml_genuine_contribution": false,
+    "qml_justification": "Classical LogisticRegression achieves superior performance (ROC-AUC: 0.9988) compared to standalone QML or Hybrid fusion.",
+    "explainability_status": "OPERATIONAL",
+    "top_5_important_features": {
+        "worst texture": 1.4188,
+        "radius error": 1.2924,
+        "worst symmetry": 1.1074,
+        "compactness error": 0.9627,
+        "area error": 0.9427
+    },
+    "classical_ml": {
+        "accuracy": 0.9884,
+        "precision": 0.9697,
+        "recall_sensitivity": 1.0,
+        "specificity": 0.9815,
+        "f1_score": 0.9846,
+        "roc_auc": 0.9988,
+        "pr_auc": 0.9981,
+        "brier_score": 0.0131,
+        "false_positive_rate": 0.0185,
+        "false_negative_rate": 0.0,
+        "confusion_matrix": {
+            "TN": 53,
+            "FP": 1,
+            "FN": 0,
+            "TP": 32
+        },
+        "inference_ms_per_sample": 0.0021
+    },
+    "quantum_qml": {
+        "accuracy": 0.593,
+        "precision": 0.4667,
+        "recall_sensitivity": 0.6562,
+        "specificity": 0.5556,
+        "f1_score": 0.5455,
+        "roc_auc": 0.6458,
+        "pr_auc": 0.5501,
+        "brier_score": 0.2468,
+        "false_positive_rate": 0.4444,
+        "false_negative_rate": 0.3438,
+        "confusion_matrix": {
+            "TN": 30,
+            "FP": 24,
+            "FN": 11,
+            "TP": 21
+        },
+        "inference_ms_per_sample": 0.7381
+    },
+    "hybrid_ensemble": {
+        "accuracy": 0.9884,
+        "precision": 0.9697,
+        "recall_sensitivity": 1.0,
+        "specificity": 0.9815,
+        "f1_score": 0.9846,
+        "roc_auc": 0.9988,
+        "pr_auc": 0.9981,
+        "brier_score": 0.0484,
+        "false_positive_rate": 0.0185,
+        "false_negative_rate": 0.0,
+        "confusion_matrix": {
+            "TN": 53,
+            "FP": 1,
+            "FN": 0,
+            "TP": 32
+        },
+        "inference_ms_per_sample": 0.8814
+    }
+}

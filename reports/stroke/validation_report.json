@@ -1,0 +1,78 @@
+{
+    "disease_id": "stroke",
+    "disease_name": "Stroke Risk Assessment",
+    "category": "Neurology",
+    "dataset_name": "Kaggle Healthcare Stroke Dataset",
+    "total_test_samples": 767,
+    "total_features": 10,
+    "data_leakage_free": true,
+    "best_classical_model_name": "GradientBoostingClassifier",
+    "selected_primary_model": "Hybrid Ensemble Model",
+    "qml_genuine_contribution": true,
+    "qml_justification": "Hybrid model boosts sensitivity from 0.0% to 84.2%, drastically reducing false negatives.",
+    "explainability_status": "OPERATIONAL",
+    "top_5_important_features": {
+        "age": 0.4527,
+        "avg_glucose_level": 0.2956,
+        "bmi": 0.1686,
+        "heart_disease": 0.0369,
+        "hypertension": 0.0201
+    },
+    "classical_ml": {
+        "accuracy": 0.9505,
+        "precision": 0.0,
+        "recall_sensitivity": 0.0,
+        "specificity": 1.0,
+        "f1_score": 0.0,
+        "roc_auc": 0.825,
+        "pr_auc": 0.2448,
+        "brier_score": 0.0424,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 1.0,
+        "confusion_matrix": {
+            "TN": 729,
+            "FP": 0,
+            "FN": 38,
+            "TP": 0
+        },
+        "inference_ms_per_sample": 0.0013
+    },
+    "quantum_qml": {
+        "accuracy": 0.9505,
+        "precision": 0.0,
+        "recall_sensitivity": 0.0,
+        "specificity": 1.0,
+        "f1_score": 0.0,
+        "roc_auc": 0.5349,
+        "pr_auc": 0.0849,
+        "brier_score": 0.1325,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 1.0,
+        "confusion_matrix": {
+            "TN": 729,
+            "FP": 0,
+            "FN": 38,
+            "TP": 0
+        },
+        "inference_ms_per_sample": 0.7234
+    },
+    "hybrid_ensemble": {
+        "accuracy": 0.6597,
+        "precision": 0.1115,
+        "recall_sensitivity": 0.8421,
+        "specificity": 0.6502,
+        "f1_score": 0.1969,
+        "roc_auc": 0.8166,
+        "pr_auc": 0.2471,
+        "brier_score": 0.1101,
+        "false_positive_rate": 0.3498,
+        "false_negative_rate": 0.1579,
+        "confusion_matrix": {
+            "TN": 474,
+            "FP": 255,
+            "FN": 6,
+            "TP": 32
+        },
+        "inference_ms_per_sample": 0.7596
+    }
+}

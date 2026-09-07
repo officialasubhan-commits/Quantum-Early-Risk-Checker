@@ -1,0 +1,16 @@
+{
+  "venvPath": ".",
+  "venv": ".venv",
+  "pythonVersion": "3.11",
+  "include": [
+    ".",
+    "voice_ai",
+    "src"
+  ],
+  "extraPaths": [
+    ".",
+    "voice_ai",
+    "src"
+  ]
+}
+

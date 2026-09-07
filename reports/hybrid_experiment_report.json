@@ -1,0 +1,19 @@
+{
+    "model_name": "Hybrid Classical-Quantum Ensemble",
+    "accuracy": 0.7851886891621991,
+    "precision": 0.3544791244426429,
+    "recall_sensitivity": 0.6597510373443983,
+    "specificity": 0.8054961832061068,
+    "f1_score": 0.46117336849044166,
+    "f1_macro": 0.6635141139232331,
+    "roc_auc": 0.8240125719518201,
+    "confusion_matrix": {
+        "TN": 26380,
+        "FP": 6370,
+        "FN": 1804,
+        "TP": 3498
+    },
+    "training_time_sec": 50.38794755935669,
+    "inference_time_sec": 64.20002388954163,
+    "inference_ms_per_sample": 1.6871655600110802
+}

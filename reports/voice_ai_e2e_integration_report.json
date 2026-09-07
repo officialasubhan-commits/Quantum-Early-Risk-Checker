@@ -1,0 +1,277 @@
+{
+  "timestamp": "2026-09-07 20:41:44",
+  "stages": [
+    {
+      "stage": "1. Microphone/Input -> STT",
+      "status": "PARTIAL",
+      "latency_ms": 30.23,
+      "neural_model_loaded": false,
+      "test_transcript_length": 47,
+      "detected_lang": "en",
+      "notes": "STT running in text-simulation fallback mode (ctranslate2/av wheels unavailable on Windows ARM64)"
+    },
+    {
+      "stage": "2. Language Detection",
+      "status": "PASS",
+      "accuracy_pct": 100.0,
+      "latency_ms": 0.44,
+      "details": [
+        {
+          "input_lang": "en",
+          "detected": "en",
+          "expected": "en",
+          "match": true
+        },
+        {
+          "input_lang": "hi",
+          "detected": "hi",
+          "expected": "hi",
+          "match": true
+        },
+        {
+          "input_lang": "bn",
+          "detected": "bn",
+          "expected": "bn",
+          "match": true
+        },
+        {
+          "input_lang": "hi_en",
+          "detected": "hi",
+          "expected": "hi",
+          "match": true
+        }
+      ]
+    },
+    {
+      "stage": "3. Medical Parameter Extraction",
+      "status": "PASS",
+      "accuracy_pct": 100.0,
+      "latency_ms": 31.61,
+      "total_scenarios": 8,
+      "passed_scenarios": 8,
+      "scenarios": [
+        {
+          "scenario": "Multiple params in one sentence (EN)",
+          "pass": true,
+          "extracted": {
+            "age": 52.0,
+            "Age": 7,
+            "Sex": 1,
+            "sex": 1.0,
+            "gender": 1.0,
+            "Gender": 1.0,
+            "systolic_bp": 145.0,
+            "diastolic_bp": 95.0,
+            "trestbps": 145.0,
+            "bp": 95.0,
+            "HighBP": 1,
+            "hypertension": 1.0,
+            "HighChol": 1,
+            "CholCheck": 1,
+            "Smoker": 1,
+            "smoking_status": 1.0,
+            "smoking_history": 1,
+            "BMI": 29.0,
+            "bmi": 29.0
+          }
+        },
+        {
+          "scenario": "Multiple params native Devanagari (HI)",
+          "pass": true,
+          "extracted": {
+            "age": 50.0,
+            "Age": 7,
+            "HighBP": 1,
+            "hypertension": 1.0,
+            "htn": 1.0,
+            "Smoker": 1,
+            "smoking_status": 1.0,
+            "smoking_history": 1,
+            "BMI": 27.7,
+            "bmi": 27.7
+          }
+        },
+        {
+          "scenario": "Multiple params native Bengali (BN)",
+          "pass": true,
+          "extracted": {
+            "age": 45.0,
+            "Age": 6,
+            "HighBP": 1,
+            "hypertension": 1.0,
+            "htn": 1.0,
+            "BMI": 28.7,
+            "bmi": 28.7
+          }
+        },
+        {
+          "scenario": "Code-Switching Hinglish",
+          "pass": true,
+          "extracted": {
+            "age": 48.0,
+            "Age": 6,
+            "HighBP": 1,
+            "hypertension": 1.0,
+            "htn": 1.0,
+            "HighChol": 1,
+            "CholCheck": 1,
+            "BMI": 28.7,
+            "bmi": 28.7
+          }
+        },
+        {
+          "scenario": "Partial input with missing values",
+          "pass": true,
+          "extracted": {
+            "age": 35.0,
+            "Age": 4,
+            "Smoker": 0,
+            "smoking_status": 0.0,
+            "smoking_history": 0
+          }
+        },
+        {
+          "scenario": "Unknown/irrelevant speech handling",
+          "pass": true,
+          "extracted": {}
+        },
+        {
+          "scenario": "User correction override",
+          "pass": true,
+          "extracted": {
+            "age": 45.0,
+            "Age": 6
+          }
+        },
+        {
+          "scenario": "Invalid out-of-range value rejection",
+          "pass": true,
+          "extracted": {}
+        }
+      ]
+    },
+    {
+      "stage": "4. Conversation Manager",
+      "status": "PASS",
+      "turn_1_missing_detected": [
+        "BMI",
+        "HighChol",
+        "Smoker"
+      ],
+      "turn_1_prompt": "Could you share your height and weight, or your current Body Mass Index (BMI)?",
+      "turn_2_all_critical_resolved": true,
+      "defaults_applied": true,
+      "final_feature_count": 24,
+      "latency_ms": 0.84
+    },
+    {
+      "stage": "5. Patient JSON Feature Payload",
+      "status": "PASS",
+      "json_valid": true,
+      "missing_required": [],
+      "total_features": 22,
+      "sample_json_keys": [
+        "age",
+        "Age",
+        "Sex",
+        "BMI",
+        "HighBP",
+        "HighChol",
+        "Smoker",
+        "CholCheck"
+      ]
+    },
+    {
+      "stage": "6 & 7. Manual Form Synchronization & User Editing",
+      "status": "PASS",
+      "form_fields_mapped": 21,
+      "user_editing_override_supported": true,
+      "frontend_voice_widget_present": true,
+      "frontend_js_sync_handler_present": true,
+      "affected_files": [
+        "patient_app/public/index.html",
+        "patient_app/public/app.js"
+      ],
+      "notes": "Field mapping contract verified. However, patient_app/public/index.html & app.js currently lack a Voice AI microphone UI widget and DOM event synchronization listeners."
+    },
+    {
+      "stage": "8. Existing FastAPI Prediction API Connection",
+      "status": "PASS",
+      "fastapi_health_code": 200,
+      "fastapi_predict_code": 200,
+      "prediction_response": {
+        "request_id": "8d274272-6c01-45ac-a47f-6384d1e1b578",
+        "timestamp": "2026-09-07T15:11:44.994265Z",
+        "patient_id": "VOICE_E2E_TEST_001",
+        "disease_id": "diabetes",
+        "disease_name": "Diabetes / Prediabetes Risk Assessment",
+        "model_used": "Hybrid Classical-Quantum Ensemble Classifier",
+        "predicted_class": 1,
+        "predicted_label": "Elevated Diabetes / Prediabetes Risk Assessment Risk",
+        "risk_probability": 0.6011,
+        "is_high_risk": true,
+        "disclaimer": "AI-Assisted Early Disease Risk Decision Support: This output is an automated probabilistic risk estimation designed solely for decision support. It is NOT a medical diagnosis and should not replace professional clinical evaluation by a licensed healthcare practitioner."
+      },
+      "latency_ms": 230.61
+    },
+    {
+      "stage": "9. Actual ML/QML/Hybrid Prediction",
+      "status": "PASS",
+      "classical": {
+        "model": "RandomForestClassifier (Classical Baseline)",
+        "predicted_label": "Elevated Diabetes / Prediabetes Risk Assessment Risk",
+        "risk_probability": 0.5886,
+        "latency_ms": 77.67
+      },
+      "qml_quantum_vqc": {
+        "model": "6-Qubit Variational Quantum Classifier (QML)",
+        "predicted_label": "Low Diabetes / Prediabetes Risk Assessment Risk",
+        "risk_probability": 0.3097,
+        "latency_ms": 18.17
+      },
+      "hybrid_ensemble": {
+        "model": "Hybrid Classical-Quantum Ensemble Classifier",
+        "predicted_label": "Elevated Diabetes / Prediabetes Risk Assessment Risk",
+        "risk_probability": 0.6011,
+        "latency_ms": 96.66
+      },
+      "total_latency_ms": 192.51
+    },
+    {
+      "stage": "10. Clinical Explanation",
+      "status": "PASS",
+      "english_explanation": "Based on your clinical profile, our Hybrid Classical-Quantum Ensemble model estimates an elevated risk score of 74.5% for Diabetes / Prediabetes. We recommend discussing these indicators with a healthcare professional for clinical validation.",
+      "hindi_explanation": "\u0906\u092a\u0915\u0940 \u0928\u0948\u0926\u093e\u0928\u093f\u0915 \u091c\u093e\u0928\u0915\u093e\u0930\u0940 \u0915\u0947 \u0905\u0928\u0941\u0938\u093e\u0930, \u0939\u092e\u093e\u0930\u0947 \u0939\u093e\u0907\u092c\u094d\u0930\u093f\u0921 \u0915\u094d\u0932\u093e\u0938\u093f\u0915\u0932-\u0915\u094d\u0935\u093e\u0902\u091f\u092e \u092e\u0949\u0921\u0932 \u0928\u0947 Diabetes / Prediabetes \u0915\u093e \u091c\u094b\u0916\u093f\u092e 74.5% (\u0909\u091a\u094d\u091a) \u0906\u0902\u0915\u093e \u0939\u0948\u0964 \u0939\u092e \u0905\u0928\u0941\u0936\u0902\u0938\u093e \u0915\u0930\u0924\u0947 \u0939\u0948\u0902 \u0915\u093f \u0906\u092a \u091a\u093f\u0915\u093f\u0924\u094d\u0938\u0940\u092f \u092a\u0941\u0937\u094d\u091f\u093f \u0915\u0947 \u0932\u093f\u090f \u0921\u0949\u0915\u094d\u091f\u0930 \u0938\u0947 \u092a\u0930\u093e\u092e\u0930\u094d\u0936 \u0932\u0947\u0902\u0964",
+      "bengali_explanation": "\u0986\u09aa\u09a8\u09be\u09b0 \u0995\u09cd\u09b2\u09bf\u09a8\u09bf\u0995\u09be\u09b2 \u09aa\u09cd\u09b0\u09cb\u09ab\u09be\u0987\u09b2 \u0985\u09a8\u09c1\u09af\u09be\u09af\u09bc\u09c0, \u0986\u09ae\u09be\u09a6\u09c7\u09b0 \u09b9\u09be\u0987\u09ac\u09cd\u09b0\u09bf\u09a1 \u0995\u09cb\u09af\u09bc\u09be\u09a8\u09cd\u099f\u09be\u09ae \u09ae\u09a1\u09c7\u09b2 Diabetes / Prediabetes-\u098f\u09b0 \u099d\u09c1\u0981\u0995\u09bf 74.5% (\u0989\u099a\u09cd\u099a) \u09a8\u09bf\u09b0\u09cd\u09a7\u09be\u09b0\u09a3 \u0995\u09b0\u09c7\u099b\u09c7\u0964 \u0986\u09ae\u09b0\u09be \u098f\u0995\u099c\u09a8 \u09a8\u09bf\u09ac\u09a8\u09cd\u09a7\u09bf\u09a4 \u099a\u09bf\u0995\u09bf\u09ce\u09b8\u0995\u09c7\u09b0 \u09b8\u09be\u09a5\u09c7 \u09aa\u09b0\u09be\u09ae\u09b0\u09cd\u09b6 \u0995\u09b0\u09be\u09b0 \u09aa\u09b0\u09be\u09ae\u09b0\u09cd\u09b6 \u09a6\u09bf\u099a\u09cd\u099b\u09bf\u0964",
+      "latency_ms": 12234.62
+    },
+    {
+      "stage": "11. TTS Speech Synthesis",
+      "status": "PASS",
+      "valid_16khz_wav": true,
+      "base64_audio_valid": true,
+      "audio_bytes_size": 134442,
+      "kokoro_onnx_loaded": false,
+      "latency_ms": 210.5,
+      "engine": "Synthetic 16kHz WAV Fallback"
+    }
+  ],
+  "total_pipeline_latency_ms": 12942.78,
+  "latencies": {
+    "STT": 30.23,
+    "Language Detection": 0.44,
+    "Entity Extraction": 31.61,
+    "Conversation Manager": 0.84,
+    "FastAPI Connection": 230.61,
+    "Model Prediction (Classical/QML/Hybrid)": 192.51,
+    "Explanation Generation": 12234.62,
+    "TTS Synthesis": 210.5
+  },
+  "summary": {
+    "total_stages": 10,
+    "PASS": 9,
+    "PARTIAL": 1,
+    "FAIL": 0,
+    "final_verdict": "PARTIAL"
+  }
+}

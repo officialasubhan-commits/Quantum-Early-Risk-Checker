@@ -1,0 +1,78 @@
+{
+    "disease_id": "heart_disease",
+    "disease_name": "Cardiovascular / Heart Disease Risk Assessment",
+    "category": "Cardiology",
+    "dataset_name": "UCI Heart Disease Benchmark Dataset",
+    "total_test_samples": 46,
+    "total_features": 13,
+    "data_leakage_free": true,
+    "best_classical_model_name": "RandomForestClassifier",
+    "selected_primary_model": "Hybrid Ensemble Model",
+    "qml_genuine_contribution": true,
+    "qml_justification": "Hybrid model boosts sensitivity from 85.7% to 95.2%, drastically reducing false negatives.",
+    "explainability_status": "OPERATIONAL",
+    "top_5_important_features": {
+        "cp": 0.1717,
+        "thal": 0.1446,
+        "thalach": 0.1307,
+        "oldpeak": 0.1128,
+        "ca": 0.1105
+    },
+    "classical_ml": {
+        "accuracy": 0.8913,
+        "precision": 0.9,
+        "recall_sensitivity": 0.8571,
+        "specificity": 0.92,
+        "f1_score": 0.878,
+        "roc_auc": 0.939,
+        "pr_auc": 0.9355,
+        "brier_score": 0.1097,
+        "false_positive_rate": 0.08,
+        "false_negative_rate": 0.1429,
+        "confusion_matrix": {
+            "TN": 23,
+            "FP": 2,
+            "FN": 3,
+            "TP": 18
+        },
+        "inference_ms_per_sample": 0.1198
+    },
+    "quantum_qml": {
+        "accuracy": 0.587,
+        "precision": 0.5625,
+        "recall_sensitivity": 0.4286,
+        "specificity": 0.72,
+        "f1_score": 0.4865,
+        "roc_auc": 0.5657,
+        "pr_auc": 0.5506,
+        "brier_score": 0.2483,
+        "false_positive_rate": 0.28,
+        "false_negative_rate": 0.5714,
+        "confusion_matrix": {
+            "TN": 18,
+            "FP": 7,
+            "FN": 12,
+            "TP": 9
+        },
+        "inference_ms_per_sample": 0.7265
+    },
+    "hybrid_ensemble": {
+        "accuracy": 0.8478,
+        "precision": 0.7692,
+        "recall_sensitivity": 0.9524,
+        "specificity": 0.76,
+        "f1_score": 0.8511,
+        "roc_auc": 0.939,
+        "pr_auc": 0.9355,
+        "brier_score": 0.154,
+        "false_positive_rate": 0.24,
+        "false_negative_rate": 0.0476,
+        "confusion_matrix": {
+            "TN": 19,
+            "FP": 6,
+            "FN": 1,
+            "TP": 20
+        },
+        "inference_ms_per_sample": 1.6299
+    }
+}

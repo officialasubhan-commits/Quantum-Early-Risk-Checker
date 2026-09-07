@@ -1,0 +1,554 @@
+{
+    "total_active_diseases": 7,
+    "validated_diseases": [
+        "diabetes",
+        "heart_disease",
+        "kidney_disease",
+        "liver_disease",
+        "stroke",
+        "breast_cancer",
+        "parkinsons"
+    ],
+    "disease_validations": {
+        "diabetes": {
+            "disease_id": "diabetes",
+            "disease_name": "Diabetes / Prediabetes Risk Assessment",
+            "category": "Endocrine & Metabolic",
+            "dataset_name": "CDC BRFSS 2015 Diabetes Health Indicators",
+            "total_test_samples": 38052,
+            "total_features": 21,
+            "data_leakage_free": false,
+            "best_classical_model_name": "RandomForestClassifier",
+            "selected_primary_model": "Hybrid Ensemble Model",
+            "qml_genuine_contribution": true,
+            "qml_justification": "Hybrid model improves overall F1 score from 0.4984 to 0.5039.",
+            "explainability_status": "OPERATIONAL",
+            "top_5_important_features": {
+                "PhysHlth": 0.2296,
+                "BMI": 0.1882,
+                "HighBP": 0.1412,
+                "Age": 0.102,
+                "Smoker": 0.0954
+            },
+            "classical_ml": {
+                "accuracy": 0.7715,
+                "precision": 0.3655,
+                "recall_sensitivity": 0.7828,
+                "specificity": 0.7696,
+                "f1_score": 0.4984,
+                "roc_auc": 0.8438,
+                "pr_auc": 0.4769,
+                "brier_score": 0.1557,
+                "false_positive_rate": 0.2304,
+                "false_negative_rate": 0.2172,
+                "confusion_matrix": {
+                    "TN": 1316,
+                    "FP": 394,
+                    "FN": 63,
+                    "TP": 227
+                },
+                "inference_ms_per_sample": 0.0046
+            },
+            "quantum_qml": {
+                "accuracy": 0.855,
+                "precision": 0.0,
+                "recall_sensitivity": 0.0,
+                "specificity": 1.0,
+                "f1_score": 0.0,
+                "roc_auc": 0.4804,
+                "pr_auc": 0.1449,
+                "brier_score": 0.1589,
+                "false_positive_rate": 0.0,
+                "false_negative_rate": 1.0,
+                "confusion_matrix": {
+                    "TN": 1710,
+                    "FP": 0,
+                    "FN": 290,
+                    "TP": 0
+                },
+                "inference_ms_per_sample": 0.8864
+            },
+            "hybrid_ensemble": {
+                "accuracy": 0.808,
+                "precision": 0.4029,
+                "recall_sensitivity": 0.6724,
+                "specificity": 0.831,
+                "f1_score": 0.5039,
+                "roc_auc": 0.8438,
+                "pr_auc": 0.477,
+                "brier_score": 0.1555,
+                "false_positive_rate": 0.169,
+                "false_negative_rate": 0.3276,
+                "confusion_matrix": {
+                    "TN": 1421,
+                    "FP": 289,
+                    "FN": 95,
+                    "TP": 195
+                },
+                "inference_ms_per_sample": 0.8526
+            }
+        },
+        "heart_disease": {
+            "disease_id": "heart_disease",
+            "disease_name": "Cardiovascular / Heart Disease Risk Assessment",
+            "category": "Cardiology",
+            "dataset_name": "UCI Heart Disease Benchmark Dataset",
+            "total_test_samples": 46,
+            "total_features": 13,
+            "data_leakage_free": true,
+            "best_classical_model_name": "RandomForestClassifier",
+            "selected_primary_model": "Hybrid Ensemble Model",
+            "qml_genuine_contribution": true,
+            "qml_justification": "Hybrid model boosts sensitivity from 85.7% to 95.2%, drastically reducing false negatives.",
+            "explainability_status": "OPERATIONAL",
+            "top_5_important_features": {
+                "cp": 0.1717,
+                "thal": 0.1446,
+                "thalach": 0.1307,
+                "oldpeak": 0.1128,
+                "ca": 0.1105
+            },
+            "classical_ml": {
+                "accuracy": 0.8913,
+                "precision": 0.9,
+                "recall_sensitivity": 0.8571,
+                "specificity": 0.92,
+                "f1_score": 0.878,
+                "roc_auc": 0.939,
+                "pr_auc": 0.9355,
+                "brier_score": 0.1097,
+                "false_positive_rate": 0.08,
+                "false_negative_rate": 0.1429,
+                "confusion_matrix": {
+                    "TN": 23,
+                    "FP": 2,
+                    "FN": 3,
+                    "TP": 18
+                },
+                "inference_ms_per_sample": 0.1198
+            },
+            "quantum_qml": {
+                "accuracy": 0.587,
+                "precision": 0.5625,
+                "recall_sensitivity": 0.4286,
+                "specificity": 0.72,
+                "f1_score": 0.4865,
+                "roc_auc": 0.5657,
+                "pr_auc": 0.5506,
+                "brier_score": 0.2483,
+                "false_positive_rate": 0.28,
+                "false_negative_rate": 0.5714,
+                "confusion_matrix": {
+                    "TN": 18,
+                    "FP": 7,
+                    "FN": 12,
+                    "TP": 9
+                },
+                "inference_ms_per_sample": 0.7265
+            },
+            "hybrid_ensemble": {
+                "accuracy": 0.8478,
+                "precision": 0.7692,
+                "recall_sensitivity": 0.9524,
+                "specificity": 0.76,
+                "f1_score": 0.8511,
+                "roc_auc": 0.939,
+                "pr_auc": 0.9355,
+                "brier_score": 0.154,
+                "false_positive_rate": 0.24,
+                "false_negative_rate": 0.0476,
+                "confusion_matrix": {
+                    "TN": 19,
+                    "FP": 6,
+                    "FN": 1,
+                    "TP": 20
+                },
+                "inference_ms_per_sample": 1.6299
+            }
+        },
+        "kidney_disease": {
+            "disease_id": "kidney_disease",
+            "disease_name": "Chronic Kidney Disease Risk Assessment",
+            "category": "Nephrology",
+            "dataset_name": "UCI Chronic Kidney Disease Dataset",
+            "total_test_samples": 60,
+            "total_features": 24,
+            "data_leakage_free": true,
+            "best_classical_model_name": "RandomForestClassifier",
+            "selected_primary_model": "Classical ML (RandomForestClassifier)",
+            "qml_genuine_contribution": false,
+            "qml_justification": "Classical RandomForestClassifier achieves superior performance (ROC-AUC: 1.0000) compared to standalone QML or Hybrid fusion.",
+            "explainability_status": "OPERATIONAL",
+            "top_5_important_features": {
+                "pcv": 0.1708,
+                "hemo": 0.1574,
+                "sc": 0.1566,
+                "sg": 0.112,
+                "rbcc": 0.0941
+            },
+            "classical_ml": {
+                "accuracy": 1.0,
+                "precision": 1.0,
+                "recall_sensitivity": 1.0,
+                "specificity": 1.0,
+                "f1_score": 1.0,
+                "roc_auc": 1.0,
+                "pr_auc": 1.0,
+                "brier_score": 0.0127,
+                "false_positive_rate": 0.0,
+                "false_negative_rate": 0.0,
+                "confusion_matrix": {
+                    "TN": 23,
+                    "FP": 0,
+                    "FN": 0,
+                    "TP": 37
+                },
+                "inference_ms_per_sample": 0.1009
+            },
+            "quantum_qml": {
+                "accuracy": 0.4667,
+                "precision": 0.5758,
+                "recall_sensitivity": 0.5135,
+                "specificity": 0.3913,
+                "f1_score": 0.5429,
+                "roc_auc": 0.4489,
+                "pr_auc": 0.6733,
+                "brier_score": 0.2511,
+                "false_positive_rate": 0.6087,
+                "false_negative_rate": 0.4865,
+                "confusion_matrix": {
+                    "TN": 9,
+                    "FP": 14,
+                    "FN": 18,
+                    "TP": 19
+                },
+                "inference_ms_per_sample": 0.7811
+            },
+            "hybrid_ensemble": {
+                "accuracy": 0.9833,
+                "precision": 0.9737,
+                "recall_sensitivity": 1.0,
+                "specificity": 0.9565,
+                "f1_score": 0.9867,
+                "roc_auc": 1.0,
+                "pr_auc": 1.0,
+                "brier_score": 0.0508,
+                "false_positive_rate": 0.0435,
+                "false_negative_rate": 0.0,
+                "confusion_matrix": {
+                    "TN": 22,
+                    "FP": 1,
+                    "FN": 0,
+                    "TP": 37
+                },
+                "inference_ms_per_sample": 0.8531
+            }
+        },
+        "liver_disease": {
+            "disease_id": "liver_disease",
+            "disease_name": "Liver Disease Risk Assessment",
+            "category": "Hepatology",
+            "dataset_name": "UCI Indian Liver Patient Dataset",
+            "total_test_samples": 88,
+            "total_features": 10,
+            "data_leakage_free": false,
+            "best_classical_model_name": "SVC",
+            "selected_primary_model": "Hybrid Ensemble Model",
+            "qml_genuine_contribution": true,
+            "qml_justification": "Hybrid model improves overall F1 score from 0.8511 to 0.8571.",
+            "explainability_status": "OPERATIONAL",
+            "top_5_important_features": {},
+            "classical_ml": {
+                "accuracy": 0.7614,
+                "precision": 0.7692,
+                "recall_sensitivity": 0.9524,
+                "specificity": 0.28,
+                "f1_score": 0.8511,
+                "roc_auc": 0.8254,
+                "pr_auc": 0.9286,
+                "brier_score": 0.155,
+                "false_positive_rate": 0.72,
+                "false_negative_rate": 0.0476,
+                "confusion_matrix": {
+                    "TN": 7,
+                    "FP": 18,
+                    "FN": 3,
+                    "TP": 60
+                },
+                "inference_ms_per_sample": 0.0228
+            },
+            "quantum_qml": {
+                "accuracy": 0.625,
+                "precision": 0.8,
+                "recall_sensitivity": 0.6349,
+                "specificity": 0.6,
+                "f1_score": 0.708,
+                "roc_auc": 0.6749,
+                "pr_auc": 0.8526,
+                "brier_score": 0.2466,
+                "false_positive_rate": 0.4,
+                "false_negative_rate": 0.3651,
+                "confusion_matrix": {
+                    "TN": 15,
+                    "FP": 10,
+                    "FN": 23,
+                    "TP": 40
+                },
+                "inference_ms_per_sample": 0.7202
+            },
+            "hybrid_ensemble": {
+                "accuracy": 0.7727,
+                "precision": 0.7792,
+                "recall_sensitivity": 0.9524,
+                "specificity": 0.32,
+                "f1_score": 0.8571,
+                "roc_auc": 0.8279,
+                "pr_auc": 0.9295,
+                "brier_score": 0.1837,
+                "false_positive_rate": 0.68,
+                "false_negative_rate": 0.0476,
+                "confusion_matrix": {
+                    "TN": 8,
+                    "FP": 17,
+                    "FN": 3,
+                    "TP": 60
+                },
+                "inference_ms_per_sample": 0.6188
+            }
+        },
+        "stroke": {
+            "disease_id": "stroke",
+            "disease_name": "Stroke Risk Assessment",
+            "category": "Neurology",
+            "dataset_name": "Kaggle Healthcare Stroke Dataset",
+            "total_test_samples": 767,
+            "total_features": 10,
+            "data_leakage_free": true,
+            "best_classical_model_name": "GradientBoostingClassifier",
+            "selected_primary_model": "Hybrid Ensemble Model",
+            "qml_genuine_contribution": true,
+            "qml_justification": "Hybrid model boosts sensitivity from 0.0% to 84.2%, drastically reducing false negatives.",
+            "explainability_status": "OPERATIONAL",
+            "top_5_important_features": {
+                "age": 0.4527,
+                "avg_glucose_level": 0.2956,
+                "bmi": 0.1686,
+                "heart_disease": 0.0369,
+                "hypertension": 0.0201
+            },
+            "classical_ml": {
+                "accuracy": 0.9505,
+                "precision": 0.0,
+                "recall_sensitivity": 0.0,
+                "specificity": 1.0,
+                "f1_score": 0.0,
+                "roc_auc": 0.825,
+                "pr_auc": 0.2448,
+                "brier_score": 0.0424,
+                "false_positive_rate": 0.0,
+                "false_negative_rate": 1.0,
+                "confusion_matrix": {
+                    "TN": 729,
+                    "FP": 0,
+                    "FN": 38,
+                    "TP": 0
+                },
+                "inference_ms_per_sample": 0.0013
+            },
+            "quantum_qml": {
+                "accuracy": 0.9505,
+                "precision": 0.0,
+                "recall_sensitivity": 0.0,
+                "specificity": 1.0,
+                "f1_score": 0.0,
+                "roc_auc": 0.5349,
+                "pr_auc": 0.0849,
+                "brier_score": 0.1325,
+                "false_positive_rate": 0.0,
+                "false_negative_rate": 1.0,
+                "confusion_matrix": {
+                    "TN": 729,
+                    "FP": 0,
+                    "FN": 38,
+                    "TP": 0
+                },
+                "inference_ms_per_sample": 0.7234
+            },
+            "hybrid_ensemble": {
+                "accuracy": 0.6597,
+                "precision": 0.1115,
+                "recall_sensitivity": 0.8421,
+                "specificity": 0.6502,
+                "f1_score": 0.1969,
+                "roc_auc": 0.8166,
+                "pr_auc": 0.2471,
+                "brier_score": 0.1101,
+                "false_positive_rate": 0.3498,
+                "false_negative_rate": 0.1579,
+                "confusion_matrix": {
+                    "TN": 474,
+                    "FP": 255,
+                    "FN": 6,
+                    "TP": 32
+                },
+                "inference_ms_per_sample": 0.7596
+            }
+        },
+        "breast_cancer": {
+            "disease_id": "breast_cancer",
+            "disease_name": "Breast Cancer Risk Assessment",
+            "category": "Oncology",
+            "dataset_name": "UCI Breast Cancer Wisconsin (Diagnostic) Dataset",
+            "total_test_samples": 86,
+            "total_features": 30,
+            "data_leakage_free": true,
+            "best_classical_model_name": "LogisticRegression",
+            "selected_primary_model": "Classical ML (LogisticRegression)",
+            "qml_genuine_contribution": false,
+            "qml_justification": "Classical LogisticRegression achieves superior performance (ROC-AUC: 0.9988) compared to standalone QML or Hybrid fusion.",
+            "explainability_status": "OPERATIONAL",
+            "top_5_important_features": {
+                "worst texture": 1.4188,
+                "radius error": 1.2924,
+                "worst symmetry": 1.1074,
+                "compactness error": 0.9627,
+                "area error": 0.9427
+            },
+            "classical_ml": {
+                "accuracy": 0.9884,
+                "precision": 0.9697,
+                "recall_sensitivity": 1.0,
+                "specificity": 0.9815,
+                "f1_score": 0.9846,
+                "roc_auc": 0.9988,
+                "pr_auc": 0.9981,
+                "brier_score": 0.0131,
+                "false_positive_rate": 0.0185,
+                "false_negative_rate": 0.0,
+                "confusion_matrix": {
+                    "TN": 53,
+                    "FP": 1,
+                    "FN": 0,
+                    "TP": 32
+                },
+                "inference_ms_per_sample": 0.0021
+            },
+            "quantum_qml": {
+                "accuracy": 0.593,
+                "precision": 0.4667,
+                "recall_sensitivity": 0.6562,
+                "specificity": 0.5556,
+                "f1_score": 0.5455,
+                "roc_auc": 0.6458,
+                "pr_auc": 0.5501,
+                "brier_score": 0.2468,
+                "false_positive_rate": 0.4444,
+                "false_negative_rate": 0.3438,
+                "confusion_matrix": {
+                    "TN": 30,
+                    "FP": 24,
+                    "FN": 11,
+                    "TP": 21
+                },
+                "inference_ms_per_sample": 0.7381
+            },
+            "hybrid_ensemble": {
+                "accuracy": 0.9884,
+                "precision": 0.9697,
+                "recall_sensitivity": 1.0,
+                "specificity": 0.9815,
+                "f1_score": 0.9846,
+                "roc_auc": 0.9988,
+                "pr_auc": 0.9981,
+                "brier_score": 0.0484,
+                "false_positive_rate": 0.0185,
+                "false_negative_rate": 0.0,
+                "confusion_matrix": {
+                    "TN": 53,
+                    "FP": 1,
+                    "FN": 0,
+                    "TP": 32
+                },
+                "inference_ms_per_sample": 0.8814
+            }
+        },
+        "parkinsons": {
+            "disease_id": "parkinsons",
+            "disease_name": "Parkinson's Disease Risk Assessment",
+            "category": "Neurology & Movement",
+            "dataset_name": "UCI Parkinson's Disease Vocal Dataset",
+            "total_test_samples": 30,
+            "total_features": 22,
+            "data_leakage_free": true,
+            "best_classical_model_name": "RandomForestClassifier",
+            "selected_primary_model": "Hybrid Ensemble Model",
+            "qml_genuine_contribution": true,
+            "qml_justification": "Hybrid model boosts sensitivity from 72.7% to 95.5%, drastically reducing false negatives.",
+            "explainability_status": "OPERATIONAL",
+            "top_5_important_features": {
+                "PPE": 0.1753,
+                "spread1": 0.1281,
+                "Jitter:DDP": 0.0824,
+                "MDVP:APQ": 0.0563,
+                "Shimmer:APQ5": 0.0449
+            },
+            "classical_ml": {
+                "accuracy": 0.7667,
+                "precision": 0.9412,
+                "recall_sensitivity": 0.7273,
+                "specificity": 0.875,
+                "f1_score": 0.8205,
+                "roc_auc": 0.9148,
+                "pr_auc": 0.9691,
+                "brier_score": 0.1315,
+                "false_positive_rate": 0.125,
+                "false_negative_rate": 0.2727,
+                "confusion_matrix": {
+                    "TN": 7,
+                    "FP": 1,
+                    "FN": 6,
+                    "TP": 16
+                },
+                "inference_ms_per_sample": 0.2213
+            },
+            "quantum_qml": {
+                "accuracy": 0.4,
+                "precision": 0.7,
+                "recall_sensitivity": 0.3182,
+                "specificity": 0.625,
+                "f1_score": 0.4375,
+                "roc_auc": 0.5852,
+                "pr_auc": 0.7989,
+                "brier_score": 0.2515,
+                "false_positive_rate": 0.375,
+                "false_negative_rate": 0.6818,
+                "confusion_matrix": {
+                    "TN": 5,
+                    "FP": 3,
+                    "FN": 15,
+                    "TP": 7
+                },
+                "inference_ms_per_sample": 0.9159
+            },
+            "hybrid_ensemble": {
+                "accuracy": 0.8333,
+                "precision": 0.84,
+                "recall_sensitivity": 0.9545,
+                "specificity": 0.5,
+                "f1_score": 0.8936,
+                "roc_auc": 0.9091,
+                "pr_auc": 0.9669,
+                "brier_score": 0.1583,
+                "false_positive_rate": 0.5,
+                "false_negative_rate": 0.0455,
+                "confusion_matrix": {
+                    "TN": 4,
+                    "FP": 4,
+                    "FN": 1,
+                    "TP": 21
+                },
+                "inference_ms_per_sample": 1.8359
+            }
+        }
+    }
+}

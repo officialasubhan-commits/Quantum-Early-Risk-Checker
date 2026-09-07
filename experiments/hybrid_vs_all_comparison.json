@@ -1,0 +1,72 @@
+{
+    "classical_rf": {
+        "model_name": "Random Forest (Classical)",
+        "accuracy": 0.7348365394723011,
+        "precision": 0.3138413685847589,
+        "recall_sensitivity": 0.7612221803093172,
+        "specificity": 0.7305648854961833,
+        "f1_score": 0.4444444444444444,
+        "f1_macro": 0.6351523937730834,
+        "roc_auc": 0.8240092374762801,
+        "confusion_matrix": {
+            "TN": 23926,
+            "FP": 8824,
+            "FN": 1266,
+            "TP": 4036
+        },
+        "training_time_sec": 3.197,
+        "inference_time_sec": 0.06414461135864258,
+        "inference_ms_per_sample": 0.0016857093282519335
+    },
+    "quantum_vqc": {
+        "model_name": "Variational Quantum Classifier (QML)",
+        "accuracy": 0.8606643540418375,
+        "precision": 0.0,
+        "recall_sensitivity": 0.0,
+        "specificity": 1.0,
+        "f1_score": 0.0,
+        "f1_macro": 0.4625575548713313,
+        "roc_auc": 0.4944273657355283,
+        "confusion_matrix": {
+            "TN": 32750,
+            "FP": 0,
+            "FN": 5302,
+            "TP": 0
+        },
+        "training_time_sec": 62.15,
+        "inference_time_sec": 35.37844681739807,
+        "inference_ms_per_sample": 0.929739483270211
+    },
+    "hybrid_ensemble": {
+        "model_name": "Hybrid Classical-Quantum Ensemble",
+        "accuracy": 0.7851886891621991,
+        "precision": 0.3544791244426429,
+        "recall_sensitivity": 0.6597510373443983,
+        "specificity": 0.8054961832061068,
+        "f1_score": 0.46117336849044166,
+        "f1_macro": 0.6635141139232331,
+        "roc_auc": 0.8240125719518201,
+        "confusion_matrix": {
+            "TN": 26380,
+            "FP": 6370,
+            "FN": 1804,
+            "TP": 3498
+        },
+        "training_time_sec": 50.38794755935669,
+        "inference_time_sec": 64.20002388954163,
+        "inference_ms_per_sample": 1.6871655600110802
+    },
+    "experiment_metadata": {
+        "dataset_version": "CDC BRFSS 2015",
+        "total_records": 253680,
+        "classical_features": 21,
+        "pca_quantum_features": 6,
+        "num_qubits": 6,
+        "circuit_layers": 2,
+        "circuit_params": 26,
+        "fusion_method": "Optimal Blended Probability (0.920 Class + 0.080 Quant) + Logistic Meta-Classifier",
+        "optimal_threshold": 0.59,
+        "test_samples": 38052,
+        "random_seed": 42
+    }
+}

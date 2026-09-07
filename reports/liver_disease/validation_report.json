@@ -1,0 +1,72 @@
+{
+    "disease_id": "liver_disease",
+    "disease_name": "Liver Disease Risk Assessment",
+    "category": "Hepatology",
+    "dataset_name": "UCI Indian Liver Patient Dataset",
+    "total_test_samples": 88,
+    "total_features": 10,
+    "data_leakage_free": false,
+    "best_classical_model_name": "SVC",
+    "selected_primary_model": "Hybrid Ensemble Model",
+    "qml_genuine_contribution": true,
+    "qml_justification": "Hybrid model improves overall F1 score from 0.8511 to 0.8571.",
+    "explainability_status": "OPERATIONAL",
+    "top_5_important_features": {},
+    "classical_ml": {
+        "accuracy": 0.7614,
+        "precision": 0.7692,
+        "recall_sensitivity": 0.9524,
+        "specificity": 0.28,
+        "f1_score": 0.8511,
+        "roc_auc": 0.8254,
+        "pr_auc": 0.9286,
+        "brier_score": 0.155,
+        "false_positive_rate": 0.72,
+        "false_negative_rate": 0.0476,
+        "confusion_matrix": {
+            "TN": 7,
+            "FP": 18,
+            "FN": 3,
+            "TP": 60
+        },
+        "inference_ms_per_sample": 0.0228
+    },
+    "quantum_qml": {
+        "accuracy": 0.625,
+        "precision": 0.8,
+        "recall_sensitivity": 0.6349,
+        "specificity": 0.6,
+        "f1_score": 0.708,
+        "roc_auc": 0.6749,
+        "pr_auc": 0.8526,
+        "brier_score": 0.2466,
+        "false_positive_rate": 0.4,
+        "false_negative_rate": 0.3651,
+        "confusion_matrix": {
+            "TN": 15,
+            "FP": 10,
+            "FN": 23,
+            "TP": 40
+        },
+        "inference_ms_per_sample": 0.7202
+    },
+    "hybrid_ensemble": {
+        "accuracy": 0.7727,
+        "precision": 0.7792,
+        "recall_sensitivity": 0.9524,
+        "specificity": 0.32,
+        "f1_score": 0.8571,
+        "roc_auc": 0.8279,
+        "pr_auc": 0.9295,
+        "brier_score": 0.1837,
+        "false_positive_rate": 0.68,
+        "false_negative_rate": 0.0476,
+        "confusion_matrix": {
+            "TN": 8,
+            "FP": 17,
+            "FN": 3,
+            "TP": 60
+        },
+        "inference_ms_per_sample": 0.6188
+    }
+}

@@ -1,0 +1,65 @@
+{
+    "Logistic Regression": {
+        "model_name": "Logistic Regression",
+        "accuracy": 0.7313938820561338,
+        "precision": 0.310880430603614,
+        "recall_sensitivity": 0.7625424368162957,
+        "specificity": 0.7263511450381679,
+        "f1_score": 0.4416889714316928,
+        "f1_macro": 0.6324229413450313,
+        "roc_auc": 0.8199788874139387,
+        "confusion_matrix": {
+            "TN": 23788,
+            "FP": 8962,
+            "FN": 1259,
+            "TP": 4043
+        },
+        "training_time_sec": 1.5299363136291504,
+        "inference_time_sec": 0.005516767501831055,
+        "inference_ms_per_sample": 0.00014497969888129547,
+        "cv_mean_f1_macro": 0.6328309011501417,
+        "cv_std_f1_macro": 0.002359309476869886
+    },
+    "Random Forest": {
+        "model_name": "Random Forest",
+        "accuracy": 0.7348365394723011,
+        "precision": 0.3138413685847589,
+        "recall_sensitivity": 0.7612221803093172,
+        "specificity": 0.7305648854961833,
+        "f1_score": 0.4444444444444444,
+        "f1_macro": 0.6351523937730834,
+        "roc_auc": 0.8240092374762801,
+        "confusion_matrix": {
+            "TN": 23926,
+            "FP": 8824,
+            "FN": 1266,
+            "TP": 4036
+        },
+        "training_time_sec": 10.166834354400635,
+        "inference_time_sec": 0.46450233459472656,
+        "inference_ms_per_sample": 0.01220704127495865,
+        "cv_mean_f1_macro": 0.6368178817500089,
+        "cv_std_f1_macro": 0.0018460723075744742
+    },
+    "Support Vector Machine": {
+        "model_name": "Support Vector Machine",
+        "accuracy": 0.862293703353306,
+        "precision": 0.5192307692307693,
+        "recall_sensitivity": 0.15786495662014335,
+        "specificity": 0.9763358778625955,
+        "f1_score": 0.24211744286954007,
+        "f1_macro": 0.5831919776856733,
+        "roc_auc": 0.8197915866402136,
+        "confusion_matrix": {
+            "TN": 31975,
+            "FP": 775,
+            "FN": 4465,
+            "TP": 837
+        },
+        "training_time_sec": 5.5999839305877686,
+        "inference_time_sec": 0.04573535919189453,
+        "inference_ms_per_sample": 0.0012019173549851394,
+        "cv_mean_f1_macro": 0.5828894599736423,
+        "cv_std_f1_macro": 0.0029513890791819514
+    }
+}
