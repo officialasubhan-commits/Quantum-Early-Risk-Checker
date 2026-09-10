@@ -480,7 +480,7 @@ class VoiceAIE2EIntegrationSuite:
         print("   STARTING REAL END-TO-END VOICE AI MODULE INTEGRATION TEST SUITE       ")
         print("========================================================================")
 
-        report = {
+        report: Dict[str, Any] = {
             "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
             "stages": []
         }

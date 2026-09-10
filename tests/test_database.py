@@ -9,6 +9,7 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
+from sqlalchemy import inspect
 from backend.database.connection import engine, Base, SessionLocal
 from backend.database.models import AssessmentRecord, ModelRegistryRecord
 from backend.database.repository import (
@@ -34,7 +35,7 @@ class TestDatabaseLayer(unittest.TestCase):
         cls.db.close()
 
     def test_01_database_tables_exist(self):
-        tables = engine.table_names() if hasattr(engine, "table_names") else engine.dialect.get_table_names(engine.connect())
+        tables = inspect(engine).get_table_names()
         self.assertIn("patient_assessments", tables)
         self.assertIn("model_registry", tables)
 
@@ -69,6 +70,7 @@ class TestDatabaseLayer(unittest.TestCase):
     def test_03_retrieve_by_request_id(self):
         retrieved = get_assessment_by_request_id(self.db, self.test_req_id)
         self.assertIsNotNone(retrieved)
+        assert retrieved is not None
         self.assertEqual(retrieved.patient_id, self.test_patient_id)
         self.assertEqual(retrieved.predicted_class, 1)
 

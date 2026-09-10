@@ -14,9 +14,9 @@
             "FN": 1259,
             "TP": 4043
         },
-        "training_time_sec": 1.5299363136291504,
-        "inference_time_sec": 0.005516767501831055,
-        "inference_ms_per_sample": 0.00014497969888129547,
+        "training_time_sec": 1.0613820552825928,
+        "inference_time_sec": 0.0040094852447509766,
+        "inference_ms_per_sample": 0.00010536858101416421,
         "cv_mean_f1_macro": 0.6328309011501417,
         "cv_std_f1_macro": 0.002359309476869886
     },
@@ -35,9 +35,9 @@
             "FN": 1266,
             "TP": 4036
         },
-        "training_time_sec": 10.166834354400635,
-        "inference_time_sec": 0.46450233459472656,
-        "inference_ms_per_sample": 0.01220704127495865,
+        "training_time_sec": 3.042553186416626,
+        "inference_time_sec": 0.1273791790008545,
+        "inference_ms_per_sample": 0.003347502864523665,
         "cv_mean_f1_macro": 0.6368178817500089,
         "cv_std_f1_macro": 0.0018460723075744742
     },
@@ -56,9 +56,9 @@
             "FN": 4465,
             "TP": 837
         },
-        "training_time_sec": 5.5999839305877686,
-        "inference_time_sec": 0.04573535919189453,
-        "inference_ms_per_sample": 0.0012019173549851394,
+        "training_time_sec": 2.693227529525757,
+        "inference_time_sec": 0.004015445709228516,
+        "inference_ms_per_sample": 0.00010552522099307568,
         "cv_mean_f1_macro": 0.5828894599736423,
         "cv_std_f1_macro": 0.0029513890791819514
     }

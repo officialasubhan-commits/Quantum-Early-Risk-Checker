@@ -75,7 +75,7 @@ class AutoDiseaseMLPipeline:
         feature_names = list(X_df.columns)
 
         # 2. Stratified Train / Val / Test Split (80% Train, 10% Val, 10% Test)
-        X_train_df, X_temp_df, y_train, y_temp = train_test_split(X_df, y, test_size=0.20, random_state=42, stratify=y)
+        X_train_df, X_temp_df, y_train, y_temp = train_test_split(X_df, y, test_size=0.20, random_state=42, stratify=y)  # type: ignore[arg-type]
         X_val_df, X_test_df, y_val, y_test = train_test_split(X_temp_df, y_temp, test_size=0.50, random_state=42, stratify=y_temp)
 
         print(f" 2. Data Split complete: Train={len(y_train)}, Val={len(y_val)}, Test={len(y_test)}")
@@ -99,7 +99,7 @@ class AutoDiseaseMLPipeline:
             "RandomForest": RandomForestClassifier(n_estimators=100, max_depth=10, random_state=42),
             "GradientBoosting": GradientBoostingClassifier(n_estimators=80, max_depth=5, random_state=42),
             "LogisticRegression": LogisticRegression(max_iter=1000, random_state=42),
-            "SVC": SVC(probability=True, random_state=42)
+            "SVC": SVC(probability=True, random_state=42)  # type: ignore[arg-type]
         }
 
         best_classical_clf = None
@@ -107,7 +107,7 @@ class AutoDiseaseMLPipeline:
         best_val_auc = -1.0
 
         for name, clf in candidate_models.items():
-            clf.fit(X_train_proc, y_train)
+            clf.fit(X_train_proc, np.asarray(y_train))  # type: ignore[arg-type]
             val_probs = clf.predict_proba(X_val_proc)[:, 1]
             auc = roc_auc_score(y_val, val_probs) if len(np.unique(y_val)) > 1 else accuracy_score(y_val, (val_probs >= 0.5).astype(int))
             print(f"    - Candidate '{name}' Val ROC-AUC: {auc:.4f}")
@@ -131,7 +131,7 @@ class AutoDiseaseMLPipeline:
         joblib.dump(pca_reducer, pca_path)
 
         vqc = VariationalQuantumClassifier(n_qubits=self.n_qubits, n_layers=2, seed=42)
-        vqc.fit(X_train_q, y_train, epochs=15, lr=0.10, batch_size=32)
+        vqc.fit(X_train_q, np.asarray(y_train), epochs=15, lr=0.10, batch_size=32)
 
         qml_params_path = os.path.join(self.disease_model_dir, "qml_vqc_params.npz")
         np.savez(
@@ -152,7 +152,7 @@ class AutoDiseaseMLPipeline:
             qml_model=vqc,
             pca_reducer=pca_reducer
         )
-        hybrid_model.fit_fusion(X_val_proc, y_val)
+        hybrid_model.fit_fusion(X_val_proc, np.asarray(y_val))
         hybrid_path = os.path.join(self.disease_model_dir, "hybrid_fusion_model.joblib")
         joblib.dump(hybrid_model, hybrid_path)
         print(f"    -> Hybrid model saved to '{hybrid_path}'.")
@@ -161,9 +161,9 @@ class AutoDiseaseMLPipeline:
         # 7. Evaluate All Architectures on Test Set
         print(" 7. Evaluating test metrics across Classical, QML, and Hybrid models...")
         metrics_dict = {
-            "classical": self._eval_model(best_classical_clf, X_test_proc, y_test, is_vqc=False, name=f"{best_classical_name} (Classical)"),
-            "qml": self._eval_model(vqc, X_test_q, y_test, is_vqc=True, name="6-Qubit VQC (Quantum)"),
-            "hybrid": self._eval_model(hybrid_model, X_test_proc, y_test, is_vqc=False, name="Hybrid Ensemble")
+            "classical": self._eval_model(best_classical_clf, X_test_proc, np.asarray(y_test), is_vqc=False, name=f"{best_classical_name} (Classical)"),
+            "qml": self._eval_model(vqc, X_test_q, np.asarray(y_test), is_vqc=True, name="6-Qubit VQC (Quantum)"),
+            "hybrid": self._eval_model(hybrid_model, X_test_proc, np.asarray(y_test), is_vqc=False, name="Hybrid Ensemble")
         }
 
         # 8. Register Records in Database & DiseaseRegistry
@@ -173,20 +173,19 @@ class AutoDiseaseMLPipeline:
         print("=" * 80)
         return metrics_dict
 
-    def _eval_model(self, model: Any, X_test: np.ndarray, y_test: np.ndarray, is_vqc: bool = False, name: str = "") -> Dict[str, Any]:
-        raw_probs = model.predict_proba(X_test)
+    def _eval_model(self, model: Any, X_test: Any, y_test: Any, is_vqc: bool = False, name: str = "") -> Dict[str, Any]:
+        raw_probs: Any = model.predict_proba(X_test)
         if isinstance(raw_probs, np.ndarray) and raw_probs.ndim == 2:
-            probs = raw_probs[:, 1]
+            probs: Any = raw_probs[:, 1]
         else:
-            probs = np.array(raw_probs)
+            probs: Any = np.array(raw_probs)
 
-        preds = model.predict(X_test) if hasattr(model, "predict") else (probs >= 0.5).astype(int)
-
+        preds: Any = model.predict(X_test) if hasattr(model, "predict") else (probs >= 0.5).astype(int)
 
         acc = float(accuracy_score(y_test, preds))
-        prec = float(precision_score(y_test, preds, zero_division=0))
-        rec = float(recall_score(y_test, preds, zero_division=0))
-        f1 = float(f1_score(y_test, preds, zero_division=0))
+        prec = float(precision_score(y_test, preds, zero_division="warn"))
+        rec = float(recall_score(y_test, preds, zero_division="warn"))
+        f1 = float(f1_score(y_test, preds, zero_division="warn"))
         
         try:
             auc = float(roc_auc_score(y_test, probs))
@@ -194,7 +193,7 @@ class AutoDiseaseMLPipeline:
             auc = acc
 
         tn, fp, fn, tp = confusion_matrix(y_test, preds, labels=[0, 1]).ravel()
-        spec = float(tn / (tn + fp)) if (tn + fp) > 0 else 0.0
+        spec = (tn / (tn + fp)) if (tn + fp) > 0 else 0.0
         brier = float(brier_score_loss(y_test, probs))
 
         print(f"    - [{name}] Acc: {acc:.4f} | F1: {f1:.4f} | ROC-AUC: {auc:.4f} | Rec: {rec:.4f} | Spec: {spec:.4f}")

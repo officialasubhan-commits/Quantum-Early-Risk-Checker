@@ -36,9 +36,9 @@ def main():
         random_state=42
     )
     
-    X_train, y_train = data_dict["X_train"], data_dict["y_train"]
-    X_val, y_val     = data_dict["X_val"], data_dict["y_val"]
-    X_test, y_test   = data_dict["X_test"], data_dict["y_test"]
+    X_train, y_train = np.asarray(data_dict["X_train"]), np.asarray(data_dict["y_train"])
+    X_val, y_val     = np.asarray(data_dict["X_val"]), np.asarray(data_dict["y_val"])
+    X_test, y_test   = np.asarray(data_dict["X_test"]), np.asarray(data_dict["y_test"])
     preprocessor     = data_dict["preprocessor"]
     feature_names    = data_dict["feature_names"]
     

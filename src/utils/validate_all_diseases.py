@@ -59,7 +59,7 @@ def evaluate_disease_pipeline(disease_id: str, registry_info: dict):
     print(f" -> Data Leakage Check: {'LEAK-FREE (0 samples overlap)' if leak_free else 'WARNING: Overlap detected'}", flush=True)
 
     X_test_raw = test_df[feature_names]
-    y_test = test_df[target_col].values
+    y_test = np.asarray(test_df[target_col].values)
 
     # 2. Load Artifacts
     preprocessor = joblib.load(os.path.join(models_dir, "preprocessor.joblib"))
@@ -121,18 +121,18 @@ def evaluate_disease_pipeline(disease_id: str, registry_info: dict):
     # 5. Calculate Full Metrics
     def compute_all_metrics(y_true, probs, preds):
         acc = float(accuracy_score(y_true, preds))
-        prec = float(precision_score(y_true, preds, zero_division=0))
-        rec = float(recall_score(y_true, preds, zero_division=0))
-        f1 = float(f1_score(y_true, preds, zero_division=0))
+        prec = float(precision_score(y_true, preds, zero_division="warn"))
+        rec = float(recall_score(y_true, preds, zero_division="warn"))
+        f1 = float(f1_score(y_true, preds, zero_division="warn"))
         auc = float(roc_auc_score(y_true, probs)) if len(np.unique(y_true)) > 1 else 0.5
         pr_auc = float(average_precision_score(y_true, probs)) if len(np.unique(y_true)) > 1 else 0.5
         brier = float(brier_score_loss(y_true, probs))
         
         cm = confusion_matrix(y_true, preds)
         tn, fp, fn, tp = map(int, cm.ravel()) if cm.size == 4 else (0, 0, 0, 0)
-        spec = float(tn / (tn + fp)) if (tn + fp) > 0 else 0.0
-        fpr = float(fp / (fp + tn)) if (fp + tn) > 0 else 0.0
-        fnr = float(fn / (fn + tp)) if (fn + tp) > 0 else 0.0
+        spec = (tn / (tn + fp)) if (tn + fp) > 0 else 0.0
+        fpr = (fp / (fp + tn)) if (fp + tn) > 0 else 0.0
+        fnr = (fn / (fn + tp)) if (fn + tp) > 0 else 0.0
 
         return {
             "accuracy": round(acc, 4),

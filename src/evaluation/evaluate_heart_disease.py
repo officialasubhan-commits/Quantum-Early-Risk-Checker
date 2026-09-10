@@ -53,13 +53,13 @@ def evaluate_heart_models():
 
     def compute_metrics(y_true, y_probs, y_preds):
         acc = float(accuracy_score(y_true, y_preds))
-        prec = float(precision_score(y_true, y_preds, zero_division=0))
-        rec = float(recall_score(y_true, y_preds, zero_division=0))
-        f1 = float(f1_score(y_true, y_preds, zero_division=0))
+        prec = float(precision_score(y_true, y_preds, zero_division="warn"))
+        rec = float(recall_score(y_true, y_preds, zero_division="warn"))
+        f1 = float(f1_score(y_true, y_preds, zero_division="warn"))
         auc = float(roc_auc_score(y_true, y_probs))
         cm = confusion_matrix(y_true, y_preds)
         tn, fp, fn, tp = map(int, cm.ravel())
-        spec = float(tn / (tn + fp)) if (tn + fp) > 0 else 0.0
+        spec = (tn / (tn + fp)) if (tn + fp) > 0 else 0.0
         return {
             "accuracy": acc,
             "precision": prec,

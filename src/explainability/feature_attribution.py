@@ -21,7 +21,7 @@ def compute_global_feature_attributions(classical_model, pca_reducer, X_val, y_v
         n_repeats=5,
         random_state=42
     )
-    perm_importances = perm_res.importances_mean
+    perm_importances: np.ndarray = np.asarray(perm_res["importances_mean"])
     perm_importances = np.maximum(0, perm_importances)
     if np.sum(perm_importances) > 0:
         perm_importances /= np.sum(perm_importances)

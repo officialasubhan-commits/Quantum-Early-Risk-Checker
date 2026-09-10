@@ -39,9 +39,9 @@ def train_heart_classical_models():
     val_df = pd.read_csv(os.path.join(PROCESSED_DIR, "val.csv"))
 
     X_train_raw = train_df[FEATURE_COLS]
-    y_train = train_df["target"].values
+    y_train = train_df["target"].to_numpy()
     X_val_raw = val_df[FEATURE_COLS]
-    y_val = val_df["target"].values
+    y_val = val_df["target"].to_numpy()
 
     # Fit Imputer + StandardScaler preprocessor pipeline
     preprocessor = Pipeline([
@@ -58,7 +58,7 @@ def train_heart_classical_models():
     # Benchmark candidates
     candidates = {
         "LogisticRegression": LogisticRegression(random_state=42, max_iter=1000),
-        "SupportVectorMachine": SVC(probability=True, random_state=42, C=1.0, kernel="rbf"),
+        "SupportVectorMachine": SVC(probability=True, random_state=42, C=1.0, kernel="rbf"),  # type: ignore[arg-type]
         "RandomForestClassifier": RandomForestClassifier(n_estimators=100, max_depth=5, random_state=42),
         "GradientBoostingClassifier": GradientBoostingClassifier(n_estimators=100, learning_rate=0.05, max_depth=3, random_state=42)
     }
@@ -74,13 +74,13 @@ def train_heart_classical_models():
         val_preds = (val_probs >= 0.5).astype(int)
 
         acc = float(accuracy_score(y_val, val_preds))
-        prec = float(precision_score(y_val, val_preds, zero_division=0))
-        rec = float(recall_score(y_val, val_preds, zero_division=0))
-        f1 = float(f1_score(y_val, val_preds, zero_division=0))
+        prec = float(precision_score(y_val, val_preds, zero_division="warn"))
+        rec = float(recall_score(y_val, val_preds, zero_division="warn"))
+        f1 = float(f1_score(y_val, val_preds, zero_division="warn"))
         auc = float(roc_auc_score(y_val, val_probs))
         cm = confusion_matrix(y_val, val_preds)
         tn, fp, fn, tp = map(int, cm.ravel())
-        spec = float(tn / (tn + fp)) if (tn + fp) > 0 else 0.0
+        spec = (tn / (tn + fp)) if (tn + fp) > 0 else 0.0
 
         benchmark_results[name] = {
             "accuracy": acc,

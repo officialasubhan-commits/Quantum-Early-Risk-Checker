@@ -4,7 +4,7 @@
     "optimal_classical_weight": 0.5,
     "optimal_quantum_weight": 0.5,
     "optimal_threshold": 0.47,
-    "training_time_sec": 5.100303411483765,
+    "training_time_sec": 5.242474555969238,
     "validation_metrics": {
         "accuracy": 0.8,
         "precision": 0.7727272727272727,

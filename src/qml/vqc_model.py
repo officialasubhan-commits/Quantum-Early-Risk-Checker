@@ -1,6 +1,8 @@
 import os
 import time
+from typing import Any
 import numpy as np
+from numpy.typing import NDArray
 
 class VariationalQuantumClassifier:
     """
@@ -48,13 +50,13 @@ class VariationalQuantumClassifier:
         
         # Swap target index slicing where control qubit == 1
         slices_control_1 = [slice(None)] * self.n_qubits
-        slices_control_1[control] = 1
+        slices_control_1[control] = 1  # type: ignore[call-overload]
         
         slices_target_0 = list(slices_control_1)
-        slices_target_0[target] = 0
+        slices_target_0[target] = 0  # type: ignore[call-overload]
         
         slices_target_1 = list(slices_control_1)
-        slices_target_1[target] = 1
+        slices_target_1[target] = 1  # type: ignore[call-overload]
         
         tmp = state_tensor[tuple(slices_target_0)].copy()
         state_tensor[tuple(slices_target_0)] = state_tensor[tuple(slices_target_1)]
@@ -106,21 +108,21 @@ class VariationalQuantumClassifier:
         expval_avg = float(expval_sum / self.n_qubits)
         return expval_avg
 
-    def predict_proba_sample(self, x: np.ndarray) -> float:
+    def predict_proba_sample(self, x: Any) -> float:
         expval_avg = self.execute_circuit(x)
         logit = self.scale * expval_avg + self.bias
         prob = 1.0 / (1.0 + np.exp(-logit))
         return float(prob)
 
-    def predict_proba(self, X: np.ndarray) -> np.ndarray:
-        probs = np.array([self.predict_proba_sample(x) for x in X])
+    def predict_proba(self, X: Any) -> NDArray[np.float64]:
+        probs = np.array([self.predict_proba_sample(x) for x in X], dtype=np.float64)
         return probs
 
-    def predict(self, X: np.ndarray, threshold: float = 0.5) -> np.ndarray:
+    def predict(self, X: Any, threshold: float = 0.5) -> NDArray[np.int_]:
         probs = self.predict_proba(X)
         return (probs >= threshold).astype(int)
 
-    def fit(self, X_train: np.ndarray, y_train: np.ndarray, epochs: int = 40, lr: float = 0.1, batch_size: int = 256):
+    def fit(self, X_train: Any, y_train: Any, epochs: int = 40, lr: float = 0.1, batch_size: int = 256):
         """
         Trains the VQC using batch gradient descent / parameter shift on batch loss.
         """

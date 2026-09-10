@@ -2,6 +2,7 @@ import os
 import sys
 import json
 import urllib.request
+from typing import cast
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -60,8 +61,11 @@ def ingest_heart_disease_data():
     print(f" -> Binary Target Class Distribution: Absence (0): {class_dist.get(0, 0)}, Presence (1): {class_dist.get(1, 0)}", flush=True)
 
     # Stratified Train (70%), Validation (15%), Test (15%) Splits
-    train_df, temp_df = train_test_split(df, test_size=0.30, random_state=42, stratify=df["target"])
-    val_df, test_df = train_test_split(temp_df, test_size=0.50, random_state=42, stratify=temp_df["target"])
+    train_split, temp_split = train_test_split(df, test_size=0.30, random_state=42, stratify=df["target"])
+    val_split, test_split = train_test_split(temp_split, test_size=0.50, random_state=42, stratify=temp_split["target"])  # type: ignore[assignment]
+    train_df = cast(pd.DataFrame, train_split)
+    val_df = cast(pd.DataFrame, val_split)
+    test_df = cast(pd.DataFrame, test_split)
 
     train_path = os.path.join(PROCESSED_DIR, "train.csv")
     val_path = os.path.join(PROCESSED_DIR, "val.csv")

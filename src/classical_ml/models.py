@@ -29,15 +29,14 @@ def get_classical_models(random_state: int = 42) -> dict:
             estimator=LinearSVC(
                 class_weight="balanced",
                 max_iter=2000,
-                random_state=random_state,
-                dual=False
+                random_state=random_state
             ),
             cv=3
         )
     }
     return models
 
-def train_and_cross_validate(models: dict, X_train: np.ndarray, y_train: np.ndarray, cv_splits: int = 5):
+def train_and_cross_validate(models: dict, X_train, y_train, cv_splits: int = 5):
     """
     Performs 5-fold stratified cross-validation on the training set to evaluate model stability.
     """
@@ -50,13 +49,15 @@ def train_and_cross_validate(models: dict, X_train: np.ndarray, y_train: np.ndar
         start_time = time.time()
         scores = cross_val_score(model, X_train, y_train, cv=skf, scoring="f1_macro", n_jobs=-1)
         duration = time.time() - start_time
+        mean_val = float(scores.mean())
+        std_val = float(scores.std())
         
         cv_results[name] = {
-            "mean_f1_macro": float(np.mean(scores)),
-            "std_f1_macro": float(np.std(scores)),
-            "fold_scores": [float(s) for s in scores],
-            "cv_duration_sec": float(duration)
+            "mean_f1_macro": mean_val,
+            "std_f1_macro": std_val,
+            "fold_scores": [s for s in scores],
+            "cv_duration_sec": duration
         }
-        print(f" -> {name} Macro F1: {np.mean(scores):.4f} (±{np.std(scores):.4f}) | CV Time: {duration:.2f}s", flush=True)
+        print(f" -> {name} Macro F1: {mean_val:.4f} (±{std_val:.4f}) | CV Time: {duration:.2f}s", flush=True)
         
     return cv_results

@@ -3,6 +3,7 @@ import time
 import json
 import joblib
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -94,10 +95,10 @@ def run_hybrid_experiment():
     # Helper metric calculator
     def compute_all_metrics(name, y_true, y_pred, y_prob, train_t, inf_t):
         acc = accuracy_score(y_true, y_pred)
-        prec = precision_score(y_true, y_pred, zero_division=0)
-        rec = recall_score(y_true, y_pred, zero_division=0)
-        f1 = f1_score(y_true, y_pred, zero_division=0)
-        f1_m = f1_score(y_true, y_pred, average="macro", zero_division=0)
+        prec = precision_score(y_true, y_pred, zero_division="warn")
+        rec = recall_score(y_true, y_pred, zero_division="warn")
+        f1 = f1_score(y_true, y_pred, zero_division="warn")
+        f1_m = f1_score(y_true, y_pred, average="macro", zero_division="warn")
         auc = roc_auc_score(y_true, y_prob)
         cm = confusion_matrix(y_true, y_pred)
         tn, fp, fn, tp = cm.ravel()
@@ -178,7 +179,7 @@ def generate_hybrid_visualizations(rf, qml, hybrid, y_test, P_rf, P_qml, P_hybri
         [hybrid["confusion_matrix"]["TN"], hybrid["confusion_matrix"]["FP"]],
         [hybrid["confusion_matrix"]["FN"], hybrid["confusion_matrix"]["TP"]]
     ])
-    sns.heatmap(cm, annot=True, fmt="d", cmap="Purples", cbar=False,
+    sns.heatmap(pd.DataFrame(cm), annot=True, fmt="d", cmap="Purples", cbar=False,
                 xticklabels=["No Diabetes (0)", "Diabetes (1)"],
                 yticklabels=["No Diabetes (0)", "Diabetes (1)"])
     plt.title("Hybrid Ensemble Confusion Matrix (Test Set)", fontsize=11, fontweight="bold")
@@ -221,9 +222,9 @@ def generate_hybrid_visualizations(rf, qml, hybrid, y_test, P_rf, P_qml, P_hybri
     fpr_qml, tpr_qml, _ = roc_curve(y_test, P_qml)
     fpr_hyb, tpr_hyb, _ = roc_curve(y_test, P_hybrid)
     
-    plt.plot(fpr_rf, tpr_rf, color="#3b82f6", label=f"Classical RF (AUC = {rf['roc_auc']:.4f})", linewidth=2)
-    plt.plot(fpr_qml, tpr_qml, color="#06b6d4", label=f"Quantum VQC (AUC = {qml['roc_auc']:.4f})", linewidth=1.8, linestyle="--")
-    plt.plot(fpr_hyb, tpr_hyb, color="#8b5cf6", label=f"Hybrid Ensemble (AUC = {hybrid['roc_auc']:.4f})", linewidth=2.5)
+    plt.plot(fpr_rf.tolist(), tpr_rf.tolist(), color="#3b82f6", label=f"Classical RF (AUC = {rf['roc_auc']:.4f})", linewidth=2)
+    plt.plot(fpr_qml.tolist(), tpr_qml.tolist(), color="#06b6d4", label=f"Quantum VQC (AUC = {qml['roc_auc']:.4f})", linewidth=1.8, linestyle="--")
+    plt.plot(fpr_hyb.tolist(), tpr_hyb.tolist(), color="#8b5cf6", label=f"Hybrid Ensemble (AUC = {hybrid['roc_auc']:.4f})", linewidth=2.5)
     plt.plot([0, 1], [0, 1], "k--", alpha=0.4)
     
     plt.title("ROC Curve Comparison: Classical vs Quantum vs Hybrid Ensemble", fontsize=12, fontweight="bold")

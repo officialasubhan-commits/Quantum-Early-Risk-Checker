@@ -145,6 +145,7 @@ class TestFastAPIBackend(unittest.TestCase):
         # Check Diabetes Result
         diabetes_res = next((r for r in data["disease_results"] if r["disease_id"] == "diabetes"), None)
         self.assertIsNotNone(diabetes_res)
+        assert diabetes_res is not None
         self.assertEqual(diabetes_res["status"], "SUCCESS")
         self.assertGreaterEqual(diabetes_res["risk_probability"], 0.0)
 

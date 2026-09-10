@@ -1,153 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIH26139 - Project Monitoring Dashboard</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quantum Early Risk Checker — SIH26139</title>
+  <meta name="description" content="Hybrid Quantum-Classical ML Platform for early multi-disease risk detection. Powered by VQC, Random Forest & Ensemble Fusion models." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="app-container">
-        <!-- Header -->
-        <header class="top-header">
-            <div class="header-left">
-                <div class="sih-badge">SIH26139</div>
-                <div class="header-titles">
-                    <h1>Hybrid Quantum Machine Learning Platform</h1>
-                    <p class="subtitle">Internal Project Monitoring & Development Dashboard</p>
-                </div>
-            </div>
-            <div class="header-right">
-                <div class="status-indicator">
-                    <span class="status-dot pulse"></span>
-                    <span class="status-text">Status: <strong id="header-status">Development</strong></span>
-                </div>
-                <div class="env-tag" id="header-env">Local Dev Environment</div>
-            </div>
-        </header>
 
-        <!-- Current Task Summary Banner -->
-        <section class="section-card current-task-card">
-            <div class="section-header">
-                <h2>⚡ Current Development Status</h2>
-                <span class="progress-badge" id="progress-pct-badge">0% Complete</span>
-            </div>
-            <div class="progress-bar-container">
-                <div class="progress-bar-fill" id="main-progress-fill" style="width: 0%"></div>
-            </div>
-            <div class="task-grid">
-                <div class="task-item">
-                    <span class="label">Current Phase</span>
-                    <strong class="value highlight-blue" id="val-current-phase">Loading...</strong>
-                </div>
-                <div class="task-item">
-                    <span class="label">Current Task</span>
-                    <strong class="value" id="val-current-task">Loading...</strong>
-                </div>
-                <div class="task-item">
-                    <span class="label">Last Completed Task</span>
-                    <strong class="value text-success" id="val-last-completed">Loading...</strong>
-                </div>
-                <div class="task-item">
-                    <span class="label">Next Milestone</span>
-                    <strong class="value text-cyan" id="val-next-task">Loading...</strong>
-                </div>
-            </div>
-        </section>
+  <!-- Animated BG Particles -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
 
-        <!-- Main Dashboard Split Grid -->
-        <div class="dashboard-grid">
-            <!-- Left Column: ML Metrics & Architecture -->
-            <div class="grid-column">
-                <!-- ML Status Card -->
-                <section class="section-card">
-                    <div class="section-header">
-                        <h2>📊 ML Status & Experiment Metrics</h2>
-                        <span class="info-tag">Real-Time Ingestion & Model Baseline</span>
-                    </div>
-                    <div class="metrics-grid">
-                        <div class="metric-box">
-                            <span class="metric-label">Dataset Records</span>
-                            <strong class="metric-val" id="ml-records">Loading...</strong>
-                        </div>
-                        <div class="metric-box">
-                            <span class="metric-label">Predictive Features</span>
-                            <strong class="metric-val" id="ml-features">Loading...</strong>
-                        </div>
-                        <div class="metric-box full-width">
-                            <span class="metric-label">Best Classical Baseline Model</span>
-                            <strong class="metric-val highlight-cyan" id="ml-best-model">Loading...</strong>
-                        </div>
-                        <div class="metric-box">
-                            <span class="metric-label">Accuracy</span>
-                            <strong class="metric-val" id="ml-accuracy">Loading...</strong>
-                        </div>
-                        <div class="metric-box">
-                            <span class="metric-label">Precision</span>
-                            <strong class="metric-val" id="ml-precision">Loading...</strong>
-                        </div>
-                        <div class="metric-box">
-                            <span class="metric-label">Recall / Sensitivity</span>
-                            <strong class="metric-val" id="ml-recall">Loading...</strong>
-                        </div>
-                        <div class="metric-box">
-                            <span class="metric-label">F1-Score</span>
-                            <strong class="metric-val text-accent" id="ml-f1">Loading...</strong>
-                        </div>
-                        <div class="metric-box full-width">
-                            <span class="metric-label">ROC-AUC Score</span>
-                            <strong class="metric-val text-accent" id="ml-roc-auc">Loading...</strong>
-                        </div>
-                    </div>
-                </section>
+  <div class="app-shell">
 
-                <!-- Project Architecture Visual Flow -->
-                <section class="section-card">
-                    <div class="section-header">
-                        <h2>📐 Project Architecture Flow</h2>
-                        <span class="info-tag">End-to-End Hybrid Pipeline</span>
-                    </div>
-                    <div class="architecture-flow" id="architecture-flow-container">
-                        <!-- Flow steps dynamically populated by JS -->
-                    </div>
-                </section>
-            </div>
+    <!-- ══════════ HEADER ══════════ -->
+    <header class="site-header" id="site-header">
+      <div class="header-brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="17" stroke="url(#g1)" stroke-width="2"/>
+            <circle cx="18" cy="18" r="6" fill="url(#g2)"/>
+            <line x1="18" y1="1" x2="18" y2="35" stroke="url(#g1)" stroke-width="1.2" stroke-dasharray="3 3"/>
+            <line x1="1" y1="18" x2="35" y2="18" stroke="url(#g1)" stroke-width="1.2" stroke-dasharray="3 3"/>
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#38bdf8"/><stop offset="1" stop-color="#818cf8"/>
+              </linearGradient>
+              <linearGradient id="g2" x1="12" y1="12" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#38bdf8"/><stop offset="1" stop-color="#c084fc"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>Quantum Early Risk Checker</h1>
+          <p>Hybrid Quantum-Classical ML · SIH26139</p>
+        </div>
+      </div>
+      <nav class="header-nav" role="navigation" aria-label="Main navigation">
+        <button class="nav-btn active" id="nav-overview" onclick="showSection('overview')">Overview</button>
+        <button class="nav-btn" id="nav-models" onclick="showSection('models')">Disease Models</button>
+        <button class="nav-btn" id="nav-benchmark" onclick="showSection('benchmark')">Benchmarks</button>
+        <button class="nav-btn" id="nav-pipeline" onclick="showSection('pipeline')">Pipeline</button>
+      </nav>
+      <div class="header-status">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span id="live-clock">—</span>
+      </div>
+    </header>
 
-            <!-- Right Column: Project Progress & Task Checklist -->
-            <div class="grid-column">
-                <!-- Project Progress Phases -->
-                <section class="section-card">
-                    <div class="section-header">
-                        <h2>🚀 Project Phase Progress</h2>
-                        <span class="info-tag">14 Core Development Modules</span>
-                    </div>
-                    <div class="phases-grid" id="phases-grid-container">
-                        <!-- Phase cards populated dynamically -->
-                    </div>
-                </section>
-
-                <!-- Task Checklist Card -->
-                <section class="section-card">
-                    <div class="section-header">
-                        <h2>✅ Task Checklist & Tracker</h2>
-                        <span class="info-tag">Interactive Task Status Management</span>
-                    </div>
-                    <div class="checklist-container" id="checklist-container">
-                        <!-- Checklist items populated dynamically -->
-                    </div>
-                </section>
-            </div>
+    <!-- ══════════ HERO BANNER ══════════ -->
+    <section class="hero-banner" id="section-overview">
+      <div class="hero-inner">
+        <div class="hero-kpi-row">
+          <div class="kpi-card" id="kpi-diseases">
+            <div class="kpi-val" id="kv-diseases">11</div>
+            <div class="kpi-label">Disease Models</div>
+          </div>
+          <div class="kpi-card" id="kpi-records">
+            <div class="kpi-val" id="kv-records">253 K</div>
+            <div class="kpi-label">Training Records</div>
+          </div>
+          <div class="kpi-card" id="kpi-auc">
+            <div class="kpi-val" id="kv-auc">0.824</div>
+            <div class="kpi-label">Best ROC-AUC</div>
+          </div>
+          <div class="kpi-card" id="kpi-qubits">
+            <div class="kpi-val" id="kv-qubits">6</div>
+            <div class="kpi-label">Qubits (VQC)</div>
+          </div>
+          <div class="kpi-card" id="kpi-active">
+            <div class="kpi-val" id="kv-active">ACTIVE</div>
+            <div class="kpi-label">System Status</div>
+          </div>
         </div>
 
-        <!-- Footer -->
-        <footer class="bottom-footer">
-            <p>SIH26139 — Hybrid Quantum Machine Learning Platform for Early Disease Detection | Internal Monitoring Console</p>
-        </footer>
-    </div>
+        <div class="hero-desc">
+          <div class="tag-row">
+            <span class="tech-tag">Variational Quantum Classifier</span>
+            <span class="tech-tag">Random Forest Baseline</span>
+            <span class="tech-tag">Hybrid Ensemble Fusion</span>
+            <span class="tech-tag">FastAPI · REST</span>
+            <span class="tech-tag">PCA Dimensionality Reduction</span>
+            <span class="tech-tag">SHAP Explainability</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <script src="app.js"></script>
+    <!-- ══════════ DISEASE MODELS SECTION ══════════ -->
+    <section class="content-section" id="section-models" style="display:none;">
+      <div class="section-title-row">
+        <h2 class="section-heading">Disease Model Registry</h2>
+        <span class="section-badge">11 Active Models · All Hyperelastic</span>
+      </div>
+      <div class="filter-bar">
+        <button class="filter-btn active-filter" onclick="filterModels('all', this)">All</button>
+        <button class="filter-btn" onclick="filterModels('Neurology', this)">Neurology</button>
+        <button class="filter-btn" onclick="filterModels('Cardiology', this)">Cardiology</button>
+        <button class="filter-btn" onclick="filterModels('Oncology', this)">Oncology</button>
+        <button class="filter-btn" onclick="filterModels('Endocrine', this)">Endocrine</button>
+        <button class="filter-btn" onclick="filterModels('Hepatology', this)">Hepatology</button>
+        <button class="filter-btn" onclick="filterModels('Nephrology', this)">Nephrology</button>
+        <button class="filter-btn" onclick="filterModels('Pulmonology', this)">Pulmonology</button>
+      </div>
+      <div class="models-grid" id="models-grid"></div>
+    </section>
+
+    <!-- ══════════ BENCHMARK SECTION ══════════ -->
+    <section class="content-section" id="section-benchmark" style="display:none;">
+      <div class="section-title-row">
+        <h2 class="section-heading">Model Benchmark Comparison</h2>
+        <span class="section-badge">Classical vs QML vs Hybrid Fusion</span>
+      </div>
+      <div class="benchmark-layout">
+        <!-- Model Cards -->
+        <div class="bench-cards-row" id="bench-cards"></div>
+        <!-- Table -->
+        <div class="bench-table-wrap">
+          <table class="bench-table" id="bench-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Accuracy</th>
+                <th>F1-Score</th>
+                <th>ROC-AUC</th>
+                <th>Precision</th>
+                <th>Recall</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+            <tbody id="bench-tbody"></tbody>
+          </table>
+        </div>
+        <!-- Visual Bar Chart -->
+        <div class="chart-container">
+          <h3 class="chart-title">ROC-AUC Comparison</h3>
+          <div class="bar-chart" id="bar-chart"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ PIPELINE SECTION ══════════ -->
+    <section class="content-section" id="section-pipeline" style="display:none;">
+      <div class="section-title-row">
+        <h2 class="section-heading">End-to-End Hybrid Pipeline</h2>
+        <span class="section-badge">Quantum-Classical Architecture</span>
+      </div>
+      <div class="pipeline-wrapper" id="pipeline-wrapper"></div>
+
+      <div class="arch-detail-grid" id="arch-detail-grid"></div>
+    </section>
+
+    <!-- ══════════ FOOTER ══════════ -->
+    <footer class="site-footer">
+      <p>SIH26139 · Quantum Early Risk Checker · Hybrid Quantum-Classical ML Platform for Early Disease Detection</p>
+      <p class="footer-sub">⚠ For research and development purposes only. Not a substitute for professional medical diagnosis.</p>
+    </footer>
+
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>

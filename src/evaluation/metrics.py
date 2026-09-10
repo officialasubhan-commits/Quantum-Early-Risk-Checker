@@ -1,4 +1,5 @@
 import time
+from typing import Tuple, Dict, Any
 import numpy as np
 from sklearn.metrics import (
     accuracy_score,
@@ -9,7 +10,14 @@ from sklearn.metrics import (
     confusion_matrix
 )
 
-def evaluate_model_performance(model, model_name: str, X_train: np.ndarray, y_train: np.ndarray, X_test: np.ndarray, y_test: np.ndarray) -> dict:
+def evaluate_model_performance(
+    model,
+    model_name: str,
+    X_train,
+    y_train,
+    X_test,
+    y_test
+) -> Tuple[Dict[str, Any], Any]:
     """
     Fits the model on the full training set, records training and inference duration,
     and computes empirical metrics on the test set.
@@ -38,10 +46,10 @@ def evaluate_model_performance(model, model_name: str, X_train: np.ndarray, y_tr
 
     # 3. Calculate Empirical Metrics
     acc = accuracy_score(y_test, y_pred)
-    prec = precision_score(y_test, y_pred, zero_division=0)
-    rec_sensitivity = recall_score(y_test, y_pred, zero_division=0)
-    f1 = f1_score(y_test, y_pred, zero_division=0)
-    f1_macro = f1_score(y_test, y_pred, average="macro", zero_division=0)
+    prec = precision_score(y_test, y_pred)
+    rec_sensitivity = recall_score(y_test, y_pred)
+    f1 = f1_score(y_test, y_pred)
+    f1_macro = f1_score(y_test, y_pred, average="macro")
     
     cm = confusion_matrix(y_test, y_pred)
     if cm.shape == (2, 2):
@@ -71,9 +79,9 @@ def evaluate_model_performance(model, model_name: str, X_train: np.ndarray, y_tr
             "FN": int(fn),
             "TP": int(tp)
         },
-        "training_time_sec": float(train_duration_sec),
-        "inference_time_sec": float(inf_duration_sec),
-        "inference_ms_per_sample": float(inf_time_per_sample_ms)
+        "training_time_sec": train_duration_sec,
+        "inference_time_sec": inf_duration_sec,
+        "inference_ms_per_sample": inf_time_per_sample_ms
     }
     
     print(f" -> Accuracy:    {acc:.4f}", flush=True)

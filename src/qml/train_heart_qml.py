@@ -1,5 +1,6 @@
 import os
 import sys
+from typing import Any
 import json
 import time
 import joblib
@@ -42,14 +43,14 @@ def train_heart_qml_model(n_qubits: int = 6, n_layers: int = 2, epochs: int = 40
     y_train = train_df["target"].values
 
     X_val_proc = preprocessor.transform(val_df[FEATURE_COLS])
-    y_val = val_df["target"].values
+    y_val: Any = val_df["target"].values
 
     # Fit PCA Reducer (13 -> 6 features)
     pca = PCA(n_components=n_qubits, random_state=seed)
     X_train_q = pca.fit_transform(X_train_proc)
     X_val_q = pca.transform(X_val_proc)
 
-    explained_var_ratio = float(np.sum(pca.explained_variance_ratio_))
+    explained_var_ratio = float(sum(pca.explained_variance_ratio_))
     print(f" -> Fitted PCA Reducer (13 -> {n_qubits} Qubits). Total Variance Retained: {explained_var_ratio*100:.2f}%", flush=True)
 
     pca_path = os.path.join(MODELS_DIR, "qml_pca_reducer.joblib")
@@ -60,20 +61,20 @@ def train_heart_qml_model(n_qubits: int = 6, n_layers: int = 2, epochs: int = 40
     vqc = VariationalQuantumClassifier(n_qubits=n_qubits, n_layers=n_layers, seed=seed)
     
     start_time = time.time()
-    vqc.fit(X_train_q, y_train, epochs=epochs, lr=lr, batch_size=32)
+    vqc.fit(X_train_q, np.asarray(y_train), epochs=epochs, lr=lr, batch_size=32)
     training_time = time.time() - start_time
 
-    val_probs = vqc.predict_proba(X_val_q)
-    val_preds = (val_probs >= 0.5).astype(int)
+    val_probs: Any = vqc.predict_proba(X_val_q)
+    val_preds: Any = (val_probs >= 0.5).astype(int)
 
     acc = float(accuracy_score(y_val, val_preds))
-    prec = float(precision_score(y_val, val_preds, zero_division=0))
-    rec = float(recall_score(y_val, val_preds, zero_division=0))
-    f1 = float(f1_score(y_val, val_preds, zero_division=0))
+    prec = float(precision_score(y_val, val_preds, zero_division="warn"))
+    rec = float(recall_score(y_val, val_preds, zero_division="warn"))
+    f1 = float(f1_score(y_val, val_preds, zero_division="warn"))
     auc = float(roc_auc_score(y_val, val_probs))
     cm = confusion_matrix(y_val, val_preds)
     tn, fp, fn, tp = map(int, cm.ravel())
-    spec = float(tn / (tn + fp)) if (tn + fp) > 0 else 0.0
+    spec = (tn / (tn + fp)) if (tn + fp) > 0 else 0.0
 
     print(f" -> 6-Qubit VQC Validation Metrics | Acc: {acc:.4f} | F1: {f1:.4f} | AUC: {auc:.4f} | Rec: {rec:.4f} | Spec: {spec:.4f}", flush=True)
 

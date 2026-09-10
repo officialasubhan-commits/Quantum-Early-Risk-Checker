@@ -1,7 +1,9 @@
 import os
 import sys
 import json
+from typing import List, Dict, Any
 import pandas as pd
+from sqlalchemy.orm import Session
 
 # Ensure project root is in sys.path
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -15,11 +17,11 @@ from src.data_ingestion.ingest_global_datasets import ingest_all_global_datasets
 from src.pipeline.auto_training_pipeline import AutoDiseaseMLPipeline
 from src.utils.disease_registry import DiseaseRegistry
 
-def seed_existing_baseline_diseases(db):
+def seed_existing_baseline_diseases(db: Session) -> None:
     """
     Seeds database records for the 7 baseline disease targets.
     """
-    baseline_diseases = [
+    baseline_diseases: List[Dict[str, Any]] = [
         {
             "id": "diabetes", "name": "Diabetes / Prediabetes Risk Assessment", "category": "Endocrine & Metabolic",
             "desc": "AI-assisted early-risk assessment for prediabetes and type-2 diabetes based on 21 clinical health indicators.",
@@ -89,18 +91,18 @@ def seed_existing_baseline_diseases(db):
     all_reg = reg.get_all_diseases()
 
     for d in baseline_diseases:
-        d_info = all_reg.get(d["id"], {})
-        features = d_info.get("features", [])
+        d_info: Dict[str, Any] = all_reg.get(str(d["id"]), {})
+        features: List[str] = d_info.get("features", [])
         register_disease_record(
             db,
-            disease_id=d["id"],
-            name=d["name"],
-            category=d["category"],
-            description=d["desc"],
-            symptoms=d["symptoms"],
-            risk_factors=d["risk_factors"],
-            dataset_name=d["dataset"],
-            target_variable=d["target"],
+            disease_id=str(d["id"]),
+            name=str(d["name"]),
+            category=str(d["category"]),
+            description=str(d["desc"]),
+            symptoms=str(d["symptoms"]),
+            risk_factors=str(d["risk_factors"]),
+            dataset_name=str(d["dataset"]),
+            target_variable=str(d["target"]),
             data_modality="Tabular Clinical Features",
             features=features,
             qml_config={"n_qubits": 6, "n_layers": 2, "pca_dim": 6},
@@ -110,16 +112,16 @@ def seed_existing_baseline_diseases(db):
         register_dataset_record(
             db,
             dataset_id=f"ds_{d['id']}",
-            disease_id=d["id"],
-            name=d["dataset"],
-            source=d["source"],
+            disease_id=str(d["id"]),
+            name=str(d["dataset"]),
+            source=str(d["source"]),
             modality="Tabular Clinical Biomarkers",
-            target_name=d["target"],
-            sample_count=d["samples"],
+            target_name=str(d["target"]),
+            sample_count=int(d["samples"]),
             feature_count=len(features),
             access_info="Open Benchmark Medical Repository",
-            raw_path=os.path.join(BASE_DIR, d["raw"]),
-            processed_path=os.path.join(BASE_DIR, "data", "processed", d["id"], "test.csv"),
+            raw_path=os.path.join(BASE_DIR, str(d["raw"])),
+            processed_path=os.path.join(BASE_DIR, "data", "processed", str(d["id"]), "test.csv"),
             is_acquired=True
         )
 
@@ -138,7 +140,7 @@ def run_global_system():
     ingest_all_global_datasets()
 
     # Step 3: Define New Disease Configurations for Automated Training
-    new_diseases = [
+    new_diseases: List[Dict[str, Any]] = [
         {
             "id": "thyroid",
             "name": "Thyroid Disease Risk Assessment",
@@ -193,20 +195,20 @@ def run_global_system():
     pipeline_results = {}
     for d in new_diseases:
         pipeline = AutoDiseaseMLPipeline(
-            disease_id=d["id"],
-            disease_name=d["name"],
-            category=d["category"],
-            description=d["desc"],
-            target_col=d["target"],
-            dataset_name=d["dataset"],
-            source=d["source"],
-            raw_csv_path=d["csv_path"],
-            symptoms=d["symptoms"],
-            risk_factors=d["risk_factors"],
+            disease_id=str(d["id"]),
+            disease_name=str(d["name"]),
+            category=str(d["category"]),
+            description=str(d["desc"]),
+            target_col=str(d["target"]),
+            dataset_name=str(d["dataset"]),
+            source=str(d["source"]),
+            raw_csv_path=str(d["csv_path"]),
+            symptoms=str(d["symptoms"]),
+            risk_factors=str(d["risk_factors"]),
             n_qubits=6
         )
         res = pipeline.run_pipeline()
-        pipeline_results[d["id"]] = res
+        pipeline_results[str(d["id"])] = res
 
     # Step 5: Generate Final System Audit Summary
     db = SessionLocal()
@@ -224,7 +226,8 @@ def run_global_system():
     print("-" * 80)
     print(" Disease Target Summary:")
     for dr in disease_recs:
-        print(f"  * [{dr.status}] {dr.name} ({dr.disease_id.upper()}) | Category: {dr.category} | Features: {len(dr.features)}")
+        features_list = getattr(dr, "features", []) or []
+        print(f"  * [{dr.status}] {dr.name} ({dr.disease_id.upper()}) | Category: {dr.category} | Features: {len(features_list)}")
     print("=" * 80)
 
 if __name__ == "__main__":

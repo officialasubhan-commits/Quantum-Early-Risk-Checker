@@ -1,12 +1,13 @@
 import os
+from typing import Any
 import joblib
 import numpy as np
 from sklearn.decomposition import PCA
 
 def reduce_features_for_qml(
-    X_train: np.ndarray,
-    X_val: np.ndarray,
-    X_test: np.ndarray,
+    X_train: Any,
+    X_val: Any,
+    X_test: Any,
     n_components: int = 6,
     models_dir: str = "models"
 ) -> tuple:
@@ -23,7 +24,7 @@ def reduce_features_for_qml(
     X_val_q = pca.transform(X_val)
     X_test_q = pca.transform(X_test)
     
-    explained_variance = np.sum(pca.explained_variance_ratio_)
+    explained_variance = float(sum(pca.explained_variance_ratio_))
     print(f" -> PCA Cumulative Explained Variance ({n_components} components): {explained_variance:.2%}", flush=True)
     
     reducer_path = os.path.join(models_dir, "qml_pca_reducer.joblib")

@@ -1,7 +1,9 @@
 import os
 import time
 import json
+from typing import Any
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -87,17 +89,17 @@ def run_qml_experiment(
     # 5. Evaluate QML Model on Full Held-Out Test Set (38,052 samples)
     print(f"\n[QML EVALUATION] Evaluating VQC on FULL UNTOUCHED Test Set ({len(X_test_q):,} samples)...", flush=True)
     start_inf_time = time.time()
-    y_proba_test = vqc.predict_proba(X_test_q)
-    y_pred_test = (y_proba_test >= 0.5).astype(int)
+    y_proba_test: Any = vqc.predict_proba(X_test_q)
+    y_pred_test: Any = (y_proba_test >= 0.5).astype(int)
     inf_duration = time.time() - start_inf_time
     inf_ms_per_sample = (inf_duration / len(X_test_q)) * 1000.0
     
     # Calculate Empirical Metrics
     acc = accuracy_score(y_test, y_pred_test)
-    prec = precision_score(y_test, y_pred_test, zero_division=0)
-    rec_sensitivity = recall_score(y_test, y_pred_test, zero_division=0)
-    f1 = f1_score(y_test, y_pred_test, zero_division=0)
-    f1_macro = f1_score(y_test, y_pred_test, average="macro", zero_division=0)
+    prec = precision_score(y_test, y_pred_test, zero_division="warn")
+    rec_sensitivity = recall_score(y_test, y_pred_test, zero_division="warn")
+    f1 = f1_score(y_test, y_pred_test, zero_division="warn")
+    f1_macro = f1_score(y_test, y_pred_test, average="macro", zero_division="warn")
     roc_auc = roc_auc_score(y_test, y_proba_test)
     
     cm = confusion_matrix(y_test, y_pred_test)
@@ -109,7 +111,7 @@ def run_qml_experiment(
         "framework": "Custom Statevector QML Simulator (NumPy)",
         "num_qubits": n_qubits,
         "num_layers": n_layers,
-        "num_trainable_params": int(n_layers * n_qubits * 2 + 2),
+        "num_trainable_params": n_layers * n_qubits * 2 + 2,
         "feature_reduction_method": f"PCA (21 -> {n_qubits} quantum features)",
         "training_subset_size": len(X_train_sub),
         "test_set_size": len(X_test_q),
@@ -126,9 +128,9 @@ def run_qml_experiment(
             "FN": int(fn),
             "TP": int(tp)
         },
-        "training_time_sec": float(train_duration),
-        "inference_time_sec": float(inf_duration),
-        "inference_ms_per_sample": float(inf_ms_per_sample)
+        "training_time_sec": train_duration,
+        "inference_time_sec": inf_duration,
+        "inference_ms_per_sample": inf_ms_per_sample
     }
     
     print("\n" + "=" * 60, flush=True)
@@ -204,7 +206,7 @@ def generate_visualizations(loss_history, qml_metrics, rf_metrics):
         [qml_metrics["confusion_matrix"]["TN"], qml_metrics["confusion_matrix"]["FP"]],
         [qml_metrics["confusion_matrix"]["FN"], qml_metrics["confusion_matrix"]["TP"]]
     ])
-    sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", cbar=False,
+    sns.heatmap(pd.DataFrame(cm), annot=True, fmt="d", cmap="Blues", cbar=False,
                 xticklabels=["No Diabetes (0)", "Diabetes (1)"],
                 yticklabels=["No Diabetes (0)", "Diabetes (1)"])
     plt.title("QML VQC Confusion Matrix (Test Set)", fontsize=11, fontweight="bold")

@@ -127,8 +127,8 @@ def load_and_validate_data(file_path: str, report_dir: str = "reports") -> pd.Da
                 out_of_range_report[col] = {
                     "invalid_count": invalid_cnt,
                     "expected_range": [min_val, max_val],
-                    "actual_min": float(df[col].min()),
-                    "actual_max": float(df[col].max())
+                    "actual_min": float(df[col].min()),  # type: ignore[arg-type]
+                    "actual_max": float(df[col].max())  # type: ignore[arg-type]
                 }
                 total_out_of_range += invalid_cnt
 

@@ -1,5 +1,6 @@
 import os
 import sys
+from typing import Any
 import json
 import time
 import joblib
@@ -51,24 +52,24 @@ def train_heart_hybrid_model():
     vqc.scale = float(qml_params["scale"])
 
     X_val_proc = preprocessor.transform(val_df[FEATURE_COLS])
-    y_val = val_df["target"].values
+    y_val = val_df["target"].to_numpy()
 
     start_time = time.time()
     hybrid_ensemble = HybridEnsembleClassifier(classical_model=classical_model, qml_model=vqc, pca_reducer=pca_reducer)
     hybrid_ensemble.fit_fusion(X_val_proc, y_val)
     training_time = time.time() - start_time
 
-    val_probs = hybrid_ensemble.predict_proba(X_val_proc)
-    val_preds = hybrid_ensemble.predict(X_val_proc)
+    val_probs: Any = hybrid_ensemble.predict_proba(X_val_proc)
+    val_preds: Any = hybrid_ensemble.predict(X_val_proc)
 
     acc = float(accuracy_score(y_val, val_preds))
-    prec = float(precision_score(y_val, val_preds, zero_division=0))
-    rec = float(recall_score(y_val, val_preds, zero_division=0))
-    f1 = float(f1_score(y_val, val_preds, zero_division=0))
+    prec = float(precision_score(y_val, val_preds, zero_division="warn"))
+    rec = float(recall_score(y_val, val_preds, zero_division="warn"))
+    f1 = float(f1_score(y_val, val_preds, zero_division="warn"))
     auc = float(roc_auc_score(y_val, val_probs))
     cm = confusion_matrix(y_val, val_preds)
     tn, fp, fn, tp = map(int, cm.ravel())
-    spec = float(tn / (tn + fp)) if (tn + fp) > 0 else 0.0
+    spec = (tn / (tn + fp)) if (tn + fp) > 0 else 0.0
 
     print(f" -> Hybrid Validation Metrics | Acc: {acc:.4f} | F1: {f1:.4f} | AUC: {auc:.4f} | Rec: {rec:.4f} | Spec: {spec:.4f}", flush=True)
     w_class = hybrid_ensemble.optimal_weight

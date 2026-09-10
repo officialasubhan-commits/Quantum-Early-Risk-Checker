@@ -4,6 +4,7 @@ import json
 import time
 import joblib
 import urllib.request
+from typing import cast
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -85,7 +86,7 @@ def load_and_preprocess_dataset(d_id: str, cfg: dict):
     print(f"\n[{d_id.upper()}] Loading dataset for {cfg['name']}...", flush=True)
     if cfg.get("source") == "sklearn":
         bc = load_breast_cancer(as_frame=True)
-        df = bc.frame
+        df = bc.frame  # type: ignore[union-attr]
         target_col = "target"
         # Inverse target so 1 = Malignant (high risk), 0 = Benign
         df["target"] = (df["target"] == 0).astype(int)
@@ -119,11 +120,11 @@ def load_and_preprocess_dataset(d_id: str, cfg: dict):
             s = df[col].astype(str).str.strip().str.lower()
             s = s.replace(['nan', 'none', '?', '', 'null', '\t?', '\tckd', 'ckd\t'], np.nan)
             s_num = pd.to_numeric(s, errors='coerce')
-            if s_num.notna().sum() > 0 and (s_num.notna().sum() / s.notna().sum() if s.notna().sum() > 0 else 0) > 0.5:
+            if s_num.notna().sum() > 0 and (s_num.notna().sum() / s.notna().sum() if s.notna().sum() > 0 else 0) > 0.5:  # type: ignore[union-attr]
                 df[col] = s_num
             else:
                 codes, uniques = pd.factorize(s)
-                df[col] = np.where(codes == -1, np.nan, codes.astype(float))
+                df[col] = pd.Series(np.where(codes == -1, np.nan, codes.astype(float)).tolist(), index=df.index)
         else:
             df[col] = pd.to_numeric(df[col], errors="coerce")
 
@@ -149,21 +150,24 @@ def train_and_evaluate_disease(d_id: str, cfg: dict):
     df.to_csv(os.path.join(raw_dir, "raw_data.csv"), index=False)
 
     # Train / Val / Test Splits (70%, 15%, 15%)
-    train_df, temp_df = train_test_split(df, test_size=0.30, random_state=42, stratify=df["target"])
-    val_df, test_df = train_test_split(temp_df, test_size=0.50, random_state=42, stratify=temp_df["target"])
+    train_split, temp_split = train_test_split(df, test_size=0.30, random_state=42, stratify=df["target"])
+    val_split, test_split = train_test_split(temp_split, test_size=0.50, random_state=42, stratify=temp_split["target"])  # type: ignore[assignment]
+    train_df = cast(pd.DataFrame, train_split)
+    val_df = cast(pd.DataFrame, val_split)
+    test_df = cast(pd.DataFrame, test_split)
 
     train_df.to_csv(os.path.join(proc_dir, "train.csv"), index=False)
     val_df.to_csv(os.path.join(proc_dir, "val.csv"), index=False)
     test_df.to_csv(os.path.join(proc_dir, "test.csv"), index=False)
 
     X_train_raw = train_df[feature_names]
-    y_train = train_df["target"].values
+    y_train = train_df["target"].to_numpy()
 
     X_val_raw = val_df[feature_names]
-    y_val = val_df["target"].values
+    y_val = val_df["target"].to_numpy()
 
     X_test_raw = test_df[feature_names]
-    y_test = test_df["target"].values
+    y_test = test_df["target"].to_numpy()
 
     # 1. Fit Preprocessor (SimpleImputer + StandardScaler)
     preprocessor = Pipeline([
@@ -181,7 +185,7 @@ def train_and_evaluate_disease(d_id: str, cfg: dict):
         "RandomForestClassifier": RandomForestClassifier(n_estimators=100, max_depth=5, random_state=42, class_weight="balanced"),
         "GradientBoostingClassifier": GradientBoostingClassifier(n_estimators=100, learning_rate=0.05, max_depth=3, random_state=42),
         "LogisticRegression": LogisticRegression(random_state=42, max_iter=1000, class_weight="balanced"),
-        "SupportVectorMachine": SVC(probability=True, random_state=42, C=1.0, class_weight="balanced")
+        "SupportVectorMachine": SVC(probability=True, random_state=42, C=1.0, class_weight="balanced")  # type: ignore[arg-type]
     }
 
     best_auc = -1.0
@@ -191,7 +195,7 @@ def train_and_evaluate_disease(d_id: str, cfg: dict):
     for name, clf in candidates.items():
         clf.fit(X_train_proc, y_train)
         probs = clf.predict_proba(X_val_proc)[:, 1]
-        auc = roc_auc_score(y_val, probs) if len(np.unique(y_val)) > 1 else 0.5
+        auc = roc_auc_score(y_val, probs) if len(set(y_val)) > 1 else 0.5
         if auc > best_auc:
             best_auc = auc
             best_name = name
@@ -230,19 +234,20 @@ def train_and_evaluate_disease(d_id: str, cfg: dict):
     # 5. Evaluate All 3 Models on Untouched Test Set
     def calc_metrics(y_true, probs, preds):
         acc = float(accuracy_score(y_true, preds))
-        prec = float(precision_score(y_true, preds, zero_division=0))
-        rec = float(recall_score(y_true, preds, zero_division=0))
-        f1 = float(f1_score(y_true, preds, zero_division=0))
-        auc = float(roc_auc_score(y_true, probs)) if len(np.unique(y_true)) > 1 else 0.5
+        prec = float(precision_score(y_true, preds, zero_division="warn"))
+        rec = float(recall_score(y_true, preds, zero_division="warn"))
+        f1 = float(f1_score(y_true, preds, zero_division="warn"))
+        auc = float(roc_auc_score(y_true, probs)) if len(set(y_true)) > 1 else 0.5
         cm = confusion_matrix(y_true, preds)
         tn, fp, fn, tp = map(int, cm.ravel()) if cm.size == 4 else (0, 0, 0, 0)
-        spec = float(tn / (tn + fp)) if (tn + fp) > 0 else 0.0
+        spec = (tn / (tn + fp)) if (tn + fp) > 0 else 0.0
         return {
             "accuracy": acc, "precision": prec, "recall_sensitivity": rec,
             "specificity": spec, "f1_score": f1, "roc_auc": auc,
             "confusion_matrix": {"TN": tn, "FP": fp, "FN": fn, "TP": tp}
         }
 
+    assert best_clf is not None, "No best classical model was selected"
     c_probs = best_clf.predict_proba(X_test_proc)[:, 1]
     c_preds = (c_probs >= 0.5).astype(int)
     c_met = calc_metrics(y_test, c_probs, c_preds)

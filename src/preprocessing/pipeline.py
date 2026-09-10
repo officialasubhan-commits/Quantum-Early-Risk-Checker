@@ -46,7 +46,7 @@ def preprocess_and_split(
         test_size=test_size,
         stratify=y,
         random_state=random_state
-    )
+    )  # type: ignore[assignment]
     
     # 2. Second Split: Train (70%) and Validation (15% overall)
     relative_val_size = val_size / (1.0 - test_size)
@@ -55,12 +55,12 @@ def preprocess_and_split(
         test_size=relative_val_size,
         stratify=y_train_val,
         random_state=random_state
-    )
+    )  # type: ignore[assignment]
     
     print("\n[PREPROCESSING] Dataset Splitting Summary (Stratified):", flush=True)
-    print(f" -> Train Set:      {X_train.shape[0]:,} samples ({len(X_train)/len(df):.1%}) | Positive Class Ratio: {y_train.mean():.2%}", flush=True)
-    print(f" -> Validation Set: {X_val.shape[0]:,} samples ({len(X_val)/len(df):.1%}) | Positive Class Ratio: {y_val.mean():.2%}", flush=True)
-    print(f" -> Test Set:       {X_test.shape[0]:,} samples ({len(X_test)/len(df):.1%}) | Positive Class Ratio: {y_test.mean():.2%}", flush=True)
+    print(f" -> Train Set:      {X_train.shape[0]:,} samples ({len(X_train)/len(df):.1%}) | Positive Class Ratio: {y_train.mean():.2%}", flush=True)  # type: ignore[union-attr]
+    print(f" -> Validation Set: {X_val.shape[0]:,} samples ({len(X_val)/len(df):.1%}) | Positive Class Ratio: {y_val.mean():.2%}", flush=True)  # type: ignore[union-attr]
+    print(f" -> Test Set:       {X_test.shape[0]:,} samples ({len(X_test)/len(df):.1%}) | Positive Class Ratio: {y_test.mean():.2%}", flush=True)  # type: ignore[union-attr]
     
     # 3. Create Preprocessing Pipeline
     continuous_transformer = Pipeline(steps=[
@@ -83,36 +83,46 @@ def preprocess_and_split(
     # 4. Strict Leak-Free Fitting: FIT ONLY ON X_TRAIN
     print("[PREPROCESSING] Fitting feature scalers/imputers STRICTLY on Training Set...", flush=True)
     X_train_proc = preprocessor.fit_transform(X_train)
+    if hasattr(X_train_proc, "toarray"):
+        X_train_proc = X_train_proc.toarray()  # type: ignore[union-attr]
+    X_train_proc = np.asarray(X_train_proc)
     
     # TRANSFORM Validation and Test sets using fitted preprocessor
     X_val_proc = preprocessor.transform(X_val)
+    if hasattr(X_val_proc, "toarray"):
+        X_val_proc = X_val_proc.toarray()  # type: ignore[union-attr]
+    X_val_proc = np.asarray(X_val_proc)
+
     X_test_proc = preprocessor.transform(X_test)
+    if hasattr(X_test_proc, "toarray"):
+        X_test_proc = X_test_proc.toarray()  # type: ignore[union-attr]
+    X_test_proc = np.asarray(X_test_proc)
     
     all_processed_features = continuous_cols + passthrough_cols
     
     # Save processed splits
     np.savez_compressed(
         os.path.join(processed_dir, "train_data.npz"),
-        X=X_train_proc, y=y_train.values
+        X=X_train_proc, y=y_train.values  # type: ignore[union-attr]
     )
     np.savez_compressed(
         os.path.join(processed_dir, "val_data.npz"),
-        X=X_val_proc, y=y_val.values
+        X=X_val_proc, y=y_val.values  # type: ignore[union-attr]
     )
     np.savez_compressed(
         os.path.join(processed_dir, "test_data.npz"),
-        X=X_test_proc, y=y_test.values
+        X=X_test_proc, y=y_test.values  # type: ignore[union-attr]
     )
     
     print(f"[PREPROCESSING] Processed splits saved to: {processed_dir}/", flush=True)
     
     return {
         "X_train": X_train_proc,
-        "y_train": y_train.values,
+        "y_train": y_train.values,  # type: ignore[union-attr]
         "X_val": X_val_proc,
-        "y_val": y_val.values,
+        "y_val": y_val.values,  # type: ignore[union-attr]
         "X_test": X_test_proc,
-        "y_test": y_test.values,
+        "y_test": y_test.values,  # type: ignore[union-attr]
         "preprocessor": preprocessor,
         "feature_names": all_processed_features,
         "raw_splits": (X_train, X_val, X_test, y_train, y_val, y_test)
