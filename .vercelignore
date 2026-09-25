@@ -9,4 +9,4 @@ data/raw/
 data/processed/
 data/*.db
 .vercel/
-uv.lock
+_uv/
