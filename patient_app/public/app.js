@@ -20,6 +20,22 @@ const DISEASE_ICONS = {
     hypertension: "🩸"
 };
 
+function getSafeElement(id) {
+    const el = document.getElementById(id);
+    if (!el) {
+        console.warn(`Frontend element missing: #${id}`);
+    }
+    return el;
+}
+
+function setTextIfPresent(id, text) {
+    const el = getSafeElement(id);
+    if (el) {
+        el.textContent = text;
+    }
+    return !!el;
+}
+
 // Preset Definitions: Low Risk vs High Risk profiles for all target diseases
 const PRESETS = {
     low: {
@@ -176,6 +192,46 @@ document.addEventListener("DOMContentLoaded", () => {
     calculateBMI();
 });
 
+const FALLBACK_DISEASES = [
+    { id: "all", name: "Comprehensive Multi-Disease Screening (All Models)" },
+    { id: "diabetes", name: "Diabetes / Prediabetes Risk" },
+    { id: "heart_disease", name: "Cardiovascular / Heart Disease Risk" },
+    { id: "kidney_disease", name: "Chronic Kidney Disease Risk" },
+    { id: "liver_disease", name: "Liver Disease Risk" },
+    { id: "stroke", name: "Stroke Risk" },
+    { id: "breast_cancer", name: "Breast Cancer Risk" },
+    { id: "parkinsons", name: "Parkinson's Disease Risk" },
+    { id: "thyroid", name: "Thyroid Disease Risk" },
+    { id: "lung_cancer", name: "Lung Cancer Risk" },
+    { id: "alzheimers", name: "Alzheimer's / Dementia Risk" },
+    { id: "hypertension", name: "Hypertension Risk" }
+];
+
+function renderDiseaseSelectOptions(diseases) {
+    const select = getSafeElement("select-target-disease");
+    if (!select) return;
+
+    const diseaseList = Array.isArray(diseases) && diseases.length ? diseases : FALLBACK_DISEASES;
+    select.innerHTML = "";
+
+    diseaseList.forEach((disease) => {
+        const option = document.createElement("option");
+        option.value = disease.id;
+        option.textContent = disease.id === "all"
+            ? `🔍 ${disease.name}`
+            : `${DISEASE_ICONS[disease.id] || "🩺"} ${disease.name}`;
+        select.appendChild(option);
+    });
+
+    if (select.querySelector('option[value="all"]')) {
+        select.value = "all";
+    }
+
+    if (typeof onDiseaseSelected === "function") {
+        onDiseaseSelected();
+    }
+}
+
 async function fetchAndPopulateDiseases() {
     const select = document.getElementById("select-target-disease");
     if (!select) return;
@@ -185,23 +241,20 @@ async function fetchAndPopulateDiseases() {
         if (resp.ok) {
             const data = await resp.json();
             const diseases = data.registered_diseases || {};
+            const activeDiseases = Object.entries(diseases)
+                .filter(([_, info]) => info.status === "ACTIVE")
+                .map(([dId, info]) => ({ id: dId, name: info.name || dId.toUpperCase().replace(/_/g, " ") }));
 
-            select.innerHTML = '<option value="all" selected>🔍 Comprehensive Multi-Disease Screening (All Models)</option>';
-
-            Object.entries(diseases).forEach(([dId, info]) => {
-                if (info.status === "ACTIVE") {
-                    const icon = DISEASE_ICONS[dId] || "🩺";
-                    const opt = document.createElement("option");
-                    opt.value = dId;
-                    opt.textContent = `${icon} ${info.name || dId.toUpperCase()}`;
-                    select.appendChild(opt);
-                }
-            });
-
-            onDiseaseSelected();
+            if (activeDiseases.length > 0) {
+                renderDiseaseSelectOptions([{ id: "all", name: "Comprehensive Multi-Disease Screening (All Models)" }, ...activeDiseases]);
+                return;
+            }
         }
+
+        throw new Error("No active disease registry payload returned");
     } catch (err) {
-        console.warn("Could not dynamically load diseases from backend, using fallback options:", err);
+        console.warn("Using local fallback disease options because the backend is offline or unavailable:", err);
+        renderDiseaseSelectOptions(FALLBACK_DISEASES);
     }
 }
 
@@ -232,7 +285,7 @@ async function checkBackendHealth() {
             statusText.style.color = "var(--accent-rose)";
         }
     } catch (err) {
-        statusText.textContent = "Offline / Connection Error";
+        statusText.textContent = "Offline / Local Demo Mode";
         statusText.style.color = "var(--accent-amber)";
     }
 }
@@ -254,7 +307,9 @@ function onDiseaseSelected() {
 }
 
 function toggleParameterTuner() {
-    const tuner = document.getElementById("disease-parameter-tuner");
+    const tuner = getSafeElement("disease-parameter-tuner");
+    if (!tuner) return;
+
     if (tuner.style.display === "none" || tuner.style.display === "") {
         tuner.style.display = "block";
     } else {
@@ -263,8 +318,9 @@ function toggleParameterTuner() {
 }
 
 function populateParameterTuner(diseaseId) {
-    const grid = document.getElementById("tuner-fields-grid");
-    const title = document.getElementById("tuner-title");
+    const grid = getSafeElement("tuner-fields-grid");
+    const title = getSafeElement("tuner-title");
+    if (!grid || !title) return;
 
     if (diseaseId === "all") {
         title.textContent = "⚙️ Multi-Disease Screening Mode";
@@ -278,7 +334,6 @@ function populateParameterTuner(diseaseId) {
     const currentParams = customDiseaseParams[diseaseId] || PRESETS.high[diseaseId] || {};
     grid.innerHTML = "";
 
-    // Show top 8 primary fields for quick tuning
     const entries = Object.entries(currentParams).slice(0, 10);
     entries.forEach(([key, val]) => {
         const fieldGroup = document.createElement("div");

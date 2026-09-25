@@ -1,9 +1,10 @@
 import os
+import sys
 import json
 import urllib.parse
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
-PORT = 8080
+PORT = int(sys.argv[1]) if len(sys.argv) > 1 else int(os.environ.get("PORT", 8000))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PUBLIC_DIR = os.path.join(BASE_DIR, "public")
 

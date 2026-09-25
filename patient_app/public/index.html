@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIH26139 - AI Disease Risk Decision Support</title>
+    <title>NEURAL NEXUS | Earlier signals. Smarter decisions.</title>
+    <meta name="description" content="NEURAL NEXUS is a hybrid AI + quantum health intelligence platform for earlier disease risk assessment." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,15 +15,20 @@
         <!-- Application Header -->
         <header class="main-header">
             <div class="brand-section">
-                <span class="brand-badge">SIH26139</span>
+                <div class="brand-mark" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
                 <div class="brand-titles">
-                    <h1>Hybrid Quantum Machine Learning Platform</h1>
-                    <p>AI-Assisted Early Disease Risk Decision Support System</p>
+                    <span class="brand-badge">NEURAL NEXUS</span>
+                    <h1>Earlier signals. Smarter decisions.</h1>
+                    <p>Hybrid AI + quantum health intelligence for early risk assessment</p>
                 </div>
             </div>
             <div class="header-status">
                 <span class="status-dot"></span>
-                <span>FastAPI Backend: <strong id="api-status-text">Connected (v1.0.0)</strong></span>
+                <span>Clinical backend: <strong id="api-status-text">Connected (v1.0.0)</strong></span>
             </div>
         </header>
 
@@ -30,52 +36,102 @@
         <div class="disclaimer-banner">
             <span class="icon">⚠️</span>
             <div>
-                <strong>IMPORTANT MEDICAL DISCLAIMER:</strong> This tool provides AI-assisted early disease risk assessment decision support based on statistical and quantum machine learning models. It is <strong>NOT a medical diagnosis</strong> and does NOT replace professional evaluation by a qualified healthcare practitioner.
+                <strong>AI-Assisted Early Disease Risk Decision Support:</strong> This output is an automated probabilistic risk estimation designed solely for decision support. It is <strong>NOT a medical diagnosis</strong> and should not replace professional clinical evaluation by a licensed healthcare practitioner.
             </div>
         </div>
 
         <!-- Navigation Tabs -->
-        <nav class="nav-tabs">
-            <button class="tab-btn active" data-tab="tab-home">🏠 Overview & Safety</button>
-            <button class="tab-btn" data-tab="tab-voice" id="tab-btn-voice">🎙️ Voice AI Assistant</button>
-            <button class="tab-btn" data-tab="tab-profile">👤 Patient Profile</button>
-            <button class="tab-btn" data-tab="tab-symptoms">🩺 Symptoms & History</button>
-            <button class="tab-btn" data-tab="tab-upload">📄 Upload Report</button>
-            <button class="tab-btn" data-tab="tab-results">📊 Risk Assessment & Explainability</button>
+        <nav class="nav-tabs" aria-label="Main sections">
+            <button class="tab-btn active" data-tab="tab-home">Overview</button>
+            <button class="tab-btn" data-tab="tab-voice" id="tab-btn-voice">Voice Assistant</button>
+            <button class="tab-btn" data-tab="tab-profile">Patient Profile</button>
+            <button class="tab-btn" data-tab="tab-symptoms">Health History</button>
+            <button class="tab-btn" data-tab="tab-upload">Reports</button>
+            <button class="tab-btn" data-tab="tab-results">Risk Result</button>
         </nav>
 
         <!-- TAB 1: OVERVIEW & SAFETY -->
         <div class="tab-content active" id="tab-home">
-            <div class="card">
-                <div class="card-header">
-                    <h2>Welcome to the Hybrid Quantum Disease Risk Assessment Platform</h2>
-                    <p>Advanced decision-support powered by Classical Machine Learning & 6-Qubit Variational Quantum Computing</p>
-                </div>
-                <div style="margin-bottom: 24px; color: var(--text-secondary);">
-                    <p style="margin-bottom: 12px;">This platform provides early probabilistic risk assessment for metabolic health indicators (such as diabetes and prediabetes) using the CDC BRFSS epidemiological dataset.</p>
-                    <p style="margin-bottom: 12px;">Our dual-branch architecture combines standard Random Forest ensembles with 6-Qubit Variational Quantum Circuits (VQC) to evaluate complex non-linear clinical risk factors.</p>
+            <div class="card hero-card">
+                <div class="hero-panel">
+                    <div class="hero-copy">
+                        <div class="eyebrow">Hybrid intelligence for earlier care</div>
+                        <h2>Understand your health before the risk becomes visible.</h2>
+                        <p>NEURAL NEXUS combines classical machine learning with a 6-qubit variational quantum circuit to deliver earlier, explainable disease-risk signals for real-world clinical decision support.</p>
+                        <div class="hero-actions">
+                            <button class="btn-primary" onclick="switchTab('tab-profile')">Start Assessment</button>
+                            <button class="btn-secondary" onclick="switchTab('tab-voice')">Talk to Nexus</button>
+                        </div>
+                    </div>
+                    <div class="hero-visual" aria-hidden="true">
+                        <div class="visual-core">
+                            <div class="pulse-ring ring-one"></div>
+                            <div class="pulse-ring ring-two"></div>
+                            <div class="visual-node node-a"></div>
+                            <div class="visual-node node-b"></div>
+                            <div class="visual-node node-c"></div>
+                            <div class="signal-line"></div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="card-header" style="margin-top: 24px;">
-                    <h2>Assessment Workflow</h2>
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">11</span>
+                        <span class="stat-label">Risk pathways</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">6Q</span>
+                        <span class="stat-label">Quantum circuit</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">SHAP</span>
+                        <span class="stat-label">Explainability</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Care guidance</span>
+                    </div>
                 </div>
-                <div class="form-grid" style="margin-bottom: 28px;">
-                    <div style="background: var(--bg-input); padding: 18px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
-                        <strong style="color: var(--accent-teal); font-size: 1.1rem; display: block; margin-bottom: 6px;">1. Health Profile</strong>
-                        <p style="font-size: 0.85rem; color: var(--text-secondary);">Enter basic demographics, age group, biological sex, and healthcare access details.</p>
+
+                <div class="capability-grid">
+                    <article class="capability-card">
+                        <span class="capability-index">01</span>
+                        <h3>Classical AI</h3>
+                        <p>Established machine-learning models analyze clinical parameters, risk factors, and patient history.</p>
+                    </article>
+                    <article class="capability-card">
+                        <span class="capability-index">02</span>
+                        <h3>Quantum ML</h3>
+                        <p>A 6-qubit variational circuit explores transformed feature representations for richer pattern detection.</p>
+                    </article>
+                    <article class="capability-card">
+                        <span class="capability-index">03</span>
+                        <h3>Hybrid Intelligence</h3>
+                        <p>Classical and quantum predictions are combined for probabilistic risk estimation with explainable output.</p>
+                    </article>
+                </div>
+
+                <div class="card-header workflow-header" style="margin-top: 24px;">
+                    <h2>Assessment workflow</h2>
+                </div>
+                <div class="form-grid workflow-grid" style="margin-bottom: 28px;">
+                    <div class="workflow-step">
+                        <strong>1. Profile</strong>
+                        <p>Establish demographics, health background, and basic lifestyle indicators.</p>
                     </div>
-                    <div style="background: var(--bg-input); padding: 18px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
-                        <strong style="color: var(--accent-blue); font-size: 1.1rem; display: block; margin-bottom: 6px;">2. Symptoms & History</strong>
-                        <p style="font-size: 0.85rem; color: var(--text-secondary);">Log physical illness days, cardiovascular history, BMI, and lifestyle habits.</p>
+                    <div class="workflow-step">
+                        <strong>2. Symptoms</strong>
+                        <p>Capture current concerns, risk triggers, and recent changes in health patterns.</p>
                     </div>
-                    <div style="background: var(--bg-input); padding: 18px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
-                        <strong style="color: var(--accent-purple); font-size: 1.1rem; display: block; margin-bottom: 6px;">3. Quantum Prediction</strong>
-                        <p style="font-size: 0.85rem; color: var(--text-secondary);">Generate probabilistic risk scores and patient-specific explainability attributions.</p>
+                    <div class="workflow-step">
+                        <strong>3. AI analysis</strong>
+                        <p>Run the hybrid model and explain the contributing factors behind the estimated risk.</p>
                     </div>
                 </div>
 
                 <div style="text-align: center; margin-top: 10px;">
-                    <button class="btn-primary" onclick="switchTab('tab-profile')">Begin Risk Assessment →</button>
+                    <button class="btn-primary" onclick="switchTab('tab-profile')">Begin assessment →</button>
                 </div>
             </div>
         </div>
@@ -97,8 +153,8 @@
 
                 <!-- Setup & Configuration Bar -->
                 <div style="background: var(--bg-input); padding: 16px 20px; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 20px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-                        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                    <div class="voice-config-bar">
+                        <div class="voice-config-controls">
                             <label for="select-voice-disease" style="font-size: 0.88rem; font-weight: 600; color: var(--text-secondary);">Target Disease:</label>
                             <select id="select-voice-disease" class="form-control" style="width: auto; padding: 6px 14px;" onchange="onVoiceDiseaseChange()">
                                 <option value="diabetes" selected>🩺 Diabetes / Prediabetes (BRFSS)</option>
@@ -210,7 +266,7 @@
                         </span>
                     </div>
 
-                    <div id="extracted-params-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px;">
+                    <div id="extracted-params-grid" class="extracted-params-grid">
                         <div class="param-card" id="card-param-age" style="background: var(--bg-input); padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
                             <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Age / BRFSS Cat</span>
                             <strong id="badge-param-age" style="font-size: 1rem; color: var(--text-primary);">-</strong>
@@ -498,7 +554,7 @@
                         </div>
                     </div>
 
-                    <div style="margin-top: 28px; display: flex; justify-content: space-between;">
+                    <div class="form-action-row">
                         <button type="button" class="btn-secondary" onclick="switchTab('tab-profile')">← Back to Profile</button>
                         <button type="submit" class="btn-primary">Proceed to Risk Assessment →</button>
                     </div>
@@ -545,7 +601,7 @@
                         <h2>Multi-Disease Risk Assessment & Explainability</h2>
                         <p>Generate disease-specific risk predictions and feature attributions</p>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                    <div class="results-header-actions">
                         <label for="select-target-disease" style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary);">Target Disease:</label>
                         <select id="select-target-disease" class="form-control" style="width: auto; padding: 6px 12px;" onchange="onDiseaseSelected()">
                             <option value="diabetes" selected>🩺 Diabetes / Prediabetes</option>
@@ -642,7 +698,7 @@
                         <div class="risk-badge low">7 DISEASES EVALUATED</div>
                     </div>
 
-                    <div id="multi-disease-cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-top: 16px;">
+                    <div id="multi-disease-cards-grid" class="multi-disease-cards-grid">
                         <!-- Populated dynamically with rich disease cards -->
                     </div>
                 </div>
