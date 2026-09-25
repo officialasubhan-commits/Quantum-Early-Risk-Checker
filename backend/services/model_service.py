@@ -24,7 +24,7 @@ from src.qml.vqc_model import VariationalQuantumClassifier
 from src.hybrid.fusion_model import HybridEnsembleClassifier
 from src.explainability.patient_explainer import explain_patient_prediction
 from src.utils.disease_registry import DiseaseRegistry
-from backend.database.connection import SessionLocal
+from backend.database.connection import SessionLocal, ensure_db_tables
 from backend.database.repository import save_assessment_record
 
 class ModelService:
@@ -149,6 +149,7 @@ class ModelService:
 
         # Save to database
         try:
+            ensure_db_tables()
             db = SessionLocal()
             save_assessment_record(
                 db,
@@ -329,6 +330,7 @@ class ModelService:
         top_contribs_dicts = [item.model_dump() for item in top_contribs]
 
         try:
+            ensure_db_tables()
             db = SessionLocal()
             save_assessment_record(
                 db,

@@ -1,6 +1,7 @@
 // SIH26139 Patient Web Application - Multi-Disease FastAPI Backend Client
-
-const API_BASE_URL = "http://127.0.0.1:8001";
+const API_BASE_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") 
+    ? "http://127.0.0.1:8001" 
+    : window.location.origin;
 
 // Active parameters stored per disease for custom user tweaking
 const customDiseaseParams = {};
@@ -645,8 +646,12 @@ async function uploadReportFile() {
 // Real-time synchronization with manual health forms & model schemas
 // =========================================================================
 
-const VOICE_PRIMARY_URL = "http://127.0.0.1:8001";
-const VOICE_SECONDARY_URL = "http://127.0.0.1:8002";
+const VOICE_PRIMARY_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+    ? "http://127.0.0.1:8001"
+    : window.location.origin;
+const VOICE_SECONDARY_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+    ? "http://127.0.0.1:8002"
+    : window.location.origin;
 let currentVoiceSessionId = "session_" + Math.floor(Math.random() * 1000000);
 let lastExtractedVoiceData = {};
 let lastSynthesizedAudioBase64 = null;

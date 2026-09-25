@@ -21,7 +21,20 @@ engine = create_engine(
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
+_db_initialized = False
+
+def ensure_db_tables():
+    global _db_initialized
+    if not _db_initialized:
+        try:
+            from backend.database.models import AssessmentRecord, ModelRegistryRecord, DiseaseRegistryRecord, DatasetRegistryRecord  # noqa: F401
+            Base.metadata.create_all(bind=engine)
+            _db_initialized = True
+        except Exception as e:
+            print(f"[DB INIT] Notice: {e}")
+
 def get_db():
+    ensure_db_tables()
     db = SessionLocal()
     try:
         yield db

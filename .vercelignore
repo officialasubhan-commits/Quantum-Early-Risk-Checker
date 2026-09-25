@@ -1,0 +1,9 @@
+# Ignore tests and local development modules from Vercel function discovery
+tests/
+voice_ai/
+experiments/
+.venv/
+.pytest_cache/
+reports/*.png
+reports/*.csv
+data/raw/
