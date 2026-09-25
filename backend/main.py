@@ -2,7 +2,7 @@ import os
 import sys
 from fastapi import FastAPI, HTTPException, status, Request, UploadFile, File, Depends
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, RedirectResponse
+from fastapi.responses import JSONResponse, RedirectResponse, FileResponse
 import uuid
 import datetime
 from typing import List, Optional, Dict, Any
@@ -81,9 +81,53 @@ async def global_exception_handler(request: Request, exc: Exception):
         }
     )
 
+STATIC_DIR = os.path.join(PROJECT_ROOT, "patient_app", "public")
+if not os.path.isdir(STATIC_DIR):
+    STATIC_DIR = os.path.join(PROJECT_ROOT, "public")
+
+DASHBOARD_DIR = os.path.join(PROJECT_ROOT, "dashboard", "public")
+
 @app.get("/", include_in_schema=False)
 def root():
+    index_file = os.path.join(STATIC_DIR, "index.html")
+    if os.path.exists(index_file):
+        return FileResponse(index_file, media_type="text/html")
     return RedirectResponse(url="/docs")
+
+@app.get("/styles.css", include_in_schema=False)
+def get_styles():
+    css_file = os.path.join(STATIC_DIR, "styles.css")
+    if os.path.exists(css_file):
+        return FileResponse(css_file, media_type="text/css")
+    raise HTTPException(status_code=404, detail="CSS file not found")
+
+@app.get("/app.js", include_in_schema=False)
+def get_js():
+    js_file = os.path.join(STATIC_DIR, "app.js")
+    if os.path.exists(js_file):
+        return FileResponse(js_file, media_type="application/javascript")
+    raise HTTPException(status_code=404, detail="JS file not found")
+
+@app.get("/dashboard", include_in_schema=False)
+def get_dashboard():
+    dash_index = os.path.join(DASHBOARD_DIR, "index.html")
+    if os.path.exists(dash_index):
+        return FileResponse(dash_index, media_type="text/html")
+    raise HTTPException(status_code=404, detail="Dashboard not found")
+
+@app.get("/dashboard/styles.css", include_in_schema=False)
+def get_dashboard_styles():
+    dash_css = os.path.join(DASHBOARD_DIR, "styles.css")
+    if os.path.exists(dash_css):
+        return FileResponse(dash_css, media_type="text/css")
+    raise HTTPException(status_code=404, detail="Dashboard CSS not found")
+
+@app.get("/dashboard/app.js", include_in_schema=False)
+def get_dashboard_js():
+    dash_js = os.path.join(DASHBOARD_DIR, "app.js")
+    if os.path.exists(dash_js):
+        return FileResponse(dash_js, media_type="application/javascript")
+    raise HTTPException(status_code=404, detail="Dashboard JS not found")
 
 @app.get("/health", response_model=HealthResponse, tags=["System"])
 @app.get("/api/v1/health", response_model=HealthResponse, tags=["System"])
