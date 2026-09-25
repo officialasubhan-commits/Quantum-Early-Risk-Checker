@@ -18,7 +18,10 @@ MODEL_PATHS = {
 }
 
 # Database Configuration
-DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{os.path.join(BASE_DIR, 'data', 'sih26139.db')}")
+if os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME"):
+    DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:////tmp/sih26139.db")
+else:
+    DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{os.path.join(BASE_DIR, 'data', 'sih26139.db')}")
 
 # API Metadata
 API_TITLE = "SIH26139 — Hybrid Quantum Machine Learning Platform API"

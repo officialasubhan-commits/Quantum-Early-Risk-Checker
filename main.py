@@ -9,6 +9,12 @@ from src.preprocessing.pipeline import preprocess_and_split
 from src.classical_ml.models import get_classical_models, train_and_cross_validate
 from src.evaluation.metrics import evaluate_model_performance
 
+# Expose ASGI application for serverless runtime entrypoints (Vercel, AWS Lambda)
+try:
+    from backend.main import app  # noqa: F401
+except Exception:
+    pass
+
 def main():
     print("=" * 70, flush=True)
     print(" Hybrid Quantum Machine Learning Platform for Early Disease Detection ", flush=True)

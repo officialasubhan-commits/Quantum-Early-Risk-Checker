@@ -60,12 +60,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount Multilingual Voice AI Router
-try:
-    from voice_ai.app.api.router import router as voice_router
-    app.include_router(voice_router)
-except Exception as e:
-    print(f"[FASTAPI SERVER] Voice AI router mount warning: {e}")
+# Mount Multilingual Voice AI Router (Skipped in serverless environments like Vercel)
+if not os.getenv("VERCEL"):
+    try:
+        from voice_ai.app.api.router import router as voice_router
+        app.include_router(voice_router)
+    except Exception as e:
+        print(f"[FASTAPI SERVER] Voice AI router mount warning: {e}")
 
 
 # Global Exception Handlers
