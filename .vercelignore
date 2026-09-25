@@ -4,6 +4,9 @@ voice_ai/
 experiments/
 .venv/
 .pytest_cache/
-reports/*.png
-reports/*.csv
+reports/
 data/raw/
+data/processed/
+data/*.db
+.vercel/
+uv.lock
